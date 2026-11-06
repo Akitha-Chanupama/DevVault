@@ -104,22 +104,22 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 dark:bg-black/55 backdrop-blur-sm animate-in fade-in duration-100">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-xs animate-in fade-in duration-100">
       <div
-        className="relative w-full max-w-3xl rounded-2xl border border-border dark:border-blue-500/30 bg-surface/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
+        className="relative w-full max-w-3xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/15 dark:shadow-black/90 ring-1 ring-slate-900/5 dark:ring-white/10 flex flex-col max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-surface-elevated">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-border bg-slate-50 dark:bg-surface-elevated">
           <div className="flex items-center gap-2">
             <Code2 className="w-4 h-4 text-primary" />
-            <span className="font-bold text-sm text-foreground">
+            <span className="font-bold text-sm text-slate-900 dark:text-foreground">
               {initialSnippet ? 'Edit Code Snippet' : 'New Code Snippet'}
             </span>
           </div>
           <button
             onClick={onClose}
-            className="text-muted-foreground hover:text-foreground p-1 rounded-md"
+            className="text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -216,7 +216,7 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
+          <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-200 dark:border-border">
             <Button type="button" variant="outline" size="sm" onClick={onClose}>
               Cancel
             </Button>

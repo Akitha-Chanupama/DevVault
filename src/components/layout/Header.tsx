@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
         {/* Global tool search input matching reference */}
         <button
           onClick={() => setCommandPaletteOpen(true)}
-          className="flex h-10 w-64 sm:w-80 md:w-96 items-center justify-between rounded-xl border border-border bg-surface hover:bg-white dark:bg-surface px-3.5 text-sm text-slate-600 dark:text-muted-foreground hover:border-blue-400 dark:hover:border-blue-500/40 hover:shadow-xs transition-all shadow-2xs group"
+          className="flex h-10 w-64 sm:w-80 md:w-96 items-center justify-between rounded-xl border border-border bg-surface hover:bg-white dark:bg-surface dark:hover:bg-slate-800/60 px-3.5 text-sm text-slate-600 dark:text-muted-foreground hover:border-blue-400 dark:hover:border-blue-500/40 hover:shadow-xs transition-all shadow-2xs group"
           aria-label="Open command palette"
         >
           <div className="flex items-center gap-2.5 min-w-0">

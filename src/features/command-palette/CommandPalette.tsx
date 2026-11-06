@@ -70,15 +70,15 @@ export const CommandPalette: React.FC = () => {
   return (
     <div
       onClick={() => setCommandPaletteOpen(false)}
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/45 dark:bg-black/55 backdrop-blur-sm animate-in fade-in duration-100"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-xs animate-in fade-in duration-100"
     >
       <div
-        className="relative w-full max-w-xl rounded-2xl border border-border dark:border-blue-500/30 bg-surface/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl shadow-2xl shadow-black/90 ring-1 ring-black/5 dark:ring-white/10 overflow-hidden"
+        className="relative w-full max-w-xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/15 dark:shadow-black/90 ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 border-b border-border/80">
-          <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+        <div className="flex items-center px-4 border-b border-slate-200 dark:border-border/80">
+          <Search className="w-4 h-4 text-slate-400 dark:text-muted-foreground shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -89,11 +89,11 @@ export const CommandPalette: React.FC = () => {
               setSelectedIndex(0);
             }}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent px-3 py-3.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
+            className="flex-1 bg-transparent px-3 py-3.5 text-sm text-slate-800 dark:text-foreground placeholder:text-slate-400 dark:placeholder:text-muted-foreground focus:outline-none"
           />
           <button
             onClick={() => setCommandPaletteOpen(false)}
-            className="text-muted-foreground hover:text-foreground p-1 rounded-md"
+            className="text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
             title="Close"
           >
             <X className="w-4 h-4" />
@@ -103,7 +103,7 @@ export const CommandPalette: React.FC = () => {
         {/* Results List */}
         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
           {filteredTools.length === 0 ? (
-            <div className="p-8 text-center text-xs text-muted-foreground">
+            <div className="p-8 text-center text-xs text-slate-500 dark:text-muted-foreground">
               No matching tools found for "{query}".
             </div>
           ) : (
@@ -118,22 +118,22 @@ export const CommandPalette: React.FC = () => {
                   onMouseEnter={() => setSelectedIndex(idx)}
                   className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-blue-600 text-white font-medium shadow-sm'
-                      : 'hover:bg-surface-elevated/70 text-foreground'
+                      ? 'bg-blue-600 text-white font-medium shadow-xs'
+                      : 'text-slate-800 dark:text-foreground hover:bg-blue-50/80 dark:hover:bg-slate-800/60'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     {isFav && (
                       <Star
                         className={`w-4 h-4 shrink-0 ${
-                          isSelected ? 'fill-white text-white' : 'fill-warning text-warning'
+                          isSelected ? 'fill-white text-white' : 'fill-amber-400 text-amber-500'
                         }`}
                       />
                     )}
                     <span className="font-semibold truncate">{tool.name}</span>
                     <span
                       className={`truncate text-xs ${
-                        isSelected ? 'text-white/80' : 'text-muted-foreground'
+                        isSelected ? 'text-blue-100' : 'text-slate-500 dark:text-muted-foreground'
                       }`}
                     >
                       — {tool.category}
@@ -144,19 +144,27 @@ export const CommandPalette: React.FC = () => {
                     {tool.status === 'available' ? (
                       <Badge
                         variant="success"
-                        className={isSelected ? 'bg-white/20 text-white border-transparent' : ''}
+                        className={
+                          isSelected
+                            ? 'bg-white/20 text-white border-transparent'
+                            : 'bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-500/30'
+                        }
                       >
                         Ready
                       </Badge>
                     ) : (
                       <Badge
                         variant="secondary"
-                        className={isSelected ? 'bg-white/10 text-white border-transparent' : ''}
+                        className={
+                          isSelected
+                            ? 'bg-white/10 text-white border-transparent'
+                            : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
+                        }
                       >
                         Planned
                       </Badge>
                     )}
-                    <ArrowRight className="w-3.5 h-3.5 opacity-60" />
+                    <ArrowRight className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-400 dark:text-muted-foreground'}`} />
                   </div>
                 </div>
               );
@@ -165,14 +173,14 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Footer shortcuts info */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-t border-border/80 bg-surface-elevated/80 dark:bg-[#080d19]/80 text-xs text-muted-foreground font-mono">
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-slate-200 dark:border-border/80 bg-slate-50 dark:bg-[#080d19]/80 text-xs text-slate-500 dark:text-muted-foreground font-mono">
           <div className="flex items-center gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>
             <span>esc to close</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-success" />
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-success" />
             <span>Local Execution</span>
           </div>
         </div>

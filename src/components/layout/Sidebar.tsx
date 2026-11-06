@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="hidden lg:flex h-8 w-8 rounded-lg text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60"
+            className="hidden lg:flex h-8 w-8 rounded-lg text-slate-500 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors"
             title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             aria-label="Toggle sidebar width"
           >
