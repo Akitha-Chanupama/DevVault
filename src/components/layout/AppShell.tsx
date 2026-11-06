@@ -53,11 +53,11 @@ export const AppShell: React.FC = () => {
   }, [theme, setTheme, navigate]);
 
   return (
-    <div className="flex min-h-screen bg-background text-foreground">
-      <Sidebar onOpenHelp={() => setShortcutsOpen(true)} />
-      <div className="flex flex-1 flex-col min-w-0">
-        <Header onOpenShortcuts={() => setShortcutsOpen(true)} />
-        <main className="flex-1 px-4 py-6 sm:px-8 max-w-7xl w-full mx-auto">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <Header onOpenShortcuts={() => setShortcutsOpen(true)} />
+      <div className="flex flex-1 min-w-0">
+        <Sidebar onOpenHelp={() => setShortcutsOpen(true)} />
+        <main className="flex-1 px-4 py-6 sm:px-8 max-w-7xl w-full mx-auto min-w-0">
           <Outlet />
         </main>
       </div>

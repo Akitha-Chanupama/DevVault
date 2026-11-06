@@ -1,11 +1,13 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   Search,
   Sun,
   Moon,
   Laptop,
-  Menu,
   Keyboard,
+  PanelLeftClose,
+  PanelLeft,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useThemeStore } from '@/stores/themeStore';
@@ -17,29 +19,47 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
   const { theme, setTheme } = useThemeStore();
-  const { toggleSidebar, setCommandPaletteOpen } = useWorkspaceStore();
+  const { sidebarOpen, toggleSidebar, setCommandPaletteOpen } = useWorkspaceStore();
 
   const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
   const shortcutKey = isMac ? '⌘ + K' : 'Ctrl + K';
 
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border bg-sidebar/95 dark:bg-background/95 px-4 backdrop-blur-md transition-colors sm:px-6 shrink-0">
-      <div className="flex items-center gap-3">
-        {/* Mobile menu button */}
+      <div className="flex items-center gap-2 sm:gap-3.5 min-w-0">
+        {/* Brand Logo & Project Name - Permanently visible at top, never collapsed */}
+        <NavLink to="/" className="flex items-center gap-2.5 shrink-0 group mr-1">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100/70 dark:bg-blue-600/15 border border-blue-200 dark:border-blue-500/30 text-blue-600 dark:text-blue-400 font-bold font-mono text-sm shadow-xs shadow-blue-500/10 shrink-0 group-hover:scale-105 group-hover:border-blue-400 dark:group-hover:border-blue-500/50 transition-all">
+            &lt;/&gt;
+          </div>
+          <span className="font-bold text-base tracking-tight text-slate-900 dark:text-foreground hidden sm:inline-block">
+            Dev<span className="text-blue-600 dark:text-blue-500">Vault</span>
+          </span>
+        </NavLink>
+
+        {/* Sidebar Collapse Toggle Button */}
         <Button
           variant="ghost"
           size="icon"
           onClick={toggleSidebar}
-          className="lg:hidden h-9 w-9 rounded-lg text-slate-600 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60"
+          className="h-8 w-8 rounded-lg text-slate-500 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors shrink-0"
+          title={sidebarOpen ? 'Collapse navigation items' : 'Expand navigation items'}
           aria-label="Toggle navigation menu"
         >
-          <Menu className="w-5 h-5" />
+          {sidebarOpen ? (
+            <PanelLeftClose className="w-4 h-4" />
+          ) : (
+            <PanelLeft className="w-4 h-4" />
+          )}
         </Button>
+
+        {/* Subtle vertical separator */}
+        <div className="h-5 w-px bg-border/80 hidden md:block mx-1 shrink-0" />
 
         {/* Global tool search input matching reference */}
         <button
           onClick={() => setCommandPaletteOpen(true)}
-          className="flex h-10 w-64 sm:w-80 md:w-96 items-center justify-between rounded-xl border border-border bg-surface hover:bg-white dark:bg-surface dark:hover:bg-slate-800/60 px-3.5 text-sm text-slate-600 dark:text-muted-foreground hover:border-blue-400 dark:hover:border-blue-500/40 hover:shadow-xs transition-all shadow-2xs group"
+          className="flex h-10 w-44 sm:w-64 md:w-80 lg:w-96 items-center justify-between rounded-xl border border-border bg-surface hover:bg-white dark:bg-surface dark:hover:bg-slate-800/60 px-3.5 text-sm text-slate-600 dark:text-muted-foreground hover:border-blue-400 dark:hover:border-blue-500/40 hover:shadow-xs transition-all shadow-2xs group"
           aria-label="Open command palette"
         >
           <div className="flex items-center gap-2.5 min-w-0">
