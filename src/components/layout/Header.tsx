@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
           variant="ghost"
           size="icon"
           onClick={toggleSidebar}
-          className="lg:hidden h-9 w-9 rounded-lg text-slate-600 hover:text-slate-900 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-surface-elevated"
+          className="lg:hidden h-9 w-9 rounded-lg text-slate-600 hover:text-slate-900 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60"
           aria-label="Toggle navigation menu"
         >
           <Menu className="w-5 h-5" />
@@ -59,7 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             variant="ghost"
             size="icon"
             onClick={onOpenShortcuts}
-            className="h-9 w-9 rounded-xl text-slate-500 hover:text-slate-900 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-surface-elevated hidden sm:inline-flex"
+            className="h-9 w-9 rounded-xl text-slate-500 hover:text-slate-900 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60 hidden sm:inline-flex"
             title="Keyboard shortcuts (?)"
             aria-label="Keyboard shortcuts"
           >

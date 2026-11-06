@@ -71,7 +71,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
             size="icon"
             variant="ghost"
             onClick={onClose}
-            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition-colors"
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
             aria-label="Close shortcuts modal"
           >
             <X className="w-4 h-4" />

@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="hidden lg:flex h-8 w-8 rounded-lg text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-surface-elevated"
+            className="hidden lg:flex h-8 w-8 rounded-lg text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800/60"
             title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             aria-label="Toggle sidebar width"
           >
@@ -105,7 +105,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 )
               }
             >
@@ -120,7 +120,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   'group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 )
               }
             >
@@ -167,7 +167,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                     'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                     isCurrent
                       ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                      : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                   )}
                   title={cat.name}
                 >
@@ -201,7 +201,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 )
               }
               title="Snippets"
@@ -227,7 +227,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                 location.pathname === '/tools' && location.search.includes('filter=favorites')
                   ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
               )}
               title="Favorites"
             >
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
                 )
               }
               title="History"
@@ -275,7 +275,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                 location.pathname === '/snippets' && location.search.includes('tab=collections')
                   ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
               )}
               title="Collections"
             >
@@ -301,7 +301,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                 isActive
                   ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
-                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'
               )
             }
             title="Settings"
@@ -324,7 +324,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           <button
             type="button"
             onClick={onOpenHelp}
-            className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70 transition-all text-left"
+            className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-all text-left"
             title="Help & Docs"
           >
             <HelpCircle className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
