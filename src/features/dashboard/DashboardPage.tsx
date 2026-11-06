@@ -14,12 +14,19 @@ import {
   Link2,
   Hash,
   KeyRound,
+  Code,
+  Send,
+  FileText,
+  Sparkles,
+  Code2,
+  Globe,
+  Clock,
 } from 'lucide-react';
 import { TOOL_REGISTRY, TOOL_CATEGORIES } from '@/tools/registry';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import bannerDark from '@/assets/images/banner_dark.png';
+import bannerLight from '@/assets/images/banner_light.png';
 
 // Core 6 utilities featured in reference screenshot
 const CORE_TOOL_CONFIG: Record<
@@ -58,6 +65,18 @@ const CORE_TOOL_CONFIG: Record<
   },
 };
 
+const CATEGORY_ICONS: Record<string, React.ReactNode> = {
+  'JSON & Data': <Code className="w-4 h-4" />,
+  'API & HTTP': <Send className="w-4 h-4" />,
+  'Security': <Shield className="w-4 h-4" />,
+  'Text & Code': <FileText className="w-4 h-4" />,
+  'Generators': <Sparkles className="w-4 h-4" />,
+  'Web Development': <Code2 className="w-4 h-4" />,
+  'Database': <Database className="w-4 h-4" />,
+  'Network': <Globe className="w-4 h-4" />,
+  'Time & Date': <Clock className="w-4 h-4" />,
+};
+
 const CORE_TOOL_IDS = [
   'json-formatter',
   'jwt-decoder',
@@ -66,6 +85,17 @@ const CORE_TOOL_IDS = [
   'hash-generator',
   'password-generator',
 ];
+
+const getToolDisplay = (tool: (typeof TOOL_REGISTRY)[0]) => {
+  const conf = CORE_TOOL_CONFIG[tool.id];
+  if (conf) return conf;
+
+  return {
+    shortDesc: tool.description,
+    icon: <FileCode2 className="w-5 h-5 text-blue-400" />,
+    badgeClass: 'bg-blue-500/10 text-blue-400 border-blue-500/25',
+  };
+};
 
 export const DashboardPage: React.FC = () => {
   const { favorites, recentTools, toggleFavorite } = useWorkspaceStore();
@@ -81,68 +111,27 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
-      {/* Hero Section matching reference */}
-      <div className="relative rounded-2xl border border-blue-900/40 dark:border-[#263247] bg-gradient-to-r from-blue-50/70 via-indigo-50/40 to-slate-50 dark:from-[#090e1c] dark:via-[#0c152a] dark:to-[#122244] p-6 sm:p-10 lg:p-12 overflow-hidden shadow-xs">
-        {/* Subtle decorative wave and </> code watermark on the right */}
-        <div className="absolute right-0 top-0 bottom-0 w-2/5 pointer-events-none hidden md:flex items-center justify-end pr-6 lg:pr-12 select-none overflow-hidden">
-          <svg
-            className="w-64 h-64 lg:w-72 lg:h-72 text-blue-500/25 dark:text-blue-500/20"
-            viewBox="0 0 240 240"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient id="bracketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#2563EB" stopOpacity="0.4" />
-              </linearGradient>
-              <linearGradient id="slashGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.95" />
-                <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.35" />
-              </linearGradient>
-            </defs>
-            {/* Ambient background wave curves */}
-            <path
-              d="M-20 190 C 60 120, 140 240, 260 100"
-              stroke="#3B82F6"
-              strokeWidth="2"
-              strokeOpacity="0.25"
-              fill="none"
-            />
-            <path
-              d="M10 210 C 90 140, 160 250, 280 120"
-              stroke="#60A5FA"
-              strokeWidth="1.5"
-              strokeOpacity="0.18"
-              fill="none"
-            />
-            {/* Stylized < / > symbol matching reference design */}
-            <path
-              d="M75 80 L35 120 L75 160"
-              stroke="url(#bracketGradient)"
-              strokeWidth="16"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M138 72 L102 168"
-              stroke="url(#slashGradient)"
-              strokeWidth="16"
-              strokeLinecap="round"
-            />
-            <path
-              d="M165 80 L205 120 L165 160"
-              stroke="url(#bracketGradient)"
-              strokeWidth="16"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
+      {/* Hero Section matching reference using user's banner_dark and banner_light images */}
+      <div className="relative rounded-2xl border border-blue-900/30 dark:border-[#263247] overflow-hidden p-6 sm:p-10 lg:p-12 shadow-xs bg-[#090D16]">
+        {/* Banner Background Images: Dark & Light */}
+        <picture className="absolute inset-0 w-full h-full pointer-events-none select-none">
+          <img
+            src={bannerDark}
+            alt=""
+            aria-hidden="true"
+            className="hidden dark:block w-full h-full object-cover object-right"
+          />
+          <img
+            src={bannerLight}
+            alt=""
+            aria-hidden="true"
+            className="block dark:hidden w-full h-full object-cover object-right"
+          />
+        </picture>
 
         {/* Hero Left Content */}
         <div className="relative z-10 max-w-xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40 shadow-2xs">
             <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
             <span>Developer Productivity Hub</span>
           </div>
@@ -203,7 +192,7 @@ export const DashboardPage: React.FC = () => {
             return (
               <div
                 key={tool.id}
-                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-500/50 hover:bg-surface-elevated/40 flex flex-col justify-between min-h-[148px]"
+                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-500/50 hover:bg-surface-elevated/40 flex flex-col justify-between min-h-[148px] shadow-2xs"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
@@ -276,133 +265,225 @@ export const DashboardPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Secondary Information: Starred Tools, Recent, and Categories */}
+      {/* Below Area: Starred Tools & Browse by Category (Refined to match the new UI) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Starred Tools */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <Star className="w-4 h-4 text-amber-400 fill-amber-400" />
-              <span>Starred Tools</span>
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Quick access shortcuts for your most frequent development utilities.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-0">
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 flex items-center justify-center shrink-0">
+                <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-foreground">Starred Tools</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Quick access shortcuts for your most frequent development utilities.
+                </p>
+              </div>
+            </div>
+            {favoriteToolList.length > 0 && (
+              <span className="text-[11px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                {favoriteToolList.length}
+              </span>
+            )}
+          </div>
+
+          <div>
             {favoriteToolList.length === 0 ? (
-              <div className="text-center py-7 text-xs text-muted-foreground border border-dashed border-border rounded-lg">
-                No starred tools yet. Click the star icon on any tool card to pin it here.
+              <div className="rounded-xl border border-dashed border-border bg-surface-elevated/30 p-8 text-center flex flex-col items-center justify-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-surface border border-border flex items-center justify-center text-muted-foreground">
+                  <Star className="w-4 h-4" />
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-xs font-semibold text-foreground">No starred tools yet</p>
+                  <p className="text-[11px] text-muted-foreground max-w-xs">
+                    Click the star icon on any utility card above to pin it here for instant access.
+                  </p>
+                </div>
               </div>
             ) : (
-              <div className="divide-y divide-border/60">
-                {favoriteToolList.map((tool) => (
-                  <div
-                    key={tool.id}
-                    className="flex items-center justify-between py-2.5 text-xs hover:bg-surface-elevated/50 px-2 rounded-md transition-colors"
-                  >
-                    <div className="flex items-center gap-2">
+              <div className="space-y-2">
+                {favoriteToolList.map((tool) => {
+                  const display = getToolDisplay(tool);
+                  return (
+                    <div
+                      key={tool.id}
+                      className="flex items-center justify-between p-3 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 transition-all group shadow-2xs"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div
+                          className={cn(
+                            'w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border text-xs',
+                            display.badgeClass
+                          )}
+                        >
+                          {display.icon}
+                        </div>
+                        <div className="min-w-0">
+                          <Link
+                            to={tool.route}
+                            className="text-xs font-semibold text-foreground group-hover:text-blue-500 transition-colors block truncate"
+                          >
+                            {tool.name}
+                          </Link>
+                          <span className="text-[10px] text-muted-foreground font-mono">
+                            {tool.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 shrink-0">
+                        <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-800/40">
+                          Ready
+                        </span>
+                        <Link
+                          to={tool.route}
+                          className="text-xs font-semibold text-blue-500 hover:text-blue-400 inline-flex items-center gap-1 transition-colors ml-1"
+                        >
+                          <span>Open</span>
+                          <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Browse by Category */}
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center shrink-0">
+                <Layers className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-foreground">Browse by Category</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Explore all tools organized across technical development domains.
+                </p>
+              </div>
+            </div>
+            <Link
+              to="/tools"
+              className="text-xs font-semibold text-blue-500 hover:text-blue-400 flex items-center gap-1 transition-colors shrink-0"
+            >
+              <span>All ({TOOL_REGISTRY.length})</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-2 gap-2.5">
+            {TOOL_CATEGORIES.map((catName) => {
+              const count = TOOL_REGISTRY.filter((t) => t.category === catName).length;
+              const icon = CATEGORY_ICONS[catName] || <FileCode2 className="w-4 h-4" />;
+              return (
+                <Link
+                  key={catName}
+                  to={`/tools?category=${encodeURIComponent(catName)}`}
+                  className="flex items-center justify-between p-2.5 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 group transition-all shadow-2xs"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-7 h-7 rounded-lg bg-surface border border-border flex items-center justify-center text-muted-foreground group-hover:text-blue-400 group-hover:border-blue-500/30 transition-colors shrink-0">
+                      {icon}
+                    </div>
+                    <span className="text-xs font-semibold text-foreground group-hover:text-blue-500 transition-colors truncate">
+                      {catName}
+                    </span>
+                  </div>
+                  <span className="text-[11px] font-mono text-muted-foreground bg-surface px-2 py-0.5 rounded-full border border-border group-hover:border-blue-500/30 transition-colors shrink-0">
+                    {count}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Recently Used Tools (if any) */}
+      {recentToolList.length > 0 && (
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 flex items-center justify-center shrink-0">
+              <History className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-foreground">Recently Used Tools</h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Utilities launched in your active session.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            {recentToolList.slice(0, 6).map((tool) => {
+              const display = getToolDisplay(tool);
+              return (
+                <div
+                  key={tool.id}
+                  className="flex items-center justify-between p-3 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 transition-all group shadow-2xs"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div
+                      className={cn(
+                        'w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border text-xs',
+                        display.badgeClass
+                      )}
+                    >
+                      {display.icon}
+                    </div>
+                    <div className="min-w-0">
                       <Link
                         to={tool.route}
-                        className="font-medium text-foreground hover:text-blue-500 transition-colors"
+                        className="text-xs font-semibold text-foreground group-hover:text-blue-500 transition-colors block truncate"
                       >
                         {tool.name}
                       </Link>
-                      <span className="text-[10px] text-muted-foreground">({tool.category})</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Badge variant="success" className="text-[10px]">Ready</Badge>
-                      <Link to={tool.route} className="text-blue-500 hover:underline text-xs">
-                        Open
-                      </Link>
+                      <span className="text-[10px] text-muted-foreground font-mono">
+                        {tool.category}
+                      </span>
                     </div>
                   </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
-        {/* Categories Overview */}
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <Layers className="w-4 h-4 text-blue-500" />
-              <span>Browse by Category</span>
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Explore the entire technical tool catalogue organized by domain.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="grid grid-cols-2 gap-2">
-              {TOOL_CATEGORIES.map((cat) => {
-                const count = TOOL_REGISTRY.filter((t) => t.category === cat).length;
-                return (
                   <Link
-                    key={cat}
-                    to={`/tools?category=${encodeURIComponent(cat)}`}
-                    className="flex items-center justify-between p-2.5 rounded-lg border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-500/40 text-xs transition-colors"
+                    to={tool.route}
+                    className="text-xs font-semibold text-blue-500 hover:text-blue-400 inline-flex items-center gap-1 transition-colors shrink-0 ml-1"
                   >
-                    <span className="font-medium text-foreground">{cat}</span>
-                    <span className="text-[11px] font-mono text-muted-foreground">
-                      {count}
-                    </span>
+                    <span>Launch</span>
+                    <ArrowRight className="w-3 h-3" />
                   </Link>
-                );
-              })}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Recent tools if any */}
-      {recentToolList.length > 0 && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <History className="w-4 h-4 text-blue-500" />
-              <span>Recently Used Tools</span>
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Tools you opened recently in this browser session.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
-              {recentToolList.slice(0, 6).map((tool) => (
-                <Link
-                  key={tool.id}
-                  to={tool.route}
-                  className="flex items-center justify-between p-2.5 rounded-lg border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-500/40 text-xs transition-colors"
-                >
-                  <span className="font-medium text-foreground">{tool.name}</span>
-                  <span className="text-blue-500 text-xs font-semibold flex items-center gap-1">
-                    Open <ArrowRight className="w-3 h-3" />
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       )}
 
-      {/* Keyboard Shortcuts Hint Bar */}
-      <div className="rounded-xl border border-border bg-surface-elevated p-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-        <div className="flex items-center gap-2">
-          <Terminal className="w-4 h-4 text-blue-500 shrink-0" />
-          <span className="font-medium text-foreground">ProTip:</span>
-          <span>Press keyboard shortcuts to navigate and execute instantly.</span>
+      {/* Developer ProTip / Shortcuts Hint Bar */}
+      <div className="rounded-xl border border-border bg-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center shrink-0">
+            <Terminal className="w-4 h-4" />
+          </div>
+          <div className="text-xs">
+            <span className="font-semibold text-foreground mr-1.5">ProTip:</span>
+            <span className="text-muted-foreground">
+              Press keyboard shortcuts to navigate, search, and run utilities instantly.
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-3 font-mono text-[11px]">
+        <div className="flex items-center gap-3 font-mono text-[11px] shrink-0">
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded bg-surface border border-border">Ctrl</kbd>+
-            <kbd className="px-1.5 py-0.5 rounded bg-surface border border-border">K</kbd>
-            <span className="ml-1 text-foreground">Command Bar</span>
+            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">Ctrl</kbd>+
+            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">K</kbd>
+            <span className="ml-1 text-muted-foreground">Command Bar</span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-1.5 py-0.5 rounded bg-surface border border-border">Esc</kbd>
-            <span className="ml-1 text-foreground">Dismiss</span>
+            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">Esc</kbd>
+            <span className="ml-1 text-muted-foreground">Dismiss</span>
           </span>
         </div>
       </div>

@@ -9,3 +9,4 @@ export interface HtmlFormatResult {
   formattedHtml: string;
   error?: string;
 }
+

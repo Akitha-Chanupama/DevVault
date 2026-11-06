@@ -25,3 +25,4 @@ describe('htmlFormatter logic', () => {
     expect(typeof result.formattedHtml).toBe('string');
   });
 });
+
