@@ -4,8 +4,8 @@
 
 - [x] **Phase 1 — Foundation** (Complete: Vite+React+TS, Semantic Design Tokens, AppShell, Sidebar, Header, Command Palette, Tool Registry, Dashboard, Directory, JSON Formatter preview, 13 Vitest suites passing, clean production build)
 - [x] **Phase 2 — Core Utilities** (Complete: All P0 tools implemented with isolated pure logic, typed interfaces, rich UI, and 50 Vitest suites passing)
-- [ ] **Phase 3 — Workspace** (Next: Dexie IndexedDB persistence, Snippets, Collections, Privacy History, Settings, Import/Export)
-- [ ] **Phase 4 — Advanced Tools** (Pending: P1 tools)
+- [x] **Phase 3 — Workspace** (Complete: Dexie IndexedDB persistence, Snippet Manager, Collections, Activity History with privacy controls, Settings, Export/Import with schema verification, 53 Vitest suites passing)
+- [ ] **Phase 4 — Advanced Tools** (Next: P1 tools)
 - [ ] **Phase 5 — Production Readiness** (Pending)
 - [ ] **Phase 6 — Optional Backend** (Optional / Future)
 

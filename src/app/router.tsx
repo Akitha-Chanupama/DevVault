@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '@/components/layout/AppShell';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
@@ -9,8 +9,19 @@ import { Loader2 } from 'lucide-react';
 const PageLoader = () => (
   <div className="flex h-96 w-full items-center justify-center gap-2 text-muted-foreground text-xs">
     <Loader2 className="w-5 h-5 animate-spin text-primary" />
-    <span>Loading utility...</span>
+    <span>Loading...</span>
   </div>
+);
+
+// Lazy load workspace features
+const SnippetListPage = React.lazy(
+  () => import('@/features/snippets/components/SnippetListPage')
+);
+const HistoryPage = React.lazy(
+  () => import('@/features/history/components/HistoryPage')
+);
+const SettingsPage = React.lazy(
+  () => import('@/features/settings/components/SettingsPage')
 );
 
 // Map available tools from registry
@@ -38,6 +49,30 @@ export const router = createBrowserRouter([
       {
         path: 'tools',
         element: <ToolDirectoryPage />,
+      },
+      {
+        path: 'snippets',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SnippetListPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'history',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <HistoryPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'settings',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <SettingsPage />
+          </Suspense>
+        ),
       },
       ...toolRoutes,
       {

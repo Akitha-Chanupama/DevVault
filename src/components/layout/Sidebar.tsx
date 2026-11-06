@@ -15,6 +15,9 @@ import {
   Shield,
   PanelLeftClose,
   PanelLeft,
+  Settings,
+  History,
+  BookMarked,
 } from 'lucide-react';
 import { TOOL_REGISTRY } from '@/tools/registry';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
@@ -129,11 +132,64 @@ export const Sidebar: React.FC = () => {
             </NavLink>
           </div>
 
+          {/* Workspace Links */}
+          <div className="space-y-1">
+            {sidebarOpen && (
+              <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+                Workspace
+              </div>
+            )}
+            <NavLink
+              to="/snippets"
+              className={({ isActive }) =>
+                cn(
+                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+                )
+              }
+            >
+              <BookMarked className="w-4 h-4 shrink-0 text-primary" />
+              {sidebarOpen && <span>Snippet Manager</span>}
+            </NavLink>
+
+            <NavLink
+              to="/history"
+              className={({ isActive }) =>
+                cn(
+                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+                )
+              }
+            >
+              <History className="w-4 h-4 shrink-0 text-secondary" />
+              {sidebarOpen && <span>Activity History</span>}
+            </NavLink>
+
+            <NavLink
+              to="/settings"
+              className={({ isActive }) =>
+                cn(
+                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary/10 text-primary font-semibold'
+                    : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+                )
+              }
+            >
+              <Settings className="w-4 h-4 shrink-0 text-muted-foreground" />
+              {sidebarOpen && <span>Settings & Backup</span>}
+            </NavLink>
+          </div>
+
           {/* Quick Access: Favorites */}
           {sidebarOpen && favoritedTools.length > 0 && (
             <div className="space-y-1">
               <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70 flex items-center justify-between">
-                <span>Favorites</span>
+                <span>Starred Tools</span>
                 <Star className="w-3 h-3 text-warning fill-warning" />
               </div>
               <div className="space-y-0.5 pt-1">
