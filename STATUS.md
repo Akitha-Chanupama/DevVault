@@ -6,7 +6,8 @@
 - [x] **Phase 2 — Core Utilities (P0 Tools)** (Complete: All 12 P0 tools implemented with isolated pure logic, typed interfaces, accessible UI components, and passing unit tests)
 - [x] **Phase 3 — Workspace Persistence** (Complete: Dexie IndexedDB persistence, Snippet Manager, Collections, Activity History with privacy controls, Settings, Workspace Export/Import with schema verification)
 - [x] **Phase 4 — Advanced Developer Tools (P1 Tools)** (Complete: All P1 developer utilities implemented with isolated logic, comprehensive test suites, and rich UI pages)
-- [x] **Phase 5 — Production Readiness & Polish** (Complete: Keyboard shortcuts modal with global listeners, Web App Manifest & PWA readiness, WCAG 2.2 contrast compliance, 30 test files / 98 tests passing, clean code-split production build in 5.3s)
+- [x] **Phase 5 — Production Readiness & Polish** (Complete: Keyboard shortcuts modal with global listeners, Web App Manifest & PWA readiness, WCAG 2.2 contrast compliance, 31 test files / 101 tests passing, clean code-split production build in 6.5s)
+- [x] **Phase 5.1 — UI/UX Refinement to Reference Design** (Complete: Exact dark navy `#090D16` palette, `#0D1220` sidebar, `#141B2A` card surfaces, fixed sidebar with custom brand logo & tool counts, 3-mode theme selector pill, `banner_dark` & `banner_light` hero banner, 3-column core utility cards, and refined lower dashboard sections)
 - [ ] **Phase 6 — Optional Backend** (Optional / Future extension)
 
 ---
@@ -49,6 +50,6 @@
 
 ## Test Suite & Verification Summary
 - **Type Checking:** 100% strict TypeScript (`tsc -b`), 0 errors.
-- **Unit & Component Tests:** 30 test suites, 98 passing tests (`vitest run`).
-- **Production Build:** Clean Vite build, code-split per tool, total build time ~5.3s.
+- **Unit & Component Tests:** 31 test suites, 101 passing tests (`vitest run`).
+- **Production Build:** Clean Vite build, code-split per tool, bundled banner image assets.
 - **Data Privacy & Storage:** Purely local in-browser execution with Dexie IndexedDB. Zero telemetry, zero analytics tracking, zero remote transmission of user secrets.
