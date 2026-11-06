@@ -192,7 +192,7 @@ export const DashboardPage: React.FC = () => {
             return (
               <div
                 key={tool.id}
-                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-surface-elevated/30 flex flex-col justify-between min-h-[154px] shadow-xs hover:shadow-md"
+                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-blue-50/50 dark:hover:bg-[#162035] flex flex-col justify-between min-h-[154px] shadow-xs hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
@@ -308,7 +308,7 @@ export const DashboardPage: React.FC = () => {
                   return (
                     <div
                       key={tool.id}
-                      className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
+                      className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-slate-50 dark:bg-[#121826] hover:bg-blue-50/80 dark:hover:bg-[#192338] hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
@@ -383,7 +383,7 @@ export const DashboardPage: React.FC = () => {
                 <Link
                   key={catName}
                   to={`/tools?category=${encodeURIComponent(catName)}`}
-                  className="flex items-center justify-between p-3 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 group transition-all shadow-2xs"
+                  className="flex items-center justify-between p-3 rounded-xl border border-border bg-slate-50 dark:bg-[#121826] hover:bg-blue-50/80 dark:hover:bg-[#192338] hover:border-blue-400 dark:hover:border-blue-500/40 group transition-all shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
@@ -424,7 +424,7 @@ export const DashboardPage: React.FC = () => {
               return (
                 <div
                   key={tool.id}
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
+                  className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-slate-50 dark:bg-[#121826] hover:bg-blue-50/80 dark:hover:bg-[#192338] hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div
