@@ -17,3 +17,4 @@ describe('DashboardPage', () => {
     expect(screen.getByText('Browse by Category')).toBeInTheDocument();
   });
 });
+

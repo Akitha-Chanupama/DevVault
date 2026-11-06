@@ -33,3 +33,4 @@ export interface ToolDefinition {
   priority?: 'P0' | 'P1' | 'P2';
   component?: React.LazyExoticComponent<React.ComponentType<any>>;
 }
+

@@ -5,6 +5,39 @@ import { ToolDefinition } from '../types/tools';
 const JsonFormatterPage = React.lazy(
   () => import('./json-formatter/components/JsonFormatterPage')
 );
+const JsonValidatorPage = React.lazy(
+  () => import('./json-validator/components/JsonValidatorPage')
+);
+const JsonMinifierPage = React.lazy(
+  () => import('./json-minifier/components/JsonMinifierPage')
+);
+const UrlParserPage = React.lazy(
+  () => import('./url-parser/components/UrlParserPage')
+);
+const JwtDecoderPage = React.lazy(
+  () => import('./jwt-decoder/components/JwtDecoderPage')
+);
+const Base64Page = React.lazy(
+  () => import('./base64/components/Base64Page')
+);
+const HashGeneratorPage = React.lazy(
+  () => import('./hash-generator/components/HashGeneratorPage')
+);
+const PasswordGeneratorPage = React.lazy(
+  () => import('./password-generator/components/PasswordGeneratorPage')
+);
+const UuidGeneratorPage = React.lazy(
+  () => import('./uuid-generator/components/UuidGeneratorPage')
+);
+const TimestampConverterPage = React.lazy(
+  () => import('./timestamp-converter/components/TimestampConverterPage')
+);
+const TextCasePage = React.lazy(
+  () => import('./text-case/components/TextCasePage')
+);
+const DiffCheckerPage = React.lazy(
+  () => import('./diff-checker/components/DiffCheckerPage')
+);
 
 export const TOOL_REGISTRY: ToolDefinition[] = [
   // JSON & Data
@@ -25,14 +58,15 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
   {
     id: 'json-validator',
     name: 'JSON Validator',
-    description: 'Validate JSON syntax and structure with precise error line and column diagnostics.',
+    description: 'Validate JSON syntax and structure with deep diagnostics, structural metrics, and line-level error detection.',
     category: 'JSON & Data',
     keywords: ['json', 'validate', 'syntax', 'lint', 'check'],
     route: '/tools/json-validator',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'CheckCircle2',
     priority: 'P0',
+    component: JsonValidatorPage,
   },
   {
     id: 'json-minifier',
@@ -41,10 +75,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'JSON & Data',
     keywords: ['json', 'minify', 'compress', 'compact'],
     route: '/tools/json-minifier',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Minimize2',
     priority: 'P0',
+    component: JsonMinifierPage,
   },
   {
     id: 'json-to-yaml',
@@ -85,6 +120,19 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
 
   // API & HTTP
   {
+    id: 'url-parser',
+    name: 'URL Parser & Builder',
+    description: 'Parse URLs into origin, pathname, hash, and interactive query parameters.',
+    category: 'API & HTTP',
+    keywords: ['url', 'uri', 'query', 'params', 'parse', 'encode'],
+    route: '/tools/url-parser',
+    status: 'available',
+    privacyMode: 'browser-only',
+    icon: 'Link',
+    priority: 'P0',
+    component: UrlParserPage,
+  },
+  {
     id: 'api-client',
     name: 'HTTP API Client',
     description: 'Send direct browser requests with method, header, parameter, and body configuration.',
@@ -109,18 +157,6 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     icon: 'ListFilter',
     priority: 'P1',
   },
-  {
-    id: 'url-parser',
-    name: 'URL Parser & Builder',
-    description: 'Parse URLs into origin, pathname, hash, and interactive query parameters.',
-    category: 'API & HTTP',
-    keywords: ['url', 'uri', 'query', 'params', 'parse', 'encode'],
-    route: '/tools/url-parser',
-    status: 'planned',
-    privacyMode: 'browser-only',
-    icon: 'Link',
-    priority: 'P0',
-  },
 
   // Security
   {
@@ -130,11 +166,12 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Security',
     keywords: ['jwt', 'token', 'decode', 'bearer', 'auth', 'claims'],
     route: '/tools/jwt-decoder',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'KeyRound',
     isPopular: true,
     priority: 'P0',
+    component: JwtDecoderPage,
   },
   {
     id: 'base64',
@@ -143,10 +180,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Security',
     keywords: ['base64', 'encode', 'decode', 'binary', 'utf8'],
     route: '/tools/base64',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Binary',
     priority: 'P0',
+    component: Base64Page,
   },
   {
     id: 'hash-generator',
@@ -155,11 +193,25 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Security',
     keywords: ['hash', 'sha256', 'sha512', 'digest', 'crypto'],
     route: '/tools/hash-generator',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Fingerprint',
     isPopular: true,
     priority: 'P0',
+    component: HashGeneratorPage,
+  },
+  {
+    id: 'password-generator',
+    name: 'Password Generator',
+    description: 'Generate cryptographically strong passwords using CSPRNG with custom constraints.',
+    category: 'Security',
+    keywords: ['password', 'generator', 'security', 'random', 'csprng'],
+    route: '/tools/password-generator',
+    status: 'available',
+    privacyMode: 'browser-only',
+    icon: 'Lock',
+    priority: 'P0',
+    component: PasswordGeneratorPage,
   },
   {
     id: 'hmac-generator',
@@ -173,18 +225,6 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     icon: 'ShieldCheck',
     priority: 'P1',
   },
-  {
-    id: 'password-generator',
-    name: 'Password Generator',
-    description: 'Generate cryptographically strong passwords using CSPRNG with custom constraints.',
-    category: 'Security',
-    keywords: ['password', 'generator', 'security', 'random', 'csprng'],
-    route: '/tools/password-generator',
-    status: 'planned',
-    privacyMode: 'browser-only',
-    icon: 'Lock',
-    priority: 'P0',
-  },
 
   // Text & Code
   {
@@ -194,11 +234,25 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Text & Code',
     keywords: ['diff', 'compare', 'text', 'code', 'changes'],
     route: '/tools/diff-checker',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'GitCompare',
     isPopular: true,
     priority: 'P0',
+    component: DiffCheckerPage,
+  },
+  {
+    id: 'text-case',
+    name: 'Text Case Converter',
+    description: 'Convert strings between camelCase, PascalCase, snake_case, kebab-case, and CONSTANT_CASE.',
+    category: 'Text & Code',
+    keywords: ['case', 'camelCase', 'snake_case', 'kebab-case', 'uppercase', 'lowercase'],
+    route: '/tools/text-case',
+    status: 'available',
+    privacyMode: 'browser-only',
+    icon: 'CaseSensitive',
+    priority: 'P0',
+    component: TextCasePage,
   },
   {
     id: 'regex-tester',
@@ -225,18 +279,6 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     icon: 'FileText',
     priority: 'P1',
   },
-  {
-    id: 'text-case',
-    name: 'Text Case Converter',
-    description: 'Convert strings between camelCase, PascalCase, snake_case, kebab-case, and CONSTANT_CASE.',
-    category: 'Text & Code',
-    keywords: ['case', 'camelCase', 'snake_case', 'kebab-case', 'uppercase', 'lowercase'],
-    route: '/tools/text-case',
-    status: 'planned',
-    privacyMode: 'browser-only',
-    icon: 'CaseSensitive',
-    priority: 'P0',
-  },
 
   // Generators
   {
@@ -246,10 +288,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Generators',
     keywords: ['uuid', 'guid', 'v4', 'random', 'id'],
     route: '/tools/uuid-generator',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Sparkles',
     priority: 'P0',
+    component: UuidGeneratorPage,
   },
   {
     id: 'qr-generator',
@@ -348,10 +391,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Time & Date',
     keywords: ['timestamp', 'unix', 'epoch', 'date', 'time', 'utc'],
     route: '/tools/timestamp-converter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Clock',
     priority: 'P0',
+    component: TimestampConverterPage,
   },
   {
     id: 'timezone-converter',

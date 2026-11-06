@@ -33,3 +33,4 @@ export const PrivacyNotice: React.FC<PrivacyNoticeProps> = ({ mode, className = 
     </div>
   );
 };
+

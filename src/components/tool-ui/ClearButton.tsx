@@ -29,3 +29,4 @@ export const ClearButton: React.FC<ClearButtonProps> = ({
     </Button>
   );
 };
+

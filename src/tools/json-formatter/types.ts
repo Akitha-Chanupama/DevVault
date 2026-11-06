@@ -16,3 +16,4 @@ export interface JsonTransformResult {
   output: string;
   error?: ParseErrorDetail;
 }
+

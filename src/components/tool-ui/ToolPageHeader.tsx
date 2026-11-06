@@ -66,3 +66,4 @@ export const ToolPageHeader: React.FC<ToolPageHeaderProps> = ({
     </div>
   );
 };
+

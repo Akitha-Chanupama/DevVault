@@ -92,3 +92,4 @@ export const ToolHelpPanel: React.FC<ToolHelpPanelProps> = ({
     </div>
   );
 };
+
