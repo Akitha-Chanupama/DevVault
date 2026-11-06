@@ -106,11 +106,11 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/45 dark:bg-black/55 backdrop-blur-sm animate-in fade-in duration-100">
       <div
-        className="relative w-full max-w-3xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
+        className="relative w-full max-w-3xl rounded-2xl border border-border dark:border-blue-500/30 bg-surface/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-border bg-slate-50 dark:bg-surface-elevated">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border bg-surface-elevated">
           <div className="flex items-center gap-2">
             <Code2 className="w-4 h-4 text-primary" />
             <span className="font-bold text-sm text-foreground">

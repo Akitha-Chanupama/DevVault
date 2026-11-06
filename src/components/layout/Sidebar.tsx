@@ -59,12 +59,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
 
       <aside
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-slate-200 dark:border-border bg-white dark:bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
+          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
           sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
         {/* Brand Header */}
-        <div className="flex h-16 items-center justify-between px-4 border-b border-slate-200 dark:border-border shrink-0">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-border shrink-0">
           <NavLink to="/" className="flex items-center gap-3 overflow-hidden group">
             {/* DevVault stylized bracket logo badge */}
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-600/15 border border-blue-200 dark:border-blue-500/30 text-blue-600 dark:text-blue-400 font-bold font-mono text-sm shadow-xs shadow-blue-500/10 shrink-0 group-hover:scale-105 group-hover:border-blue-400 dark:group-hover:border-blue-500/50 transition-all">
@@ -293,7 +293,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
         </div>
 
         {/* Bottom Section: Settings & Help */}
-        <div className="p-3 border-t border-slate-200 dark:border-border shrink-0 space-y-1">
+        <div className="p-3 border-t border-border shrink-0 space-y-1">
           <NavLink
             to="/settings"
             className={({ isActive }) =>

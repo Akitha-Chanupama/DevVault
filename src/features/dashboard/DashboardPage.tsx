@@ -192,7 +192,7 @@ export const DashboardPage: React.FC = () => {
             return (
               <div
                 key={tool.id}
-                className="group relative rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-slate-50/50 dark:hover:bg-surface-elevated/40 flex flex-col justify-between min-h-[154px] shadow-xs hover:shadow-md"
+                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-surface-elevated/30 flex flex-col justify-between min-h-[154px] shadow-xs hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
@@ -268,7 +268,7 @@ export const DashboardPage: React.FC = () => {
       {/* Below Area: Starred Tools & Browse by Category */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Starred Tools */}
-        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/25 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
@@ -290,8 +290,8 @@ export const DashboardPage: React.FC = () => {
 
           <div>
             {favoriteToolList.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-slate-200 dark:border-border bg-slate-50/50 dark:bg-surface-elevated/30 p-8 text-center flex flex-col items-center justify-center gap-2">
-                <div className="w-9 h-9 rounded-full bg-white dark:bg-surface border border-slate-200 dark:border-border flex items-center justify-center text-slate-400 dark:text-muted-foreground">
+              <div className="rounded-xl border border-dashed border-border bg-surface-elevated/30 p-8 text-center flex flex-col items-center justify-center gap-2">
+                <div className="w-9 h-9 rounded-full bg-surface border border-border flex items-center justify-center text-muted-foreground">
                   <Star className="w-4 h-4" />
                 </div>
                 <div className="space-y-0.5">
@@ -308,7 +308,7 @@ export const DashboardPage: React.FC = () => {
                   return (
                     <div
                       key={tool.id}
-                      className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 dark:border-border bg-slate-50/60 hover:bg-slate-100/80 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
+                      className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
@@ -353,7 +353,7 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Browse by Category */}
-        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
@@ -383,17 +383,17 @@ export const DashboardPage: React.FC = () => {
                 <Link
                   key={catName}
                   to={`/tools?category=${encodeURIComponent(catName)}`}
-                  className="flex items-center justify-between p-3 rounded-xl border border-slate-200/90 dark:border-border bg-slate-50/70 hover:bg-slate-100 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 group transition-all shadow-2xs"
+                  className="flex items-center justify-between p-3 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 group transition-all shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-white dark:bg-surface border border-slate-200 dark:border-border flex items-center justify-center text-slate-500 dark:text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
                       {icon}
                     </div>
                     <span className="text-sm font-semibold text-slate-800 dark:text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors truncate">
                       {catName}
                     </span>
                   </div>
-                  <span className="text-xs font-mono font-medium text-slate-600 dark:text-muted-foreground bg-white dark:bg-surface px-2 py-0.5 rounded-full border border-slate-200 dark:border-border group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
+                  <span className="text-xs font-mono font-medium text-slate-600 dark:text-muted-foreground bg-surface px-2 py-0.5 rounded-full border border-border group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
                     {count}
                   </span>
                 </Link>
@@ -405,7 +405,7 @@ export const DashboardPage: React.FC = () => {
 
       {/* Recently Used Tools (if any) */}
       {recentToolList.length > 0 && (
-        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
+        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/25 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
               <History className="w-5 h-5" />
@@ -424,7 +424,7 @@ export const DashboardPage: React.FC = () => {
               return (
                 <div
                   key={tool.id}
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 dark:border-border bg-slate-50/70 hover:bg-slate-100 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
+                  className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/40 hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div
@@ -463,7 +463,7 @@ export const DashboardPage: React.FC = () => {
       )}
 
       {/* Developer ProTip / Shortcuts Hint Bar */}
-      <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
+      <div className="rounded-xl border border-border bg-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
             <Terminal className="w-4.5 h-4.5" />
@@ -477,12 +477,12 @@ export const DashboardPage: React.FC = () => {
         </div>
         <div className="flex items-center gap-3 font-mono text-xs shrink-0">
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">Ctrl</kbd>+
-            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">K</kbd>
+            <kbd className="px-2 py-0.5 rounded-md bg-surface-elevated border border-border text-foreground font-semibold shadow-2xs">Ctrl</kbd>+
+            <kbd className="px-2 py-0.5 rounded-md bg-surface-elevated border border-border text-foreground font-semibold shadow-2xs">K</kbd>
             <span className="ml-1 text-slate-500 dark:text-muted-foreground">Command Bar</span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">Esc</kbd>
+            <kbd className="px-2 py-0.5 rounded-md bg-surface-elevated border border-border text-foreground font-semibold shadow-2xs">Esc</kbd>
             <span className="ml-1 text-slate-500 dark:text-muted-foreground">Dismiss</span>
           </span>
         </div>
