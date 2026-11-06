@@ -59,7 +59,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
 
       <aside
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
+          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar transition-all duration-200 ease-in-out lg:sticky lg:top-0 lg:h-screen lg:shrink-0 select-none',
           sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
@@ -93,16 +93,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           </Button>
         </div>
 
-        {/* Scrollable Navigation Body */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+        {/* Navigation Body - Compact & Non-scrollable on standard viewports */}
+        <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-3 py-2.5 space-y-3">
           {/* Main Top Nav */}
-          <div className="space-y-1.5">
+          <div className="space-y-1">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
                 cn(
-                  'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
+                  'group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -117,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               to="/tools"
               className={({ isActive }) =>
                 cn(
-                  'group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
+                  'group flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -148,9 +148,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           </div>
 
           {/* Categories Section */}
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {sidebarOpen && (
-              <div className="px-3.5 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
+              <div className="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Categories
               </div>
             )}
@@ -164,7 +164,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   key={cat.name}
                   to={`/tools?category=${encodeURIComponent(cat.name)}`}
                   className={cn(
-                    'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                    'group flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium transition-all',
                     isCurrent
                       ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                       : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -188,9 +188,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           </div>
 
           {/* Workspace Section */}
-          <div className="space-y-1">
+          <div className="space-y-0.5">
             {sidebarOpen && (
-              <div className="px-3.5 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
+              <div className="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Workspace
               </div>
             )}
@@ -198,7 +198,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               to="/snippets"
               className={({ isActive }) =>
                 cn(
-                  'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                  'group flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -224,7 +224,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             <NavLink
               to="/tools?filter=favorites"
               className={cn(
-                'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                'group flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium transition-all',
                 location.pathname === '/tools' && location.search.includes('filter=favorites')
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -246,7 +246,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               to="/history"
               className={({ isActive }) =>
                 cn(
-                  'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                  'group flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium transition-all',
                   isActive
                     ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -272,7 +272,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             <NavLink
               to="/snippets?tab=collections"
               className={cn(
-                'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                'group flex items-center gap-3 px-3 py-1.5 rounded-xl text-sm font-medium transition-all',
                 location.pathname === '/snippets' && location.search.includes('tab=collections')
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -293,12 +293,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
         </div>
 
         {/* Bottom Section: Settings & Help */}
-        <div className="p-3 border-t border-border shrink-0 space-y-1">
+        <div className="p-2.5 border-t border-border shrink-0 space-y-0.5">
           <NavLink
             to="/settings"
             className={({ isActive }) =>
               cn(
-                'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
+                'group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all',
                 isActive
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -324,7 +324,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           <button
             type="button"
             onClick={onOpenHelp}
-            className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-all text-left"
+            className="w-full group flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-all text-left"
             title="Help & Docs"
           >
             <HelpCircle className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
