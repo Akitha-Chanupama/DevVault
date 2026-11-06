@@ -35,33 +35,33 @@ const CORE_TOOL_CONFIG: Record<
 > = {
   'json-formatter': {
     shortDesc: 'Format, validate, and beautify JSON data.',
-    icon: <span className="font-mono font-bold text-lg leading-none text-blue-400">{`{}`}</span>,
-    badgeClass: 'bg-blue-500/10 text-blue-400 border-blue-500/25',
+    icon: <span className="font-mono font-bold text-lg leading-none text-blue-600 dark:text-blue-400">{`{}`}</span>,
+    badgeClass: 'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/25',
   },
   'jwt-decoder': {
     shortDesc: 'Decode and inspect JWT tokens.',
-    icon: <Shield className="w-5 h-5 text-emerald-400" />,
-    badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25',
+    icon: <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+    badgeClass: 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/25',
   },
   'sql-formatter': {
     shortDesc: 'Format and beautify SQL queries.',
-    icon: <Database className="w-5 h-5 text-purple-400" />,
-    badgeClass: 'bg-purple-500/10 text-purple-400 border-purple-500/25',
+    icon: <Database className="w-5 h-5 text-purple-600 dark:text-purple-400" />,
+    badgeClass: 'bg-purple-50 text-purple-600 border-purple-200 dark:bg-purple-500/10 dark:text-purple-400 dark:border-purple-500/25',
   },
   'url-parser': {
     shortDesc: 'Parse and analyze URLs.',
-    icon: <Link2 className="w-5 h-5 text-cyan-400" />,
-    badgeClass: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/25',
+    icon: <Link2 className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />,
+    badgeClass: 'bg-cyan-50 text-cyan-600 border-cyan-200 dark:bg-cyan-500/10 dark:text-cyan-400 dark:border-cyan-500/25',
   },
   'hash-generator': {
     shortDesc: 'Generate cryptographic hashes.',
-    icon: <Hash className="w-5 h-5 text-amber-400" />,
-    badgeClass: 'bg-amber-500/10 text-amber-400 border-amber-500/25',
+    icon: <Hash className="w-5 h-5 text-amber-600 dark:text-amber-400" />,
+    badgeClass: 'bg-amber-50 text-amber-600 border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/25',
   },
   'password-generator': {
     shortDesc: 'Create strong and secure passwords.',
-    icon: <KeyRound className="w-5 h-5 text-emerald-400" />,
-    badgeClass: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25',
+    icon: <KeyRound className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />,
+    badgeClass: 'bg-emerald-50 text-emerald-600 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/25',
   },
 };
 
@@ -92,8 +92,8 @@ const getToolDisplay = (tool: (typeof TOOL_REGISTRY)[0]) => {
 
   return {
     shortDesc: tool.description,
-    icon: <FileCode2 className="w-5 h-5 text-blue-400" />,
-    badgeClass: 'bg-blue-500/10 text-blue-400 border-blue-500/25',
+    icon: <FileCode2 className="w-5 h-5 text-blue-600 dark:text-blue-400" />,
+    badgeClass: 'bg-blue-50 text-blue-600 border-blue-200 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/25',
   };
 };
 
@@ -111,8 +111,8 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <div className="space-y-9 animate-in fade-in duration-150">
-      {/* Hero Section matching reference using user's banner_dark and banner_light images */}
-      <div className="relative rounded-2xl border border-blue-900/30 dark:border-[#263247] overflow-hidden p-6 sm:p-10 lg:p-12 shadow-xs bg-[#090D16]">
+      {/* Hero Section with polished borders and backgrounds for both light and dark */}
+      <div className="relative rounded-2xl border border-blue-200/90 dark:border-[#263247] overflow-hidden p-6 sm:p-10 lg:p-12 shadow-xs bg-blue-50/30 dark:bg-[#090D16]">
         {/* Banner Background Images: Dark & Light */}
         <picture className="absolute inset-0 w-full h-full pointer-events-none select-none">
           <img
@@ -131,14 +131,14 @@ export const DashboardPage: React.FC = () => {
 
         {/* Hero Left Content */}
         <div className="relative z-10 max-w-xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40 shadow-xs backdrop-blur-xs">
             <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
             <span>Developer Productivity Hub</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
             All your daily developer utilities,{' '}
-            <span className="text-blue-500 block">in one place.</span>
+            <span className="text-blue-600 dark:text-blue-500 block">in one place.</span>
           </h1>
 
           <p className="text-base text-slate-600 dark:text-slate-400 font-normal leading-relaxed">
@@ -148,7 +148,7 @@ export const DashboardPage: React.FC = () => {
           <div className="pt-2">
             <Link
               to="/tools"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-sm shadow-blue-900/30 transition-all hover:translate-y-[-1px]"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/20 dark:shadow-blue-900/30 transition-all hover:translate-y-[-1px]"
             >
               <Zap className="w-4 h-4 fill-white" />
               <span>Browse All Tools</span>
@@ -162,17 +162,17 @@ export const DashboardPage: React.FC = () => {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2.5">
-              <LayoutGrid className="w-5 h-5 text-blue-500 shrink-0" />
+            <h2 className="text-xl font-bold tracking-tight text-slate-900 dark:text-foreground flex items-center gap-2.5">
+              <LayoutGrid className="w-5 h-5 text-blue-600 dark:text-blue-500 shrink-0" />
               <span>Available Core Utilities</span>
             </h2>
-            <p className="text-sm text-muted-foreground mt-0.5">
+            <p className="text-sm text-slate-500 dark:text-muted-foreground mt-0.5">
               Production-ready tools executing entirely within your browser.
             </p>
           </div>
           <Link
             to="/tools"
-            className="text-sm font-semibold text-blue-500 hover:text-blue-400 flex items-center gap-1 transition-colors"
+            className="text-sm font-semibold text-blue-600 dark:text-blue-500 hover:text-blue-500 dark:hover:text-blue-400 flex items-center gap-1 transition-colors"
           >
             <span>View All Tools</span>
             <ArrowRight className="w-4 h-4" />
@@ -192,7 +192,7 @@ export const DashboardPage: React.FC = () => {
             return (
               <div
                 key={tool.id}
-                className="group relative rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-blue-500/50 hover:bg-surface-elevated/40 flex flex-col justify-between min-h-[154px] shadow-2xs"
+                className="group relative rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 transition-all duration-200 hover:border-blue-400 dark:hover:border-blue-500/50 hover:bg-slate-50/50 dark:hover:bg-surface-elevated/40 flex flex-col justify-between min-h-[154px] shadow-xs hover:shadow-md"
               >
                 <div>
                   <div className="flex items-start justify-between gap-3">
@@ -211,11 +211,11 @@ export const DashboardPage: React.FC = () => {
                       <div className="min-w-0">
                         <Link
                           to={tool.route}
-                          className="text-base font-semibold text-foreground hover:text-blue-500 transition-colors block truncate"
+                          className="text-base font-semibold text-slate-900 dark:text-foreground hover:text-blue-600 dark:hover:text-blue-500 transition-colors block truncate"
                         >
                           {tool.name}
                         </Link>
-                        <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1 leading-snug">
+                        <p className="text-sm text-slate-600 dark:text-muted-foreground mt-0.5 line-clamp-1 leading-snug">
                           {conf.shortDesc}
                         </p>
                       </div>
@@ -229,7 +229,7 @@ export const DashboardPage: React.FC = () => {
                         e.stopPropagation();
                         toggleFavorite(tool.id);
                       }}
-                      className="text-muted-foreground hover:text-amber-400 p-1 rounded-md transition-colors shrink-0"
+                      className="text-slate-400 hover:text-amber-500 dark:text-muted-foreground dark:hover:text-amber-400 p-1 rounded-md transition-colors shrink-0"
                       title={isFav ? 'Remove from favorites' : 'Add to favorites'}
                       aria-label={isFav ? `Remove ${tool.name} from favorites` : `Add ${tool.name} to favorites`}
                     >
@@ -237,8 +237,8 @@ export const DashboardPage: React.FC = () => {
                         className={cn(
                           'w-4.5 h-4.5 transition-colors',
                           isFav
-                            ? 'fill-amber-400 text-amber-400'
-                            : 'text-muted-foreground hover:text-amber-400'
+                            ? 'fill-amber-400 text-amber-500'
+                            : 'text-slate-400 dark:text-muted-foreground hover:text-amber-500'
                         )}
                       />
                     </button>
@@ -253,7 +253,7 @@ export const DashboardPage: React.FC = () => {
 
                   <Link
                     to={tool.route}
-                    className="inline-flex items-center gap-1 text-sm font-semibold text-blue-500 hover:text-blue-400 group-hover:gap-1.5 transition-all"
+                    className="inline-flex items-center gap-1 text-sm font-semibold text-blue-600 dark:text-blue-500 hover:text-blue-500 dark:hover:text-blue-400 group-hover:gap-1.5 transition-all"
                   >
                     <span>Launch</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -265,24 +265,24 @@ export const DashboardPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Below Area: Starred Tools & Browse by Category (Refined with larger, modern typography) */}
+      {/* Below Area: Starred Tools & Browse by Category */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Starred Tools */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/25 text-amber-400 flex items-center justify-center shrink-0">
-                <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+              <div className="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/25 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
+                <Star className="w-5 h-5 fill-amber-400 text-amber-500" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-foreground">Starred Tools</h3>
-                <p className="text-sm text-muted-foreground mt-0.5">
+                <h3 className="text-base font-bold text-slate-900 dark:text-foreground">Starred Tools</h3>
+                <p className="text-sm text-slate-500 dark:text-muted-foreground mt-0.5">
                   Quick access shortcuts for your most frequent development utilities.
                 </p>
               </div>
             </div>
             {favoriteToolList.length > 0 && (
-              <span className="text-xs font-mono font-medium text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-mono font-medium text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 px-2.5 py-0.5 rounded-full">
                 {favoriteToolList.length}
               </span>
             )}
@@ -290,13 +290,13 @@ export const DashboardPage: React.FC = () => {
 
           <div>
             {favoriteToolList.length === 0 ? (
-              <div className="rounded-xl border border-dashed border-border bg-surface-elevated/30 p-8 text-center flex flex-col items-center justify-center gap-2">
-                <div className="w-9 h-9 rounded-full bg-surface border border-border flex items-center justify-center text-muted-foreground">
+              <div className="rounded-xl border border-dashed border-slate-200 dark:border-border bg-slate-50/50 dark:bg-surface-elevated/30 p-8 text-center flex flex-col items-center justify-center gap-2">
+                <div className="w-9 h-9 rounded-full bg-white dark:bg-surface border border-slate-200 dark:border-border flex items-center justify-center text-slate-400 dark:text-muted-foreground">
                   <Star className="w-4 h-4" />
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-sm font-semibold text-foreground">No starred tools yet</p>
-                  <p className="text-xs text-muted-foreground max-w-xs">
+                  <p className="text-sm font-semibold text-slate-800 dark:text-foreground">No starred tools yet</p>
+                  <p className="text-xs text-slate-500 dark:text-muted-foreground max-w-xs">
                     Click the star icon on any utility card above to pin it here for instant access.
                   </p>
                 </div>
@@ -308,7 +308,7 @@ export const DashboardPage: React.FC = () => {
                   return (
                     <div
                       key={tool.id}
-                      className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 transition-all group shadow-2xs"
+                      className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 dark:border-border bg-slate-50/60 hover:bg-slate-100/80 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div
@@ -322,11 +322,11 @@ export const DashboardPage: React.FC = () => {
                         <div className="min-w-0">
                           <Link
                             to={tool.route}
-                            className="text-sm font-semibold text-foreground group-hover:text-blue-500 transition-colors block truncate"
+                            className="text-sm font-semibold text-slate-900 dark:text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors block truncate"
                           >
                             {tool.name}
                           </Link>
-                          <span className="text-xs text-muted-foreground font-mono">
+                          <span className="text-xs text-slate-500 dark:text-muted-foreground font-mono">
                             {tool.category}
                           </span>
                         </div>
@@ -338,7 +338,7 @@ export const DashboardPage: React.FC = () => {
                         </span>
                         <Link
                           to={tool.route}
-                          className="text-sm font-semibold text-blue-500 hover:text-blue-400 inline-flex items-center gap-1 transition-colors ml-1"
+                          className="text-sm font-semibold text-blue-600 dark:text-blue-500 hover:text-blue-500 dark:hover:text-blue-400 inline-flex items-center gap-1 transition-colors ml-1"
                         >
                           <span>Open</span>
                           <ArrowRight className="w-3.5 h-3.5" />
@@ -353,22 +353,22 @@ export const DashboardPage: React.FC = () => {
         </div>
 
         {/* Browse by Category */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
                 <Layers className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-foreground">Browse by Category</h3>
-                <p className="text-sm text-muted-foreground mt-0.5">
+                <h3 className="text-base font-bold text-slate-900 dark:text-foreground">Browse by Category</h3>
+                <p className="text-sm text-slate-500 dark:text-muted-foreground mt-0.5">
                   Explore all tools organized across technical development domains.
                 </p>
               </div>
             </div>
             <Link
               to="/tools"
-              className="text-sm font-semibold text-blue-500 hover:text-blue-400 flex items-center gap-1 transition-colors shrink-0"
+              className="text-sm font-semibold text-blue-600 dark:text-blue-500 hover:text-blue-500 dark:hover:text-blue-400 flex items-center gap-1 transition-colors shrink-0"
             >
               <span>All ({TOOL_REGISTRY.length})</span>
               <ArrowRight className="w-4 h-4" />
@@ -383,17 +383,17 @@ export const DashboardPage: React.FC = () => {
                 <Link
                   key={catName}
                   to={`/tools?category=${encodeURIComponent(catName)}`}
-                  className="flex items-center justify-between p-3 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 group transition-all shadow-2xs"
+                  className="flex items-center justify-between p-3 rounded-xl border border-slate-200/90 dark:border-border bg-slate-50/70 hover:bg-slate-100 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 group transition-all shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-muted-foreground group-hover:text-blue-400 group-hover:border-blue-500/30 transition-colors shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-white dark:bg-surface border border-slate-200 dark:border-border flex items-center justify-center text-slate-500 dark:text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
                       {icon}
                     </div>
-                    <span className="text-sm font-semibold text-foreground group-hover:text-blue-500 transition-colors truncate">
+                    <span className="text-sm font-semibold text-slate-800 dark:text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors truncate">
                       {catName}
                     </span>
                   </div>
-                  <span className="text-xs font-mono font-medium text-muted-foreground bg-surface px-2 py-0.5 rounded-full border border-border group-hover:border-blue-500/30 transition-colors shrink-0">
+                  <span className="text-xs font-mono font-medium text-slate-600 dark:text-muted-foreground bg-white dark:bg-surface px-2 py-0.5 rounded-full border border-slate-200 dark:border-border group-hover:border-blue-300 dark:group-hover:border-blue-500/30 transition-colors shrink-0">
                     {count}
                   </span>
                 </Link>
@@ -405,14 +405,14 @@ export const DashboardPage: React.FC = () => {
 
       {/* Recently Used Tools (if any) */}
       {recentToolList.length > 0 && (
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4 shadow-2xs">
+        <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-5 space-y-4 shadow-xs">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/25 text-cyan-400 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-200 dark:border-cyan-500/25 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
               <History className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-foreground">Recently Used Tools</h3>
-              <p className="text-sm text-muted-foreground mt-0.5">
+              <h3 className="text-base font-bold text-slate-900 dark:text-foreground">Recently Used Tools</h3>
+              <p className="text-sm text-slate-500 dark:text-muted-foreground mt-0.5">
                 Utilities launched in your active session.
               </p>
             </div>
@@ -424,7 +424,7 @@ export const DashboardPage: React.FC = () => {
               return (
                 <div
                   key={tool.id}
-                  className="flex items-center justify-between p-3.5 rounded-xl border border-border bg-surface-elevated/30 hover:bg-surface-elevated hover:border-blue-500/40 transition-all group shadow-2xs"
+                  className="flex items-center justify-between p-3.5 rounded-xl border border-slate-200 dark:border-border bg-slate-50/70 hover:bg-slate-100 dark:bg-surface-elevated/30 dark:hover:bg-surface-elevated hover:border-blue-400 dark:hover:border-blue-500/40 transition-all group shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div
@@ -438,11 +438,11 @@ export const DashboardPage: React.FC = () => {
                     <div className="min-w-0">
                       <Link
                         to={tool.route}
-                        className="text-sm font-semibold text-foreground group-hover:text-blue-500 transition-colors block truncate"
+                        className="text-sm font-semibold text-slate-900 dark:text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors block truncate"
                       >
                         {tool.name}
                       </Link>
-                      <span className="text-xs text-muted-foreground font-mono">
+                      <span className="text-xs text-slate-500 dark:text-muted-foreground font-mono">
                         {tool.category}
                       </span>
                     </div>
@@ -450,7 +450,7 @@ export const DashboardPage: React.FC = () => {
 
                   <Link
                     to={tool.route}
-                    className="text-sm font-semibold text-blue-500 hover:text-blue-400 inline-flex items-center gap-1 transition-colors shrink-0 ml-1"
+                    className="text-sm font-semibold text-blue-600 dark:text-blue-500 hover:text-blue-500 dark:hover:text-blue-400 inline-flex items-center gap-1 transition-colors shrink-0 ml-1"
                   >
                     <span>Launch</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -463,27 +463,27 @@ export const DashboardPage: React.FC = () => {
       )}
 
       {/* Developer ProTip / Shortcuts Hint Bar */}
-      <div className="rounded-xl border border-border bg-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-2xs">
+      <div className="rounded-xl border border-slate-200 dark:border-border bg-white dark:bg-card p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/25 text-blue-400 flex items-center justify-center shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
             <Terminal className="w-4.5 h-4.5" />
           </div>
           <div className="text-sm">
-            <span className="font-semibold text-foreground mr-1.5">ProTip:</span>
-            <span className="text-muted-foreground">
+            <span className="font-semibold text-slate-900 dark:text-foreground mr-1.5">ProTip:</span>
+            <span className="text-slate-500 dark:text-muted-foreground">
               Press keyboard shortcuts to navigate, search, and run utilities instantly.
             </span>
           </div>
         </div>
         <div className="flex items-center gap-3 font-mono text-xs shrink-0">
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">Ctrl</kbd>+
-            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">K</kbd>
-            <span className="ml-1 text-muted-foreground">Command Bar</span>
+            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">Ctrl</kbd>+
+            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">K</kbd>
+            <span className="ml-1 text-slate-500 dark:text-muted-foreground">Command Bar</span>
           </span>
           <span className="inline-flex items-center gap-1">
-            <kbd className="px-2 py-0.5 rounded-md bg-surface border border-border text-foreground font-semibold shadow-2xs">Esc</kbd>
-            <span className="ml-1 text-muted-foreground">Dismiss</span>
+            <kbd className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-surface border border-slate-200 dark:border-border text-slate-700 dark:text-foreground font-semibold shadow-2xs">Esc</kbd>
+            <span className="ml-1 text-slate-500 dark:text-muted-foreground">Dismiss</span>
           </span>
         </div>
       </div>

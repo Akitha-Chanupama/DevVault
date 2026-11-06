@@ -52,27 +52,27 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
       {/* Mobile backdrop */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
           onClick={toggleSidebar}
         />
       )}
 
       <aside
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
+          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-slate-200 dark:border-border bg-white dark:bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
           sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
         {/* Brand Header */}
-        <div className="flex h-16 items-center justify-between px-4 border-b border-border shrink-0">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-slate-200 dark:border-border shrink-0">
           <NavLink to="/" className="flex items-center gap-3 overflow-hidden group">
             {/* DevVault stylized bracket logo badge */}
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600/15 border border-blue-500/30 text-blue-400 font-bold font-mono text-sm shadow-xs shadow-blue-500/10 shrink-0 group-hover:scale-105 group-hover:border-blue-500/50 transition-all">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-600/15 border border-blue-200 dark:border-blue-500/30 text-blue-600 dark:text-blue-400 font-bold font-mono text-sm shadow-xs shadow-blue-500/10 shrink-0 group-hover:scale-105 group-hover:border-blue-400 dark:group-hover:border-blue-500/50 transition-all">
               &lt;/&gt;
             </div>
             {sidebarOpen && (
-              <span className="font-bold text-base tracking-tight text-foreground">
-                Dev<span className="text-blue-500">Vault</span>
+              <span className="font-bold text-base tracking-tight text-slate-900 dark:text-foreground">
+                Dev<span className="text-blue-600 dark:text-blue-500">Vault</span>
               </span>
             )}
           </NavLink>
@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="hidden lg:flex h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-surface-elevated"
+            className="hidden lg:flex h-8 w-8 rounded-lg text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground hover:bg-slate-100 dark:hover:bg-surface-elevated"
             title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
             aria-label="Toggle sidebar width"
           >
@@ -104,8 +104,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 cn(
                   'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                   isActive
-                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-900/40'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
                 )
               }
             >
@@ -119,19 +119,30 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 cn(
                   'group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                   isActive
-                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-900/40'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
                 )
               }
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <LayoutGrid className="w-4 h-4 shrink-0" />
-                {sidebarOpen && <span>All Tools</span>}
-              </div>
-              {sidebarOpen && (
-                <span className="text-xs font-mono font-medium text-muted-foreground bg-surface-elevated px-2 py-0.5 rounded-full border border-border group-hover:border-blue-500/30 transition-colors">
-                  {totalCount}
-                </span>
+              {({ isActive }) => (
+                <>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <LayoutGrid className="w-4 h-4 shrink-0" />
+                    {sidebarOpen && <span>All Tools</span>}
+                  </div>
+                  {sidebarOpen && (
+                    <span
+                      className={cn(
+                        'text-xs font-mono font-medium px-2 py-0.5 rounded-full border transition-colors',
+                        isActive
+                          ? 'bg-blue-700/80 text-white border-blue-400/40'
+                          : 'text-slate-600 dark:text-muted-foreground bg-slate-100 dark:bg-surface-elevated border-slate-200 dark:border-border group-hover:border-blue-400 dark:group-hover:border-blue-500/30'
+                      )}
+                    >
+                      {totalCount}
+                    </span>
+                  )}
+                </>
               )}
             </NavLink>
           </div>
@@ -139,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           {/* Categories Section */}
           <div className="space-y-1">
             {sidebarOpen && (
-              <div className="px-3.5 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/75">
+              <div className="px-3.5 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Categories
               </div>
             )}
@@ -155,12 +166,19 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   className={cn(
                     'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                     isCurrent
-                      ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                      : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                      ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                      : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
                   )}
                   title={cat.name}
                 >
-                  <span className="text-muted-foreground group-hover:text-blue-400 transition-colors">
+                  <span
+                    className={cn(
+                      'transition-colors',
+                      isCurrent
+                        ? 'text-blue-700 dark:text-blue-400'
+                        : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                    )}
+                  >
                     {cat.icon}
                   </span>
                   {sidebarOpen && <span className="truncate">{cat.name}</span>}
@@ -172,7 +190,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           {/* Workspace Section */}
           <div className="space-y-1">
             {sidebarOpen && (
-              <div className="px-3.5 pb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/75">
+              <div className="px-3.5 pb-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Workspace
               </div>
             )}
@@ -182,29 +200,45 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 cn(
                   'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
-                    ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                    ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
                 )
               }
               title="Snippets"
             >
-              <Code className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-blue-400 transition-colors" />
-              {sidebarOpen && <span>Snippets</span>}
+              {({ isActive }) => (
+                <>
+                  <Code
+                    className={cn(
+                      'w-4 h-4 shrink-0 transition-colors',
+                      isActive
+                        ? 'text-blue-700 dark:text-blue-400'
+                        : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                    )}
+                  />
+                  {sidebarOpen && <span>Snippets</span>}
+                </>
+              )}
             </NavLink>
 
             <NavLink
               to="/tools?filter=favorites"
-              className={({ isActive }) =>
-                cn(
-                  'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
-                  isActive
-                    ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
-                )
-              }
+              className={cn(
+                'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                location.pathname === '/tools' && location.search.includes('filter=favorites')
+                  ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+              )}
               title="Favorites"
             >
-              <Star className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-amber-400 transition-colors" />
+              <Star
+                className={cn(
+                  'w-4 h-4 shrink-0 transition-colors',
+                  location.pathname === '/tools' && location.search.includes('filter=favorites')
+                    ? 'fill-amber-400 text-amber-500'
+                    : 'text-slate-500 group-hover:text-amber-500 dark:text-muted-foreground dark:group-hover:text-amber-400'
+                )}
+              />
               {sidebarOpen && <span>Favorites</span>}
             </NavLink>
 
@@ -214,59 +248,86 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 cn(
                   'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
                   isActive
-                    ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                    ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
                 )
               }
               title="History"
             >
-              <History className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-blue-400 transition-colors" />
-              {sidebarOpen && <span>History</span>}
+              {({ isActive }) => (
+                <>
+                  <History
+                    className={cn(
+                      'w-4 h-4 shrink-0 transition-colors',
+                      isActive
+                        ? 'text-blue-700 dark:text-blue-400'
+                        : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                    )}
+                  />
+                  {sidebarOpen && <span>History</span>}
+                </>
+              )}
             </NavLink>
 
             <NavLink
               to="/snippets?tab=collections"
-              className={({ isActive }) =>
-                cn(
-                  'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
-                  isActive
-                    ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                    : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
-                )
-              }
+              className={cn(
+                'group flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-medium transition-all',
+                location.pathname === '/snippets' && location.search.includes('tab=collections')
+                  ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
+              )}
               title="Collections"
             >
-              <Layers className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-blue-400 transition-colors" />
+              <Layers
+                className={cn(
+                  'w-4 h-4 shrink-0 transition-colors',
+                  location.pathname === '/snippets' && location.search.includes('tab=collections')
+                    ? 'text-blue-700 dark:text-blue-400'
+                    : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                )}
+              />
               {sidebarOpen && <span>Collections</span>}
             </NavLink>
           </div>
         </div>
 
         {/* Bottom Section: Settings & Help */}
-        <div className="p-3 border-t border-border shrink-0 space-y-1">
+        <div className="p-3 border-t border-slate-200 dark:border-border shrink-0 space-y-1">
           <NavLink
             to="/settings"
             className={({ isActive }) =>
               cn(
                 'group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-primary/15 text-blue-400 font-semibold border border-blue-500/20'
-                  : 'text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70'
+                  ? 'bg-blue-50 text-blue-700 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70'
               )
             }
             title="Settings"
           >
-            <Settings className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-blue-400 transition-colors" />
-            {sidebarOpen && <span>Settings</span>}
+            {({ isActive }) => (
+              <>
+                <Settings
+                  className={cn(
+                    'w-4 h-4 shrink-0 transition-colors',
+                    isActive
+                      ? 'text-blue-700 dark:text-blue-400'
+                      : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                  )}
+                />
+                {sidebarOpen && <span>Settings</span>}
+              </>
+            )}
           </NavLink>
 
           <button
             type="button"
             onClick={onOpenHelp}
-            className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-300 dark:text-slate-300 hover:text-white hover:bg-surface-elevated/70 transition-all text-left"
+            className="w-full group flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-surface-elevated/70 transition-all text-left"
             title="Help & Docs"
           >
-            <HelpCircle className="w-4 h-4 shrink-0 text-muted-foreground group-hover:text-blue-400 transition-colors" />
+            <HelpCircle className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
             {sidebarOpen && <span>Help & Docs</span>}
           </button>
         </div>
