@@ -45,42 +45,52 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-labelledby="shortcuts-dialog-title"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm animate-in fade-in"
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 dark:bg-black/85 backdrop-blur-md animate-in fade-in transition-all"
     >
       <div
-        className="relative w-full max-w-lg bg-card border rounded-xl shadow-xl overflow-hidden p-6 space-y-4"
+        className="relative w-full max-w-lg bg-white/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl border border-slate-200 dark:border-blue-500/30 rounded-2xl shadow-2xl shadow-black/90 ring-1 ring-black/5 dark:ring-white/10 overflow-hidden p-6 space-y-5"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b pb-3">
-          <div className="flex items-center gap-2">
-            <Keyboard className="w-5 h-5 text-primary" />
-            <h3 id="shortcuts-dialog-title" className="text-base font-bold text-foreground">
-              Keyboard Shortcuts
-            </h3>
+        {/* Modal Header */}
+        <div className="flex items-center justify-between border-b border-border/80 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-xs">
+              <Keyboard className="w-5 h-5" />
+            </div>
+            <div>
+              <h3 id="shortcuts-dialog-title" className="text-base font-bold text-foreground">
+                Keyboard Shortcuts
+              </h3>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Quick commands to navigate and control DevVault
+              </p>
+            </div>
           </div>
           <Button
             size="icon"
             variant="ghost"
             onClick={onClose}
-            className="h-8 w-8 text-muted-foreground hover:text-foreground"
+            className="h-8 w-8 rounded-lg text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition-colors"
             aria-label="Close shortcuts modal"
           >
             <X className="w-4 h-4" />
           </Button>
         </div>
 
-        <div className="space-y-2.5 py-1">
+        {/* Shortcuts List */}
+        <div className="space-y-1.5 py-1">
           {SHORTCUTS.map((s, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between py-1.5 border-b border-border/40 text-xs"
+              className="flex items-center justify-between py-2.5 px-3 rounded-xl bg-surface-elevated/40 dark:bg-[#131b2e]/60 border border-border/50 hover:border-blue-500/30 transition-all text-sm"
             >
-              <span className="text-muted-foreground font-medium">{s.description}</span>
-              <div className="flex items-center gap-1 font-mono">
+              <span className="text-foreground/90 font-medium">{s.description}</span>
+              <div className="flex items-center gap-1.5 font-mono">
                 {s.keys.map((k, kIdx) => (
                   <kbd
                     key={kIdx}
-                    className="px-2 py-1 rounded bg-muted text-foreground border font-bold text-[11px] shadow-2xs"
+                    className="px-2.5 py-1 rounded-md bg-surface border border-border dark:bg-[#1a253d] dark:border-blue-500/30 text-foreground dark:text-blue-200 font-bold text-xs shadow-2xs"
                   >
                     {k}
                   </kbd>
@@ -90,11 +100,11 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
           ))}
         </div>
 
-        <div className="pt-2 text-center text-xs text-muted-foreground">
-          Press <kbd className="px-1.5 py-0.5 rounded bg-muted border text-[10px] font-mono">Esc</kbd> to dismiss this dialog
+        {/* Dismiss footer */}
+        <div className="pt-2 text-center text-xs text-muted-foreground border-t border-border/40">
+          Press <kbd className="px-2 py-0.5 rounded bg-surface-elevated border border-border text-foreground text-xs font-mono font-medium">Esc</kbd> to dismiss this dialog
         </div>
       </div>
     </div>
   );
 };
-

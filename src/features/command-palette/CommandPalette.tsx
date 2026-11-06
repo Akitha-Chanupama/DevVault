@@ -68,13 +68,16 @@ export const CommandPalette: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-background/80 backdrop-blur-sm animate-in fade-in duration-100">
+    <div
+      onClick={() => setCommandPaletteOpen(false)}
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/75 dark:bg-black/85 backdrop-blur-md animate-in fade-in duration-100"
+    >
       <div
-        className="relative w-full max-w-xl rounded-xl border border-border bg-surface shadow-2xl overflow-hidden"
+        className="relative w-full max-w-xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white/95 dark:bg-[#0c1324]/95 backdrop-blur-2xl shadow-2xl shadow-black/90 ring-1 ring-black/5 dark:ring-white/10 overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 border-b border-border">
+        <div className="flex items-center px-4 border-b border-border/80">
           <Search className="w-4 h-4 text-muted-foreground shrink-0" />
           <input
             ref={inputRef}
@@ -113,24 +116,24 @@ export const CommandPalette: React.FC = () => {
                   key={tool.id}
                   onClick={() => handleSelect(tool.route)}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-xs cursor-pointer transition-colors ${
+                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-primary text-primary-foreground font-medium'
-                      : 'hover:bg-surface-elevated text-foreground'
+                      ? 'bg-blue-600 text-white font-medium shadow-sm'
+                      : 'hover:bg-surface-elevated/70 text-foreground'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
                     {isFav && (
                       <Star
-                        className={`w-3.5 h-3.5 shrink-0 ${
+                        className={`w-4 h-4 shrink-0 ${
                           isSelected ? 'fill-white text-white' : 'fill-warning text-warning'
                         }`}
                       />
                     )}
                     <span className="font-semibold truncate">{tool.name}</span>
                     <span
-                      className={`truncate text-[11px] ${
-                        isSelected ? 'text-primary-foreground/80' : 'text-muted-foreground'
+                      className={`truncate text-xs ${
+                        isSelected ? 'text-white/80' : 'text-muted-foreground'
                       }`}
                     >
                       — {tool.category}
@@ -162,7 +165,7 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Footer shortcuts info */}
-        <div className="flex items-center justify-between px-4 py-2 border-t border-border bg-surface-elevated text-[11px] text-muted-foreground font-mono">
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-border/80 bg-surface-elevated/80 dark:bg-[#080d19]/80 text-xs text-muted-foreground font-mono">
           <div className="flex items-center gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>
@@ -177,4 +180,3 @@ export const CommandPalette: React.FC = () => {
     </div>
   );
 };
-
