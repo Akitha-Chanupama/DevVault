@@ -59,3 +59,4 @@ export class DevVaultDatabase extends Dexie {
 }
 
 export const db = new DevVaultDatabase();
+

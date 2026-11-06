@@ -38,3 +38,4 @@ describe('jwtDecoder logic', () => {
     expect(JSON.parse(decoded).name).toBe('❤️');
   });
 });
+

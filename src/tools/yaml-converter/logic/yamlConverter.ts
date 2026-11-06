@@ -38,3 +38,4 @@ export function yamlToJson(yamlStr: string, indent = 2): YamlConvertResult {
     };
   }
 }
+

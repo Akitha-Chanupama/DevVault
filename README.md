@@ -153,3 +153,4 @@ All data transformations are performed client-side using native Web APIs (`crypt
 ## License
 
 MIT © 2026 DevVault Contributors
+

@@ -73,3 +73,4 @@ export function computeLineDiff(originalText: string, modifiedText: string): Dif
     lines,
   };
 }
+

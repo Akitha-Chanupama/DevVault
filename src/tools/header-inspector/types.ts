@@ -19,3 +19,4 @@ export interface HeaderInspectionResult {
   rawCount: number;
   securityAudit: SecurityAuditItem[];
 }
+

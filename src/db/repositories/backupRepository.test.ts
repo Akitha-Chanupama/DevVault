@@ -56,3 +56,4 @@ describe('backupRepository validation', () => {
     expect(result.error).toContain('Unsupported backup version');
   });
 });
+

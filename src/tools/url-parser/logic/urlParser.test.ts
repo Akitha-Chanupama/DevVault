@@ -44,3 +44,4 @@ describe('urlParser logic', () => {
     expect(result.error).toBeTruthy();
   });
 });
+

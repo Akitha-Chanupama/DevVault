@@ -12,3 +12,4 @@ export interface QrCodeResult {
   svg: string;
   dataUrl: string;
 }
+

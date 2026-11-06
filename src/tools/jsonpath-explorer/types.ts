@@ -9,3 +9,4 @@ export interface JsonPathResult {
   formattedMatches: string;
   error?: string;
 }
+

@@ -48,3 +48,4 @@ describe('regexTester logic', () => {
     expect(result.error).toBeTruthy();
   });
 });
+

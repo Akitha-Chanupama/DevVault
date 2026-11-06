@@ -27,3 +27,4 @@ describe('KeyboardShortcutsModal', () => {
     expect(handleClose).toHaveBeenCalledTimes(1);
   });
 });
+

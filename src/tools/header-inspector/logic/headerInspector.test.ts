@@ -46,3 +46,4 @@ x-content-type-options: nosniff`;
     expect(result.securityAudit.every((a) => a.status === 'missing')).toBe(true);
   });
 });
+

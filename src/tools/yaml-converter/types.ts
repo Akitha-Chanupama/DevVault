@@ -5,3 +5,4 @@ export interface YamlConvertResult {
   output: string;
   error?: string;
 }
+

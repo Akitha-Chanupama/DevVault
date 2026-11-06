@@ -32,3 +32,4 @@ describe('diffChecker logic', () => {
     expect(res3.additions).toBe(1);
   });
 });
+

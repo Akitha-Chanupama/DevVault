@@ -87,3 +87,4 @@ export function processBase64(input: string, options: Base64Options): Base64Resu
     return decodeBase64(input);
   }
 }
+

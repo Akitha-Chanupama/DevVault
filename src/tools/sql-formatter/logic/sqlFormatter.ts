@@ -35,3 +35,4 @@ export function formatSqlQuery(sql: string, options: Partial<SqlFormatOptions> =
     };
   }
 }
+

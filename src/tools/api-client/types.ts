@@ -24,3 +24,4 @@ export interface ApiResponseDetails {
   durationMs: number;
   isCorsError?: boolean;
 }
+

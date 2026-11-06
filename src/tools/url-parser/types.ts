@@ -17,3 +17,4 @@ export interface ParsedUrlDetails {
   params: QueryParam[];
   error?: string;
 }
+

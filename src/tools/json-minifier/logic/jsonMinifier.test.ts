@@ -25,3 +25,4 @@ describe('jsonMinifier logic', () => {
     expect(result.minified).toBe('');
   });
 });
+

@@ -41,3 +41,4 @@ export function executeJsonMinify(input: string): MinifyResult {
     };
   }
 }
+

@@ -25,3 +25,4 @@ describe('qrGenerator logic', () => {
     expect(result.dataUrl).toBe('');
   });
 });
+

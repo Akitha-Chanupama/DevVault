@@ -14,3 +14,4 @@ export interface SqlFormatResult {
   formattedSql: string;
   error?: string;
 }
+

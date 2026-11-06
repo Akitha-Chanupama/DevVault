@@ -29,3 +29,4 @@ describe('randomJson logic', () => {
     expect(JSON.parse(maxStr)).toHaveLength(100);
   });
 });
+

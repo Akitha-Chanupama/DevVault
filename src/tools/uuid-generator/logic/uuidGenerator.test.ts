@@ -22,3 +22,4 @@ describe('uuidGenerator logic', () => {
     expect(unique.size).toBe(10);
   });
 });
+

@@ -28,3 +28,4 @@ export interface RegexFlags {
   s: boolean; // Dot all
   u: boolean; // Unicode
 }
+

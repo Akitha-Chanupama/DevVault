@@ -20,3 +20,4 @@ export interface DecodedJwtResult {
   claims: JwtClaimSummary;
   error?: string;
 }
+

@@ -15,3 +15,4 @@ export interface DiffSummary {
 }
 
 export type DiffViewMode = 'split' | 'unified';
+

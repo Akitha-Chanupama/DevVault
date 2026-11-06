@@ -15,3 +15,4 @@ export interface JsonValidationResult {
     rootType: 'object' | 'array' | 'primitive';
   };
 }
+

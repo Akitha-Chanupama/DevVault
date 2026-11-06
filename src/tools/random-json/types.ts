@@ -20,3 +20,4 @@ export interface RandomJsonOptions {
   count: number;
   fields: SchemaField[];
 }
+

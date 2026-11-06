@@ -60,3 +60,4 @@ export const historyRepository = {
     await db.history.where('createdAt').below(cutoff).delete();
   },
 };
+

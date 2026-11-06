@@ -27,3 +27,4 @@ service:
     expect(jsonToYaml('{ bad json }').success).toBe(false);
   });
 });
+

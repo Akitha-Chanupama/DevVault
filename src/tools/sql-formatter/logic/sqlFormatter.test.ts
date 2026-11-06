@@ -27,3 +27,4 @@ describe('sqlFormatter logic', () => {
     expect(result.formattedSql).toBe('');
   });
 });
+

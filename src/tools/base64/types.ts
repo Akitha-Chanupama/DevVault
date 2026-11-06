@@ -12,3 +12,4 @@ export interface Base64Result {
   error?: string;
   byteSize?: number;
 }
+

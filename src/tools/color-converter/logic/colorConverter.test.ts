@@ -52,3 +52,4 @@ describe('colorConverter logic', () => {
     expect(details.hslString).toContain('hsl(');
   });
 });
+

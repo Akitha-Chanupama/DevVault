@@ -4,3 +4,4 @@ export interface MarkdownStats {
   lines: number;
   readingTimeMinutes: number;
 }
+

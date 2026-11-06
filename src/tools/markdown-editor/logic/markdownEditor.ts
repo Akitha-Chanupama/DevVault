@@ -14,3 +14,4 @@ export function calculateMarkdownStats(text: string): MarkdownStats {
     readingTimeMinutes: words > 0 ? readingTimeMinutes : 0,
   };
 }
+

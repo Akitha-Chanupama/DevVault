@@ -90,3 +90,4 @@ export function parseTimestampInput(rawInput: string | number): TimestampDetails
 export function dateToTimestamp(isoOrDate: string): TimestampDetails {
   return parseTimestampInput(isoOrDate);
 }
+

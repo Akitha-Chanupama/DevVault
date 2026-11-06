@@ -29,3 +29,4 @@ export interface ColorDetails {
   hslString: string;
   luminance: number;
 }
+

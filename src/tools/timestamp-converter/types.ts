@@ -9,3 +9,4 @@ export interface TimestampDetails {
   timezoneName: string;
   error?: string;
 }
+

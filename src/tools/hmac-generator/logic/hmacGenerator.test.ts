@@ -33,3 +33,4 @@ describe('hmacGenerator logic', () => {
     expect(verification.isValid).toBe(false);
   });
 });
+

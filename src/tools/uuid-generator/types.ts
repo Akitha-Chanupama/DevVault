@@ -3,3 +3,4 @@ export interface UuidOptions {
   uppercase: boolean;
   hyphens: boolean;
 }
+

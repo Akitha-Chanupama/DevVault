@@ -230,3 +230,4 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
     </div>
   );
 };
+

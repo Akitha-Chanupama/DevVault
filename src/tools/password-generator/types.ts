@@ -15,3 +15,4 @@ export interface GeneratedPasswordInfo {
   entropyBits: number;
   strengthLevel: PasswordStrengthLevel;
 }
+

@@ -31,3 +31,4 @@ export const settingsRepository = {
     return next;
   },
 };
+

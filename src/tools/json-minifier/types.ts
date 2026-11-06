@@ -13,3 +13,4 @@ export interface MinifyResult {
     savingsPercent: number;
   };
 }
+

@@ -34,3 +34,4 @@ describe('hashGenerator logic', () => {
     expect(sha512.hex.length).toBe(128);
   });
 });
+

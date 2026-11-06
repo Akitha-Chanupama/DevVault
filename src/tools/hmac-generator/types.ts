@@ -12,3 +12,4 @@ export interface HmacVerificationResult {
   algorithm: HmacAlgorithm;
   computedHex: string;
 }
+

@@ -32,3 +32,4 @@ describe('apiClient logic', () => {
     expect(result).toBe('invalid-url');
   });
 });
+

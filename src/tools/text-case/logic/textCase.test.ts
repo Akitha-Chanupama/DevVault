@@ -27,3 +27,4 @@ describe('textCase logic', () => {
     expect(map.get('Sentence case')).toBe('Developer productivity platform');
   });
 });
+

@@ -42,3 +42,4 @@ export async function generateQrCode(
 
   return { svg, dataUrl };
 }
+

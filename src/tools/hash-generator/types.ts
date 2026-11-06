@@ -12,3 +12,4 @@ export interface HashResult {
   digests: HashDigest[];
   executionTimeMs: number;
 }
+
