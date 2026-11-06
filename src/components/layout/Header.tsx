@@ -7,12 +7,17 @@ import {
   Menu,
   Github,
   Command,
+  Keyboard,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useThemeStore } from '@/stores/themeStore';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+  onOpenShortcuts?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
   const { theme, resolvedTheme, setTheme } = useThemeStore();
   const { toggleSidebar, setCommandPaletteOpen } = useWorkspaceStore();
 
@@ -61,6 +66,20 @@ export const Header: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-2">
+        {/* Keyboard Shortcuts Trigger Button */}
+        {onOpenShortcuts && (
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onOpenShortcuts}
+            className="h-8 w-8 text-muted-foreground hover:text-foreground hidden sm:inline-flex"
+            title="Keyboard shortcuts (?)"
+            aria-label="Keyboard shortcuts"
+          >
+            <Keyboard className="w-4 h-4" />
+          </Button>
+        )}
+
         {/* Theme Mode Selector Button */}
         <Button
           variant="ghost"
@@ -80,6 +99,7 @@ export const Header: React.FC = () => {
           rel="noreferrer"
           className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition-colors"
           title="DevVault on GitHub"
+          aria-label="DevVault on GitHub"
         >
           <Github className="w-4 h-4" />
         </a>

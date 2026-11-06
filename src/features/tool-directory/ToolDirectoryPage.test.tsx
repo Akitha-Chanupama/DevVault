@@ -41,7 +41,7 @@ describe('ToolDirectoryPage', () => {
     fireEvent.click(readyButton);
 
     expect(screen.getByText('JSON Formatter')).toBeInTheDocument();
-    expect(screen.queryByText('HTTP API Client')).not.toBeInTheDocument();
+    expect(screen.queryByText('HTML Formatter')).not.toBeInTheDocument();
   });
 });
 

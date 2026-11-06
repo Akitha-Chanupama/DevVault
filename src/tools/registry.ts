@@ -11,8 +11,23 @@ const JsonValidatorPage = React.lazy(
 const JsonMinifierPage = React.lazy(
   () => import('./json-minifier/components/JsonMinifierPage')
 );
+const JsonToYamlPage = React.lazy(
+  () => import('./yaml-converter/components/JsonToYamlPage')
+);
+const YamlToJsonPage = React.lazy(
+  () => import('./yaml-converter/components/YamlToJsonPage')
+);
+const JsonpathExplorerPage = React.lazy(
+  () => import('./jsonpath-explorer/components/JsonpathExplorerPage')
+);
 const UrlParserPage = React.lazy(
   () => import('./url-parser/components/UrlParserPage')
+);
+const ApiClientPage = React.lazy(
+  () => import('./api-client/components/ApiClientPage')
+);
+const HeaderInspectorPage = React.lazy(
+  () => import('./header-inspector/components/HeaderInspectorPage')
 );
 const JwtDecoderPage = React.lazy(
   () => import('./jwt-decoder/components/JwtDecoderPage')
@@ -26,17 +41,44 @@ const HashGeneratorPage = React.lazy(
 const PasswordGeneratorPage = React.lazy(
   () => import('./password-generator/components/PasswordGeneratorPage')
 );
-const UuidGeneratorPage = React.lazy(
-  () => import('./uuid-generator/components/UuidGeneratorPage')
+const HmacGeneratorPage = React.lazy(
+  () => import('./hmac-generator/components/HmacGeneratorPage')
 );
-const TimestampConverterPage = React.lazy(
-  () => import('./timestamp-converter/components/TimestampConverterPage')
+const DiffCheckerPage = React.lazy(
+  () => import('./diff-checker/components/DiffCheckerPage')
 );
 const TextCasePage = React.lazy(
   () => import('./text-case/components/TextCasePage')
 );
-const DiffCheckerPage = React.lazy(
-  () => import('./diff-checker/components/DiffCheckerPage')
+const RegexTesterPage = React.lazy(
+  () => import('./regex-tester/components/RegexTesterPage')
+);
+const MarkdownEditorPage = React.lazy(
+  () => import('./markdown-editor/components/MarkdownEditorPage')
+);
+const UuidGeneratorPage = React.lazy(
+  () => import('./uuid-generator/components/UuidGeneratorPage')
+);
+const QrGeneratorPage = React.lazy(
+  () => import('./qr-generator/components/QrGeneratorPage')
+);
+const RandomJsonPage = React.lazy(
+  () => import('./random-json/components/RandomJsonPage')
+);
+const ColorConverterPage = React.lazy(
+  () => import('./color-converter/components/ColorConverterPage')
+);
+const SqlFormatterPage = React.lazy(
+  () => import('./sql-formatter/components/SqlFormatterPage')
+);
+const TimestampConverterPage = React.lazy(
+  () => import('./timestamp-converter/components/TimestampConverterPage')
+);
+const TimezoneConverterPage = React.lazy(
+  () => import('./timezone-converter/components/TimezoneConverterPage')
+);
+const CronHelperPage = React.lazy(
+  () => import('./cron-helper/components/CronHelperPage')
 );
 
 export const TOOL_REGISTRY: ToolDefinition[] = [
@@ -88,10 +130,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'JSON & Data',
     keywords: ['json', 'yaml', 'convert', 'transform'],
     route: '/tools/json-to-yaml',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'ArrowRightLeft',
     priority: 'P1',
+    component: JsonToYamlPage,
   },
   {
     id: 'yaml-to-json',
@@ -100,10 +143,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'JSON & Data',
     keywords: ['yaml', 'json', 'convert', 'parse'],
     route: '/tools/yaml-to-json',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'ArrowRightLeft',
     priority: 'P1',
+    component: YamlToJsonPage,
   },
   {
     id: 'jsonpath-explorer',
@@ -112,10 +156,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'JSON & Data',
     keywords: ['json', 'jsonpath', 'query', 'filter', 'extract'],
     route: '/tools/jsonpath-explorer',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'SearchCode',
     priority: 'P1',
+    component: JsonpathExplorerPage,
   },
 
   // API & HTTP
@@ -139,11 +184,12 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'API & HTTP',
     keywords: ['api', 'http', 'rest', 'client', 'fetch', 'postman', 'curl'],
     route: '/tools/api-client',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Send',
     isPopular: true,
     priority: 'P1',
+    component: ApiClientPage,
   },
   {
     id: 'header-inspector',
@@ -152,10 +198,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'API & HTTP',
     keywords: ['http', 'headers', 'cors', 'security', 'cache', 'cookies'],
     route: '/tools/header-inspector',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'ListFilter',
     priority: 'P1',
+    component: HeaderInspectorPage,
   },
 
   // Security
@@ -220,10 +267,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Security',
     keywords: ['hmac', 'signature', 'secret', 'sha256', 'verify'],
     route: '/tools/hmac-generator',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'ShieldCheck',
     priority: 'P1',
+    component: HmacGeneratorPage,
   },
 
   // Text & Code
@@ -261,11 +309,12 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Text & Code',
     keywords: ['regex', 'regexp', 'match', 'pattern', 'test'],
     route: '/tools/regex-tester',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Regex',
     isPopular: true,
     priority: 'P1',
+    component: RegexTesterPage,
   },
   {
     id: 'markdown-editor',
@@ -274,10 +323,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Text & Code',
     keywords: ['markdown', 'md', 'gfm', 'preview', 'editor'],
     route: '/tools/markdown-editor',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'FileText',
     priority: 'P1',
+    component: MarkdownEditorPage,
   },
 
   // Generators
@@ -301,10 +351,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Generators',
     keywords: ['qr', 'qrcode', 'barcode', 'generator'],
     route: '/tools/qr-generator',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'QrCode',
     priority: 'P1',
+    component: QrGeneratorPage,
   },
   {
     id: 'random-json',
@@ -313,13 +364,27 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Generators',
     keywords: ['mock', 'fake', 'json', 'data', 'faker', 'synthetic'],
     route: '/tools/random-json',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'DatabaseZap',
     priority: 'P1',
+    component: RandomJsonPage,
   },
 
   // Web Development
+  {
+    id: 'color-converter',
+    name: 'Color Converter & WCAG Contrast',
+    description: 'Convert HEX, RGB, HSL colors and verify accessible WCAG 2.2 contrast ratios.',
+    category: 'Web Development',
+    keywords: ['color', 'hex', 'rgb', 'hsl', 'wcag', 'contrast', 'palette'],
+    route: '/tools/color-converter',
+    status: 'available',
+    privacyMode: 'browser-only',
+    icon: 'Pipette',
+    priority: 'P1',
+    component: ColorConverterPage,
+  },
   {
     id: 'html-formatter',
     name: 'HTML Formatter',
@@ -356,18 +421,6 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     icon: 'FileCode',
     priority: 'P1',
   },
-  {
-    id: 'color-converter',
-    name: 'Color Converter & WCAG Contrast',
-    description: 'Convert HEX, RGB, HSL colors and verify accessible WCAG 2.2 contrast ratios.',
-    category: 'Web Development',
-    keywords: ['color', 'hex', 'rgb', 'hsl', 'wcag', 'contrast', 'palette'],
-    route: '/tools/color-converter',
-    status: 'planned',
-    privacyMode: 'browser-only',
-    icon: 'Pipette',
-    priority: 'P1',
-  },
 
   // Database
   {
@@ -377,10 +430,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Database',
     keywords: ['sql', 'postgres', 'mysql', 'sqlite', 'format', 'query'],
     route: '/tools/sql-formatter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Database',
     priority: 'P1',
+    component: SqlFormatterPage,
   },
 
   // Time & Date
@@ -404,10 +458,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Time & Date',
     keywords: ['timezone', 'iana', 'dst', 'time', 'world'],
     route: '/tools/timezone-converter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Globe',
     priority: 'P1',
+    component: TimezoneConverterPage,
   },
   {
     id: 'cron-helper',
@@ -416,10 +471,11 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
     category: 'Time & Date',
     keywords: ['cron', 'schedule', 'timer', 'crontab'],
     route: '/tools/cron-helper',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'CalendarClock',
     priority: 'P1',
+    component: CronHelperPage,
   },
 ];
 

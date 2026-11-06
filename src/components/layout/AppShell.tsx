@@ -1,25 +1,69 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { CommandPalette } from '@/features/command-palette/CommandPalette';
+import { KeyboardShortcutsModal } from './KeyboardShortcutsModal';
 import { Toaster } from 'sonner';
 import { useThemeStore } from '@/stores/themeStore';
 
 export const AppShell: React.FC = () => {
   const resolvedTheme = useThemeStore((state) => state.resolvedTheme);
+  const { theme, setTheme } = useThemeStore();
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeEl = document.activeElement;
+      const isInput =
+        activeEl?.tagName === 'INPUT' ||
+        activeEl?.tagName === 'TEXTAREA' ||
+        (activeEl as HTMLElement)?.isContentEditable;
+
+      if (!isInput) {
+        if (e.key === '?') {
+          e.preventDefault();
+          setShortcutsOpen((prev) => !prev);
+        }
+      }
+
+      // Theme toggle shortcut: Ctrl + Shift + T
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 't') {
+        e.preventDefault();
+        if (theme === 'dark') setTheme('light');
+        else if (theme === 'light') setTheme('system');
+        else setTheme('dark');
+      }
+
+      // Navigation shortcuts
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 's') {
+        e.preventDefault();
+        navigate('/snippets');
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'h') {
+        e.preventDefault();
+        navigate('/history');
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [theme, setTheme, navigate]);
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
       <Sidebar />
       <div className="flex flex-1 flex-col min-w-0">
-        <Header />
+        <Header onOpenShortcuts={() => setShortcutsOpen(true)} />
         <main className="flex-1 px-4 py-6 sm:px-8 max-w-7xl w-full mx-auto">
           <Outlet />
         </main>
       </div>
 
       <CommandPalette />
+      <KeyboardShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       <Toaster
         theme={resolvedTheme}
         position="bottom-right"
@@ -34,4 +78,3 @@ export const AppShell: React.FC = () => {
     </div>
   );
 };
-

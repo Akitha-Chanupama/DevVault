@@ -1,0 +1,17 @@
+{
+  "name": "DevVault — Local Developer Toolbox",
+  "short_name": "DevVault",
+  "description": "Local-first, privacy-first developer utility suite for formatting, cryptography, HTTP, encoding, and mock datasets.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d16",
+  "theme_color": "#4f8cff",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
