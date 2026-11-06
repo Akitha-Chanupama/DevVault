@@ -8,6 +8,7 @@
 - [x] **Phase 4 — Advanced Developer Tools (P1 Tools)** (Complete: All P1 developer utilities implemented with isolated logic, comprehensive test suites, and rich UI pages)
 - [x] **Phase 5 — Production Readiness & Polish** (Complete: Keyboard shortcuts modal with global listeners, Web App Manifest & PWA readiness, WCAG 2.2 contrast compliance, 31 test files / 101 tests passing, clean code-split production build in 6.5s)
 - [x] **Phase 5.1 — UI/UX Refinement to Reference Design** (Complete: Exact dark navy `#090D16` palette, `#0D1220` sidebar, `#141B2A` card surfaces, fixed sidebar with custom brand logo & tool counts, 3-mode theme selector pill, `banner_dark` & `banner_light` hero banner, 3-column core utility cards, and refined lower dashboard sections)
+- [x] **Phase 5.2 — Theme Contrast & Hover Stabilization** (Complete: High-contrast light mode typography, refined banner borders, semantic theme token normalization across all cards & navigation, and dark slate hover state on sidebar items)
 - [ ] **Phase 6 — Optional Backend** (Optional / Future extension)
 
 ---
