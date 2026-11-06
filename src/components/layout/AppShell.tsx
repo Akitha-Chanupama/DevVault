@@ -54,7 +54,7 @@ export const AppShell: React.FC = () => {
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
-      <Sidebar />
+      <Sidebar onOpenHelp={() => setShortcutsOpen(true)} />
       <div className="flex flex-1 flex-col min-w-0">
         <Header onOpenShortcuts={() => setShortcutsOpen(true)} />
         <main className="flex-1 px-4 py-6 sm:px-8 max-w-7xl w-full mx-auto">

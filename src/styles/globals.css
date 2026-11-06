@@ -4,55 +4,59 @@
 
 @layer base {
   :root {
-    /* Light Mode */
-    --background: #F7F8FA;
-    --foreground: #171B24;
+    /* Light Mode - Clean, modern developer aesthetic */
+    --background: #F8FAFC;
+    --foreground: #0F172A;
+    --sidebar: #FFFFFF;
     --surface: #FFFFFF;
-    --surface-elevated: #F0F2F5;
-    --muted: #E8ECF2;
-    --muted-foreground: #596273;
-    --border: #E2E6EC;
-    --input: #E2E6EC;
-    --primary: #326DE6;
+    --surface-elevated: #F1F5F9;
+    --card: #FFFFFF;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    --border: #E2E8F0;
+    --input: #F1F5F9;
+    --primary: #2563EB;
     --primary-foreground: #FFFFFF;
-    --secondary: #159AAA;
+    --secondary: #3B82F6;
     --secondary-foreground: #FFFFFF;
-    --accent: #EEF3FE;
-    --accent-foreground: #326DE6;
-    --success: #168653;
+    --accent: #EFF6FF;
+    --accent-foreground: #2563EB;
+    --success: #16A34A;
     --success-foreground: #FFFFFF;
-    --warning: #A96A12;
+    --warning: #D97706;
     --warning-foreground: #FFFFFF;
-    --destructive: #D83C48;
+    --destructive: #DC2626;
     --destructive-foreground: #FFFFFF;
-    --ring: #326DE6;
-    --radius: 0.5rem;
+    --ring: #2563EB;
+    --radius: 0.625rem;
   }
 
   .dark {
-    /* Dark Mode */
-    --background: #0B0D12;
-    --foreground: #E8EDF5;
-    --surface: #11151D;
-    --surface-elevated: #171D27;
-    --muted: #1B222F;
-    --muted-foreground: #9AA6B7;
-    --border: #252D3A;
-    --input: #252D3A;
-    --primary: #4F8CFF;
+    /* Dark Mode - Exact reference match */
+    --background: #090D16;
+    --foreground: #F1F5F9;
+    --sidebar: #0D1220;
+    --surface: #141B2A;
+    --surface-elevated: #192338;
+    --card: #141B2A;
+    --muted: #192338;
+    --muted-foreground: #94A3B8;
+    --border: #263247;
+    --input: #141B2A;
+    --primary: #3B82F6;
     --primary-foreground: #FFFFFF;
-    --secondary: #27C2D1;
-    --secondary-foreground: #FFFFFF;
-    --accent: #17243B;
-    --accent-foreground: #4F8CFF;
-    --success: #35B879;
+    --secondary: #60A5FA;
+    --secondary-foreground: #090D16;
+    --accent: #1E293B;
+    --accent-foreground: #60A5FA;
+    --success: #22C55E;
     --success-foreground: #FFFFFF;
-    --warning: #E6AA48;
-    --warning-foreground: #11151D;
-    --destructive: #EF6464;
+    --warning: #F59E0B;
+    --warning-foreground: #090D16;
+    --destructive: #EF4444;
     --destructive-foreground: #FFFFFF;
-    --ring: #4F8CFF;
-    --radius: 0.5rem;
+    --ring: #3B82F6;
+    --radius: 0.625rem;
   }
 
   * {
@@ -62,9 +66,10 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
   }
 
-  /* Custom scrollbars */
+  /* Custom subtle developer scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -74,10 +79,9 @@
   }
   ::-webkit-scrollbar-thumb {
     background: var(--border);
-    border-radius: 3px;
+    border-radius: 4px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: var(--muted-foreground);
   }
 }
-

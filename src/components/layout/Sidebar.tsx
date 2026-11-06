@@ -1,48 +1,51 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
-  LayoutDashboard,
-  Grid,
-  FileCode2,
+  Home,
+  LayoutGrid,
+  Code,
   Send,
-  ShieldCheck,
+  Shield,
   FileText,
   Sparkles,
   Code2,
   Database,
+  Globe,
   Clock,
   Star,
-  Shield,
+  History,
+  Layers,
+  Settings,
+  HelpCircle,
   PanelLeftClose,
   PanelLeft,
-  Settings,
-  History,
-  BookMarked,
 } from 'lucide-react';
 import { TOOL_REGISTRY } from '@/tools/registry';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export const Sidebar: React.FC = () => {
-  const location = useLocation();
-  const { sidebarOpen, toggleSidebar, favorites } = useWorkspaceStore();
+interface SidebarProps {
+  onOpenHelp?: () => void;
+}
 
-  const availableCount = TOOL_REGISTRY.filter((t) => t.status === 'available').length;
+export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
+  const location = useLocation();
+  const { sidebarOpen, toggleSidebar } = useWorkspaceStore();
+
   const totalCount = TOOL_REGISTRY.length;
 
-  const categoryIcons: Record<string, React.ReactNode> = {
-    'JSON & Data': <FileCode2 className="w-4 h-4 text-primary" />,
-    'API & HTTP': <Send className="w-4 h-4 text-secondary" />,
-    'Security': <ShieldCheck className="w-4 h-4 text-success" />,
-    'Text & Code': <FileText className="w-4 h-4 text-warning" />,
-    'Generators': <Sparkles className="w-4 h-4 text-purple-400" />,
-    'Web Development': <Code2 className="w-4 h-4 text-blue-400" />,
-    'Database': <Database className="w-4 h-4 text-emerald-400" />,
-    'Time & Date': <Clock className="w-4 h-4 text-amber-400" />,
-  };
-
-  const favoritedTools = TOOL_REGISTRY.filter((t) => favorites.includes(t.id));
+  const categories = [
+    { name: 'JSON & Data', icon: <Code className="w-4 h-4" /> },
+    { name: 'API & HTTP', icon: <Send className="w-4 h-4" /> },
+    { name: 'Security', icon: <Shield className="w-4 h-4" /> },
+    { name: 'Text & Code', icon: <FileText className="w-4 h-4" /> },
+    { name: 'Generators', icon: <Sparkles className="w-4 h-4" /> },
+    { name: 'Web Development', icon: <Code2 className="w-4 h-4" /> },
+    { name: 'Database', icon: <Database className="w-4 h-4" /> },
+    { name: 'Network', icon: <Globe className="w-4 h-4" /> },
+    { name: 'Time & Date', icon: <Clock className="w-4 h-4" /> },
+  ];
 
   return (
     <>
@@ -56,25 +59,21 @@ export const Sidebar: React.FC = () => {
 
       <aside
         className={cn(
-          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-surface transition-all duration-200 ease-in-out lg:static',
-          sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
+          'fixed top-0 bottom-0 left-0 z-40 flex flex-col border-r border-border bg-sidebar transition-all duration-200 ease-in-out lg:static select-none',
+          sidebarOpen ? 'w-60' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
-        {/* Brand header */}
+        {/* Brand Header */}
         <div className="flex h-14 items-center justify-between px-4 border-b border-border">
           <NavLink to="/" className="flex items-center gap-2.5 overflow-hidden">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 border border-primary/20 text-primary">
-              <Shield className="w-4 h-4" />
+            {/* DevVault stylized bracket logo */}
+            <div className="flex items-center justify-center text-primary font-bold text-lg tracking-tighter">
+              &lt;/&gt;
             </div>
             {sidebarOpen && (
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-base tracking-tight text-foreground">
-                  Dev<span className="text-primary">Vault</span>
-                </span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded bg-surface-elevated border border-border text-muted-foreground">
-                  v1.0
-                </span>
-              </div>
+              <span className="font-bold text-base tracking-tight text-foreground">
+                DevVault
+              </span>
             )}
           </NavLink>
 
@@ -84,28 +83,29 @@ export const Sidebar: React.FC = () => {
             onClick={toggleSidebar}
             className="hidden lg:flex h-7 w-7 text-muted-foreground hover:text-foreground"
             title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            aria-label="Toggle sidebar width"
           >
-            {sidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
+            {sidebarOpen ? <PanelLeftClose className="w-3.5 h-3.5" /> : <PanelLeft className="w-3.5 h-3.5" />}
           </Button>
         </div>
 
-        {/* Scrollable navigation */}
-        <div className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
-          {/* Main Links */}
+        {/* Scrollable Navigation Body */}
+        <div className="flex-1 overflow-y-auto px-3 py-3 space-y-5">
+          {/* Main Top Nav */}
           <div className="space-y-1">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
                     : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
                 )
               }
             >
-              <LayoutDashboard className="w-4 h-4 shrink-0" />
+              <Home className="w-4 h-4 shrink-0" />
               {sidebarOpen && <span>Dashboard</span>}
             </NavLink>
 
@@ -113,29 +113,60 @@ export const Sidebar: React.FC = () => {
               to="/tools"
               className={({ isActive }) =>
                 cn(
-                  'flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  'flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-blue-600 text-white font-semibold shadow-xs'
                     : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
                 )
               }
             >
               <div className="flex items-center gap-3">
-                <Grid className="w-4 h-4 shrink-0" />
+                <LayoutGrid className="w-4 h-4 shrink-0" />
                 {sidebarOpen && <span>All Tools</span>}
               </div>
               {sidebarOpen && (
-                <span className="text-[11px] font-mono text-muted-foreground/70 bg-surface-elevated px-1.5 py-0.2 rounded border border-border">
+                <span className="text-[11px] font-mono text-muted-foreground bg-surface-elevated px-2 py-0.5 rounded-full border border-border">
                   {totalCount}
                 </span>
               )}
             </NavLink>
           </div>
 
-          {/* Workspace Links */}
+          {/* Categories Section */}
           <div className="space-y-1">
             {sidebarOpen && (
-              <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+              <div className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+                Categories
+              </div>
+            )}
+            {categories.map((cat) => {
+              const isCurrent =
+                location.pathname === '/tools' &&
+                location.search.includes(encodeURIComponent(cat.name));
+
+              return (
+                <NavLink
+                  key={cat.name}
+                  to={`/tools?category=${encodeURIComponent(cat.name)}`}
+                  className={cn(
+                    'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
+                    isCurrent
+                      ? 'bg-primary/15 text-primary font-semibold'
+                      : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+                  )}
+                  title={cat.name}
+                >
+                  <span className="shrink-0">{cat.icon}</span>
+                  {sidebarOpen && <span className="truncate">{cat.name}</span>}
+                </NavLink>
+              );
+            })}
+          </div>
+
+          {/* Workspace Section */}
+          <div className="space-y-1">
+            {sidebarOpen && (
+              <div className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
                 Workspace
               </div>
             )}
@@ -143,132 +174,96 @@ export const Sidebar: React.FC = () => {
               to="/snippets"
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-primary/15 text-primary font-semibold'
                     : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
                 )
               }
+              title="Snippets"
             >
-              <BookMarked className="w-4 h-4 shrink-0 text-primary" />
-              {sidebarOpen && <span>Snippet Manager</span>}
+              <Code className="w-4 h-4 shrink-0" />
+              {sidebarOpen && <span>Snippets</span>}
+            </NavLink>
+
+            <NavLink
+              to="/tools?filter=favorites"
+              className={({ isActive }) =>
+                cn(
+                  'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
+                  isActive
+                    ? 'bg-primary/15 text-primary font-semibold'
+                    : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+                )
+              }
+              title="Favorites"
+            >
+              <Star className="w-4 h-4 shrink-0" />
+              {sidebarOpen && <span>Favorites</span>}
             </NavLink>
 
             <NavLink
               to="/history"
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-primary/15 text-primary font-semibold'
                     : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
                 )
               }
+              title="History"
             >
-              <History className="w-4 h-4 shrink-0 text-secondary" />
-              {sidebarOpen && <span>Activity History</span>}
+              <History className="w-4 h-4 shrink-0" />
+              {sidebarOpen && <span>History</span>}
             </NavLink>
 
             <NavLink
-              to="/settings"
+              to="/snippets?tab=collections"
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-3 px-3 py-2 rounded-md text-xs font-medium transition-colors',
+                  'flex items-center gap-3 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors',
                   isActive
-                    ? 'bg-primary/10 text-primary font-semibold'
+                    ? 'bg-primary/15 text-primary font-semibold'
                     : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
                 )
               }
+              title="Collections"
             >
-              <Settings className="w-4 h-4 shrink-0 text-muted-foreground" />
-              {sidebarOpen && <span>Settings & Backup</span>}
+              <Layers className="w-4 h-4 shrink-0" />
+              {sidebarOpen && <span>Collections</span>}
             </NavLink>
           </div>
-
-          {/* Quick Access: Favorites */}
-          {sidebarOpen && favoritedTools.length > 0 && (
-            <div className="space-y-1">
-              <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70 flex items-center justify-between">
-                <span>Starred Tools</span>
-                <Star className="w-3 h-3 text-warning fill-warning" />
-              </div>
-              <div className="space-y-0.5 pt-1">
-                {favoritedTools.slice(0, 5).map((tool) => (
-                  <NavLink
-                    key={tool.id}
-                    to={tool.route}
-                    className={({ isActive }) =>
-                      cn(
-                        'flex items-center justify-between px-3 py-1.5 rounded-md text-xs transition-colors',
-                        isActive
-                          ? 'bg-primary/10 text-primary font-medium'
-                          : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
-                      )
-                    }
-                  >
-                    <span className="truncate">{tool.name}</span>
-                    {tool.status === 'available' ? (
-                      <span className="w-1.5 h-1.5 rounded-full bg-success" />
-                    ) : (
-                      <span className="text-[10px] text-muted-foreground/50">Soon</span>
-                    )}
-                  </NavLink>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Tools by Category */}
-          {sidebarOpen && (
-            <div className="space-y-4">
-              <div className="px-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
-                Tool Categories
-              </div>
-
-              <div className="space-y-1">
-                {Object.entries(categoryIcons).map(([cat, icon]) => {
-                  const catTools = TOOL_REGISTRY.filter((t) => t.category === cat);
-                  const isCurrentCategory =
-                    location.pathname === '/tools' && location.search.includes(encodeURIComponent(cat));
-
-                  return (
-                    <NavLink
-                      key={cat}
-                      to={`/tools?category=${encodeURIComponent(cat)}`}
-                      className={cn(
-                        'flex items-center justify-between px-3 py-2 rounded-md text-xs font-medium transition-colors',
-                        isCurrentCategory
-                          ? 'bg-primary/10 text-primary'
-                          : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
-                      )}
-                    >
-                      <div className="flex items-center gap-2.5">
-                        {icon}
-                        <span>{cat}</span>
-                      </div>
-                      <span className="text-[10px] text-muted-foreground/60">
-                        {catTools.length}
-                      </span>
-                    </NavLink>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
 
-        {/* Sidebar Footer */}
-        {sidebarOpen && (
-          <div className="p-3 border-t border-border bg-surface-elevated/40 space-y-2">
-            <div className="flex items-center justify-between text-xs text-muted-foreground px-1">
-              <span>Status</span>
-              <span className="flex items-center gap-1.5 font-medium text-foreground">
-                <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
-                {availableCount} Active / {totalCount} Planned
-              </span>
-            </div>
-          </div>
-        )}
+        {/* Bottom Section: Settings & Help */}
+        <div className="p-3 border-t border-border space-y-1">
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              cn(
+                'flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-colors',
+                isActive
+                  ? 'bg-primary/15 text-primary font-semibold'
+                  : 'text-muted-foreground hover:bg-surface-elevated hover:text-foreground'
+              )
+            }
+            title="Settings"
+          >
+            <Settings className="w-4 h-4 shrink-0" />
+            {sidebarOpen && <span>Settings</span>}
+          </NavLink>
+
+          <button
+            type="button"
+            onClick={onOpenHelp}
+            className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium text-muted-foreground hover:bg-surface-elevated hover:text-foreground transition-colors text-left"
+            title="Help & Docs"
+          >
+            <HelpCircle className="w-4 h-4 shrink-0" />
+            {sidebarOpen && <span>Help & Docs</span>}
+          </button>
+        </div>
       </aside>
     </>
   );

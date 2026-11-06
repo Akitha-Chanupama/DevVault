@@ -5,8 +5,6 @@ import {
   Moon,
   Laptop,
   Menu,
-  Github,
-  Command,
   Keyboard,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,27 +16,16 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
-  const { theme, resolvedTheme, setTheme } = useThemeStore();
+  const { theme, setTheme } = useThemeStore();
   const { toggleSidebar, setCommandPaletteOpen } = useWorkspaceStore();
 
-  const handleCycleTheme = () => {
-    if (theme === 'dark') setTheme('light');
-    else if (theme === 'light') setTheme('system');
-    else setTheme('dark');
-  };
-
-  const getThemeIcon = () => {
-    if (theme === 'system') return <Laptop className="w-4 h-4 text-primary" />;
-    return resolvedTheme === 'dark' ? (
-      <Moon className="w-4 h-4 text-primary" />
-    ) : (
-      <Sun className="w-4 h-4 text-warning" />
-    );
-  };
+  const isMac = typeof window !== 'undefined' && navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  const shortcutKey = isMac ? '⌘ + K' : 'Ctrl + K';
 
   return (
-    <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between border-b border-border bg-surface/80 px-4 backdrop-blur-md transition-colors sm:px-6">
+    <header className="sticky top-0 z-30 flex h-14 w-full items-center justify-between border-b border-border bg-background/95 px-4 backdrop-blur-md transition-colors sm:px-6">
       <div className="flex items-center gap-3">
+        {/* Mobile menu button */}
         <Button
           variant="ghost"
           size="icon"
@@ -49,24 +36,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
           <Menu className="w-4 h-4" />
         </Button>
 
-        {/* Global Command Palette search trigger */}
+        {/* Global tool search input matching reference */}
         <button
           onClick={() => setCommandPaletteOpen(true)}
-          className="flex h-9 w-64 md:w-80 items-center justify-between rounded-md border border-border bg-surface-elevated/80 px-3 text-xs text-muted-foreground hover:border-muted-foreground/40 hover:bg-surface-elevated transition-colors shadow-sm"
+          className="flex h-9 w-64 sm:w-80 md:w-96 items-center justify-between rounded-lg border border-border bg-surface px-3 text-xs text-muted-foreground hover:border-muted-foreground/40 hover:bg-surface-elevated transition-colors shadow-2xs group"
           aria-label="Open command palette"
         >
-          <div className="flex items-center gap-2">
-            <Search className="w-3.5 h-3.5" />
-            <span>Search utilities and actions...</span>
+          <div className="flex items-center gap-2.5">
+            <Search className="w-3.5 h-3.5 text-muted-foreground group-hover:text-foreground transition-colors" />
+            <span className="truncate">Search tools... ({shortcutKey})</span>
           </div>
-          <kbd className="hidden sm:inline-flex items-center gap-0.5 rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-mono text-muted-foreground">
-            <Command className="w-2.5 h-2.5" /> K
-          </kbd>
         </button>
       </div>
 
-      <div className="flex items-center gap-2">
-        {/* Keyboard Shortcuts Trigger Button */}
+      <div className="flex items-center gap-3">
+        {/* Keyboard Shortcuts Trigger */}
         {onOpenShortcuts && (
           <Button
             variant="ghost"
@@ -80,29 +64,68 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
           </Button>
         )}
 
-        {/* Theme Mode Selector Button */}
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleCycleTheme}
-          className="h-8 px-2.5 text-xs text-muted-foreground hover:text-foreground gap-1.5 border border-transparent hover:border-border"
-          title={`Theme: ${theme} (click to cycle)`}
+        {/* 3-State Theme Selector Pill matching reference */}
+        <div
+          role="radiogroup"
+          aria-label="Theme mode selector"
+          className="flex items-center gap-0.5 bg-surface border border-border p-1 rounded-full shadow-2xs"
         >
-          {getThemeIcon()}
-          <span className="capitalize hidden sm:inline">{theme}</span>
-        </Button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked={theme === 'light'}
+            onClick={() => setTheme('light')}
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+              theme === 'light'
+                ? 'bg-amber-500/20 text-amber-500 shadow-xs'
+                : 'text-muted-foreground hover:text-foreground hover:bg-surface-elevated'
+            }`}
+            title="Light mode"
+            aria-label="Light mode"
+          >
+            <Sun className="w-3.5 h-3.5" />
+          </button>
 
-        {/* GitHub link */}
-        <a
-          href="https://github.com"
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground hover:text-foreground hover:bg-surface-elevated transition-colors"
-          title="DevVault on GitHub"
-          aria-label="DevVault on GitHub"
+          <button
+            type="button"
+            role="radio"
+            aria-checked={theme === 'dark'}
+            onClick={() => setTheme('dark')}
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+              theme === 'dark'
+                ? 'bg-primary/20 text-primary shadow-xs'
+                : 'text-muted-foreground hover:text-foreground hover:bg-surface-elevated'
+            }`}
+            title="Dark mode"
+            aria-label="Dark mode"
+          >
+            <Moon className="w-3.5 h-3.5" />
+          </button>
+
+          <button
+            type="button"
+            role="radio"
+            aria-checked={theme === 'system'}
+            onClick={() => setTheme('system')}
+            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+              theme === 'system'
+                ? 'bg-primary/20 text-primary shadow-xs'
+                : 'text-muted-foreground hover:text-foreground hover:bg-surface-elevated'
+            }`}
+            title="System theme"
+            aria-label="System theme"
+          >
+            <Laptop className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* User avatar badge matching reference image */}
+        <div
+          className="flex h-8 w-8 items-center justify-center rounded-full bg-surface-elevated border border-border text-foreground font-semibold text-xs select-none shadow-2xs"
+          title="Developer Profile"
         >
-          <Github className="w-4 h-4" />
-        </a>
+          JD
+        </div>
       </div>
     </header>
   );

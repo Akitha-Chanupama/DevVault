@@ -10,6 +10,11 @@ export default {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
+        sidebar: 'var(--sidebar)',
+        card: {
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--foreground)',
+        },
         surface: {
           DEFAULT: 'var(--surface)',
           elevated: 'var(--surface-elevated)',
@@ -51,6 +56,7 @@ export default {
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       borderRadius: {
+        xl: 'calc(var(--radius) + 4px)',
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
@@ -59,4 +65,3 @@ export default {
   },
   plugins: [],
 };
-
