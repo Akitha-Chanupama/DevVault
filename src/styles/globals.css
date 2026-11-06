@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    /* Light Mode - Clean, modern developer aesthetic */
-    --background: #F8FAFC;
-    --foreground: #0F172A;
-    --sidebar: #FFFFFF;
+    /* Light Mode - Harmonious blue-tinted developer aesthetic matching banner */
+    --background: #EEF4FB;
+    --foreground: #0C1E36;
+    --sidebar: #F5F9FE;
     --surface: #FFFFFF;
-    --surface-elevated: #F1F5F9;
+    --surface-elevated: #E2EDF9;
     --card: #FFFFFF;
-    --muted: #F1F5F9;
-    --muted-foreground: #64748B;
-    --border: #E2E8F0;
-    --input: #F1F5F9;
+    --muted: #E8F1FB;
+    --muted-foreground: #526A87;
+    --border: #D8E6F5;
+    --input: #F0F6FC;
     --primary: #2563EB;
     --primary-foreground: #FFFFFF;
     --secondary: #3B82F6;
     --secondary-foreground: #FFFFFF;
-    --accent: #EFF6FF;
-    --accent-foreground: #2563EB;
+    --accent: #E0EEFD;
+    --accent-foreground: #1D4ED8;
     --success: #16A34A;
     --success-foreground: #FFFFFF;
     --warning: #D97706;
