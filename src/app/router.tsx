@@ -23,6 +23,9 @@ const HistoryPage = React.lazy(
 const SettingsPage = React.lazy(
   () => import('@/features/settings/components/SettingsPage')
 );
+const AboutDeveloperPage = React.lazy(
+  () => import('@/features/about/AboutDeveloperPage')
+);
 
 // Map available tools from registry
 const toolRoutes = TOOL_REGISTRY.filter((tool) => tool.component).map((tool) => {
@@ -71,6 +74,22 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageLoader />}>
             <SettingsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'about',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AboutDeveloperPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'developer',
+        element: (
+          <Suspense fallback={<PageLoader />}>
+            <AboutDeveloperPage />
           </Suspense>
         ),
       },
