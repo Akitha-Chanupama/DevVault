@@ -35,14 +35,18 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             sidebarOpen ? 'w-[236px] pr-2' : 'w-auto gap-3 mr-4'
           )}
         >
-          {/* Brand Logo & Project Name - Permanently visible at top */}
+          {/* Brand Logo & Project Title - Permanently visible at top */}
           <NavLink to="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-100/70 dark:bg-blue-600/15 border border-blue-200 dark:border-blue-500/30 text-blue-600 dark:text-blue-400 font-bold font-mono text-sm shadow-xs shadow-blue-500/10 shrink-0 group-hover:scale-105 group-hover:border-blue-400 dark:group-hover:border-blue-500/50 transition-all">
-              &lt;/&gt;
-            </div>
-            <span className="font-bold text-base tracking-tight text-slate-900 dark:text-foreground inline-block">
-              Dev<span className="text-blue-600 dark:text-blue-500">Vault</span>
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="DevVault Logo"
+              className="h-9 w-9 rounded-xl object-contain shrink-0 shadow-xs shadow-blue-500/10 group-hover:scale-105 transition-transform"
+            />
+            <img
+              src="/images/title.png"
+              alt="DevVault"
+              className="h-10 w-auto object-contain shrink-0 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all"
+            />
           </NavLink>
 
           {/* Sidebar Collapse Toggle Button - Aligned to the right edge of sidebar column where it was previously */}
