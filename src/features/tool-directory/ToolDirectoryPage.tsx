@@ -16,28 +16,32 @@ import { Button } from '@/components/ui/button';
 
 export const ToolDirectoryPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const initialCategory = searchParams.get('category') || 'All';
+  const selectedCategory = searchParams.get('category') || 'All';
+  const filterParam = searchParams.get('filter');
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [selectedStatus, setSelectedStatus] = useState<'all' | 'available' | 'planned'>('all');
   const [searchQuery, setSearchQuery] = useState('');
 
   const { favorites, toggleFavorite } = useWorkspaceStore();
 
   const handleCategoryChange = (cat: string) => {
-    setSelectedCategory(cat);
+    const next = new URLSearchParams(searchParams);
     if (cat === 'All') {
-      searchParams.delete('category');
-      setSearchParams(searchParams);
+      next.delete('category');
     } else {
-      setSearchParams({ category: cat });
+      next.set('category', cat);
     }
+    setSearchParams(next);
   };
 
   const filteredTools = useMemo(() => {
     return TOOL_REGISTRY.filter((tool) => {
       // Category filter
       if (selectedCategory !== 'All' && tool.category !== selectedCategory) {
+        return false;
+      }
+      // Favorites filter
+      if (filterParam === 'favorites' && !favorites.includes(tool.id)) {
         return false;
       }
       // Status filter
@@ -56,17 +60,19 @@ export const ToolDirectoryPage: React.FC = () => {
       }
       return true;
     });
-  }, [selectedCategory, selectedStatus, searchQuery]);
+  }, [selectedCategory, filterParam, favorites, selectedStatus, searchQuery]);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-150">
       {/* Header */}
       <div>
         <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-          All Developer Tools
+          {filterParam === 'favorites' ? 'Favorite Tools' : 'All Developer Tools'}
         </h1>
         <p className="text-xs sm:text-sm text-muted-foreground mt-1 max-w-2xl">
-          Browse the full directory of local browser utilities. Filter by category, release status, or search keywords.
+          {filterParam === 'favorites'
+            ? 'Quick access to all your starred developer utilities.'
+            : 'Browse the full directory of local browser utilities. Filter by category, release status, or search keywords.'}
         </p>
       </div>
 
@@ -152,8 +158,8 @@ export const ToolDirectoryPage: React.FC = () => {
             size="sm"
             onClick={() => {
               setSearchQuery('');
-              setSelectedCategory('All');
               setSelectedStatus('all');
+              setSearchParams({});
             }}
             className="mt-4"
           >
