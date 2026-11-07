@@ -40,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             <img
               src="/images/logo_transparent.png"
               alt="DevVault Logo"
-              className="h-[42px] w-[42px] object-contain shrink-0 group-hover:scale-105 transition-transform"
+              className="h-[38px] w-[38px] object-contain shrink-0 group-hover:scale-105 transition-transform"
             />
             <img
               src="/images/title.png"
