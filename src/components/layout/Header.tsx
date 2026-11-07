@@ -38,14 +38,14 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
           {/* Brand Logo & Project Title - Permanently visible at top */}
           <NavLink to="/" className="flex items-center gap-2.5 shrink-0 group">
             <img
-              src="/images/logo.png"
+              src="/images/logo_transparent.png"
               alt="DevVault Logo"
-              className="h-11 w-11 rounded-xl object-contain shrink-0 shadow-xs shadow-blue-500/10 group-hover:scale-105 transition-transform"
+              className="h-[42px] w-[42px] object-contain shrink-0 group-hover:scale-105 transition-transform"
             />
             <img
               src="/images/title.png"
               alt="DevVault"
-              className="h-10 w-auto object-contain shrink-0 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all"
+              className="h-8 max-w-[136px] w-auto object-contain shrink-0 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all"
             />
           </NavLink>
 
