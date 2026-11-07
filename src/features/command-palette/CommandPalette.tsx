@@ -89,11 +89,11 @@ export const CommandPalette: React.FC = () => {
               setSelectedIndex(0);
             }}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent px-3 py-3.5 text-sm text-slate-800 dark:text-foreground placeholder:text-slate-400 dark:placeholder:text-muted-foreground focus:outline-none"
+            className="flex-1 bg-transparent px-3 py-3.5 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none"
           />
           <button
             onClick={() => setCommandPaletteOpen(false)}
-            className="text-slate-400 hover:text-slate-700 dark:text-muted-foreground dark:hover:text-foreground p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors"
+            className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             title="Close"
           >
             <X className="w-4 h-4" />
@@ -103,7 +103,7 @@ export const CommandPalette: React.FC = () => {
         {/* Results List */}
         <div className="max-h-80 overflow-y-auto p-2 space-y-1">
           {filteredTools.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500 dark:text-muted-foreground">
+            <div className="p-8 text-center text-xs text-slate-500 dark:text-slate-400">
               No matching tools found for "{query}".
             </div>
           ) : (
@@ -119,7 +119,7 @@ export const CommandPalette: React.FC = () => {
                   className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-colors ${
                     isSelected
                       ? 'bg-blue-600 text-white font-medium shadow-xs'
-                      : 'text-slate-800 dark:text-foreground hover:bg-blue-50/80 dark:hover:bg-slate-800/60'
+                      : 'text-slate-800 dark:text-slate-200 hover:bg-blue-50/80 dark:hover:bg-slate-800/70'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
@@ -133,7 +133,7 @@ export const CommandPalette: React.FC = () => {
                     <span className="font-semibold truncate">{tool.name}</span>
                     <span
                       className={`truncate text-xs ${
-                        isSelected ? 'text-blue-100' : 'text-slate-500 dark:text-muted-foreground'
+                        isSelected ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'
                       }`}
                     >
                       — {tool.category}
@@ -164,7 +164,7 @@ export const CommandPalette: React.FC = () => {
                         Planned
                       </Badge>
                     )}
-                    <ArrowRight className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-400 dark:text-muted-foreground'}`} />
+                    <ArrowRight className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-400 dark:text-slate-400'}`} />
                   </div>
                 </div>
               );
@@ -173,7 +173,7 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Footer shortcuts info */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-t border-slate-200 dark:border-border/80 bg-slate-50 dark:bg-[#080d19]/80 text-xs text-slate-500 dark:text-muted-foreground font-mono">
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#080d19] text-xs text-slate-500 dark:text-slate-400 font-mono">
           <div className="flex items-center gap-3">
             <span>↑↓ to navigate</span>
             <span>↵ to select</span>

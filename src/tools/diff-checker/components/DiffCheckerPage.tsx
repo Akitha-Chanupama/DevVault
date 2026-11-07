@@ -223,7 +223,7 @@ export const DiffCheckerPage: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="flex items-start hover:bg-surface-elevated/40 text-foreground/80 py-0.5 px-3"
+                  className="flex items-start hover:bg-surface-elevated/40 text-slate-800 dark:text-slate-200 py-0.5 px-3"
                 >
                   <span className="w-8 shrink-0 text-right pr-3 select-none text-muted-foreground/50">
                     {line.originalLineNumber}

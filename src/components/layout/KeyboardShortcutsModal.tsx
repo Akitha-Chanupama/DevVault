@@ -53,16 +53,16 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-border/80 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-4">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-100/70 dark:bg-blue-500/15 border border-blue-200 dark:border-blue-500/25 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-xs">
               <Keyboard className="w-5 h-5" />
             </div>
             <div>
-              <h3 id="shortcuts-dialog-title" className="text-base font-bold text-slate-900 dark:text-foreground">
+              <h3 id="shortcuts-dialog-title" className="text-base font-bold text-slate-900 dark:text-white">
                 Keyboard Shortcuts
               </h3>
-              <p className="text-xs text-slate-500 dark:text-muted-foreground mt-0.5">
+              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                 Quick commands to navigate and control DevVault
               </p>
             </div>
@@ -71,7 +71,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
             size="icon"
             variant="ghost"
             onClick={onClose}
-            className="h-8 w-8 rounded-lg text-slate-400 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors"
+            className="h-8 w-8 rounded-lg text-slate-400 hover:text-blue-800 dark:text-slate-400 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800 transition-colors"
             aria-label="Close shortcuts modal"
           >
             <X className="w-4 h-4" />
@@ -83,9 +83,9 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
           {SHORTCUTS.map((s, idx) => (
             <div
               key={idx}
-              className="flex items-center justify-between py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-[#131b2e]/60 border border-slate-200/80 dark:border-border/50 hover:border-blue-300 dark:hover:border-blue-500/30 transition-all text-sm"
+              className="flex items-center justify-between py-2.5 px-3 rounded-xl bg-slate-50 dark:bg-[#131b2e] border border-slate-200/80 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-500/40 transition-all text-sm"
             >
-              <span className="text-slate-800 dark:text-foreground/90 font-medium">{s.description}</span>
+              <span className="text-slate-800 dark:text-slate-200 font-medium">{s.description}</span>
               <div className="flex items-center gap-1.5 font-mono">
                 {s.keys.map((k, kIdx) => (
                   <kbd
@@ -101,8 +101,8 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
         </div>
 
         {/* Dismiss footer */}
-        <div className="pt-2 text-center text-xs text-slate-500 dark:text-muted-foreground border-t border-slate-200/80 dark:border-border/40">
-          Press <kbd className="px-2 py-0.5 rounded bg-slate-100 dark:bg-surface-elevated border border-slate-200 dark:border-border text-slate-700 dark:text-foreground text-xs font-mono font-medium shadow-2xs">Esc</kbd> to dismiss this dialog
+        <div className="pt-2 text-center text-xs text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-slate-800">
+          Press <kbd className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-mono font-medium shadow-2xs">Esc</kbd> to dismiss this dialog
         </div>
       </div>
     </div>
