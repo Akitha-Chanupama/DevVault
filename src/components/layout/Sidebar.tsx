@@ -30,6 +30,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
   const location = useLocation();
   const { sidebarOpen, toggleSidebar } = useWorkspaceStore();
 
+  const searchParams = new URLSearchParams(location.search);
+  const currentCategory = searchParams.get('category');
+  const currentFilter = searchParams.get('filter');
+  const currentTab = searchParams.get('tab');
+
+  const isAllToolsActive = location.pathname === '/tools' && !currentCategory && !currentFilter;
+  const isFavoritesActive = location.pathname === '/tools' && currentFilter === 'favorites';
+  const isSnippetsActive = location.pathname === '/snippets' && !currentTab;
+  const isCollectionsActive = location.pathname === '/snippets' && currentTab === 'collections';
+
   const totalCount = TOOL_REGISTRY.length;
 
   const categories = [
@@ -85,36 +95,30 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
 
             <NavLink
               to="/tools"
-              className={({ isActive }) =>
-                cn(
-                  'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'justify-between px-3.5 py-2.5' : 'w-10 h-10 mx-auto justify-center p-0',
-                  isActive
-                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
-                )
-              }
+              className={cn(
+                'group flex items-center rounded-xl text-sm font-medium transition-all',
+                sidebarOpen ? 'justify-between px-3.5 py-2.5' : 'w-10 h-10 mx-auto justify-center p-0',
+                isAllToolsActive
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
+              )}
               title={`All Tools (${totalCount})`}
             >
-              {({ isActive }) => (
-                <>
-                  <div className="flex items-center gap-3 min-w-0">
-                    <LayoutGrid className="w-4 h-4 shrink-0" />
-                    {sidebarOpen && <span>All Tools</span>}
-                  </div>
-                  {sidebarOpen && (
-                    <span
-                      className={cn(
-                        'text-xs font-mono font-medium px-2 py-0.5 rounded-full border transition-colors',
-                        isActive
-                          ? 'bg-blue-700/80 text-white border-blue-400/40'
-                          : 'text-blue-700 dark:text-muted-foreground bg-blue-100/70 dark:bg-surface-elevated border-blue-200/80 dark:border-border group-hover:border-blue-400 dark:group-hover:border-blue-500/30'
-                      )}
-                    >
-                      {totalCount}
-                    </span>
+              <div className="flex items-center gap-3 min-w-0">
+                <LayoutGrid className="w-4 h-4 shrink-0" />
+                {sidebarOpen && <span>All Tools</span>}
+              </div>
+              {sidebarOpen && (
+                <span
+                  className={cn(
+                    'text-xs font-mono font-medium px-2 py-0.5 rounded-full border transition-colors',
+                    isAllToolsActive
+                      ? 'bg-blue-700/80 text-white border-blue-400/40'
+                      : 'text-blue-700 dark:text-muted-foreground bg-blue-100/70 dark:bg-surface-elevated border-blue-200/80 dark:border-border group-hover:border-blue-400 dark:group-hover:border-blue-500/30'
                   )}
-                </>
+                >
+                  {totalCount}
+                </span>
               )}
             </NavLink>
           </div>
@@ -127,9 +131,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               </div>
             )}
             {categories.map((cat) => {
-              const isCurrent =
-                location.pathname === '/tools' &&
-                location.search.includes(encodeURIComponent(cat.name));
+              const isCurrent = location.pathname === '/tools' && currentCategory === cat.name;
 
               return (
                 <NavLink
@@ -139,7 +141,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                     'group flex items-center rounded-xl text-sm font-medium transition-all',
                     sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                     isCurrent
-                      ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
+                      ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                       : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
                   )}
                   title={cat.name}
@@ -148,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                     className={cn(
                       'transition-colors',
                       isCurrent
-                        ? 'text-blue-700 dark:text-blue-400'
+                        ? 'text-white'
                         : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
                     )}
                   >
@@ -169,30 +171,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             )}
             <NavLink
               to="/snippets"
-              className={({ isActive }) =>
-                cn(
-                  'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
-                  isActive
-                    ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
-                )
-              }
+              className={cn(
+                'group flex items-center rounded-xl text-sm font-medium transition-all',
+                sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                isSnippetsActive
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
+              )}
               title="Snippets"
             >
-              {({ isActive }) => (
-                <>
-                  <Code
-                    className={cn(
-                      'w-4 h-4 shrink-0 transition-colors',
-                      isActive
-                        ? 'text-blue-700 dark:text-blue-400'
-                        : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
-                    )}
-                  />
-                  {sidebarOpen && <span>Snippets</span>}
-                </>
-              )}
+              <Code
+                className={cn(
+                  'w-4 h-4 shrink-0 transition-colors',
+                  isSnippetsActive
+                    ? 'text-white'
+                    : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                )}
+              />
+              {sidebarOpen && <span>Snippets</span>}
             </NavLink>
 
             <NavLink
@@ -200,8 +196,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
-                location.pathname === '/tools' && location.search.includes('filter=favorites')
-                  ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
+                isFavoritesActive
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
               )}
               title="Favorites"
@@ -209,8 +205,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               <Star
                 className={cn(
                   'w-4 h-4 shrink-0 transition-colors',
-                  location.pathname === '/tools' && location.search.includes('filter=favorites')
-                    ? 'fill-amber-400 text-amber-500'
+                  isFavoritesActive
+                    ? 'fill-white text-white'
                     : 'text-slate-500 group-hover:text-amber-500 dark:text-muted-foreground dark:group-hover:text-amber-400'
                 )}
               />
@@ -224,7 +220,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
                   sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                   isActive
-                    ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
+                    ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
                 )
               }
@@ -236,7 +232,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                     className={cn(
                       'w-4 h-4 shrink-0 transition-colors',
                       isActive
-                        ? 'text-blue-700 dark:text-blue-400'
+                        ? 'text-white'
                         : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
                     )}
                   />
@@ -250,8 +246,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
-                location.pathname === '/snippets' && location.search.includes('tab=collections')
-                  ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
+                isCollectionsActive
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
               )}
               title="Collections"
@@ -259,8 +255,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               <Layers
                 className={cn(
                   'w-4 h-4 shrink-0 transition-colors',
-                  location.pathname === '/snippets' && location.search.includes('tab=collections')
-                    ? 'text-blue-700 dark:text-blue-400'
+                  isCollectionsActive
+                    ? 'text-white'
                     : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
                 )}
               />
@@ -278,7 +274,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                 isActive
-                  ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
               )
             }
@@ -290,7 +286,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   className={cn(
                     'w-4 h-4 shrink-0 transition-colors',
                     isActive
-                      ? 'text-blue-700 dark:text-blue-400'
+                      ? 'text-white'
                       : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
                   )}
                 />
