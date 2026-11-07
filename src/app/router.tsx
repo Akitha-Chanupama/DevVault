@@ -4,12 +4,15 @@ import { AppShell } from '@/components/layout/AppShell';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
 import { ToolDirectoryPage } from '@/features/tool-directory/ToolDirectoryPage';
 import { TOOL_REGISTRY } from '@/tools/registry';
-import { Loader2 } from 'lucide-react';
 
 const PageLoader = () => (
-  <div className="flex h-96 w-full items-center justify-center gap-2 text-muted-foreground text-xs">
-    <Loader2 className="w-5 h-5 animate-spin text-primary" />
-    <span>Loading...</span>
+  <div className="w-full max-w-5xl mx-auto space-y-6 py-4 animate-pulse">
+    <div className="h-8 w-64 bg-slate-200/70 dark:bg-slate-800/70 rounded-xl" />
+    <div className="h-4 w-96 bg-slate-200/50 dark:bg-slate-800/50 rounded-lg" />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+      <div className="h-48 bg-slate-200/40 dark:bg-slate-800/40 rounded-2xl border border-border/50" />
+      <div className="h-48 bg-slate-200/40 dark:bg-slate-800/40 rounded-2xl border border-border/50" />
+    </div>
   </div>
 );
 

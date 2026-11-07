@@ -41,11 +41,11 @@ export const SettingsPage: React.FC = () => {
     });
   }, []);
 
-  const handleUpdate = async (updates: Partial<DbSettings>) => {
+  const handleUpdate = async (updates: Partial<DbSettings>, origin?: { clientX: number; clientY: number }) => {
     const updated = await settingsRepository.updateSettings(updates);
     setSettings(updated);
     if (updates.theme) {
-      setTheme(updates.theme);
+      setTheme(updates.theme, origin);
     }
     toast.success('Settings saved');
   };
@@ -125,7 +125,7 @@ export const SettingsPage: React.FC = () => {
         <CardContent className="pt-0">
           <div className="grid grid-cols-3 gap-3 max-w-md">
             <button
-              onClick={() => handleUpdate({ theme: 'light' })}
+              onClick={(e) => handleUpdate({ theme: 'light' }, { clientX: e.clientX, clientY: e.clientY })}
               className={`flex flex-col items-center justify-center p-3 rounded-lg border text-xs font-semibold gap-2 transition-all ${
                 theme === 'light'
                   ? 'border-primary bg-primary/10 text-primary'
@@ -137,7 +137,7 @@ export const SettingsPage: React.FC = () => {
             </button>
 
             <button
-              onClick={() => handleUpdate({ theme: 'dark' })}
+              onClick={(e) => handleUpdate({ theme: 'dark' }, { clientX: e.clientX, clientY: e.clientY })}
               className={`flex flex-col items-center justify-center p-3 rounded-lg border text-xs font-semibold gap-2 transition-all ${
                 theme === 'dark'
                   ? 'border-primary bg-primary/10 text-primary'
@@ -149,7 +149,7 @@ export const SettingsPage: React.FC = () => {
             </button>
 
             <button
-              onClick={() => handleUpdate({ theme: 'system' })}
+              onClick={(e) => handleUpdate({ theme: 'system' }, { clientX: e.clientX, clientY: e.clientY })}
               className={`flex flex-col items-center justify-center p-3 rounded-lg border text-xs font-semibold gap-2 transition-all ${
                 theme === 'system'
                   ? 'border-primary bg-primary/10 text-primary'
