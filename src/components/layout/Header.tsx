@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             <img
               src="/images/title.png"
               alt="DevVault"
-              className="h-8 max-w-[136px] w-auto object-contain shrink-0 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all"
+              className="h-8 max-w-[136px] w-auto object-contain shrink-0 invert hue-rotate-180 dark:invert-0 dark:hue-rotate-0 transition-all duration-700 ease-in-out"
             />
           </NavLink>
 
