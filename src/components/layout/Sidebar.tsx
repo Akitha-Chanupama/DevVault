@@ -16,17 +16,13 @@ import {
   History,
   Layers,
   Settings,
-  HelpCircle,
+  User,
 } from 'lucide-react';
 import { TOOL_REGISTRY } from '@/tools/registry';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
 import { cn } from '@/lib/utils';
 
-interface SidebarProps {
-  onOpenHelp?: () => void;
-}
-
-export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
+export const Sidebar: React.FC = () => {
   const location = useLocation();
   const { sidebarOpen, toggleSidebar } = useWorkspaceStore();
 
@@ -295,18 +291,33 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             )}
           </NavLink>
 
-          <button
-            type="button"
-            onClick={onOpenHelp}
-            className={cn(
-              'group flex items-center rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-all text-left',
-              sidebarOpen ? 'w-full gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0'
-            )}
-            title="Help & Docs"
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              cn(
+                'group flex items-center rounded-xl text-sm font-medium transition-all',
+                sidebarOpen ? 'gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                isActive
+                  ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
+                  : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
+              )
+            }
+            title="About Developer"
           >
-            <HelpCircle className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
-            {sidebarOpen && <span>Help & Docs</span>}
-          </button>
+            {({ isActive }) => (
+              <>
+                <User
+                  className={cn(
+                    'w-4 h-4 shrink-0 transition-colors',
+                    isActive
+                      ? 'text-white'
+                      : 'text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400'
+                  )}
+                />
+                {sidebarOpen && <span>About Developer</span>}
+              </>
+            )}
+          </NavLink>
         </div>
       </aside>
     </>
