@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { CommandPalette } from '@/features/command-palette/CommandPalette';
@@ -12,6 +12,12 @@ export const AppShell: React.FC = () => {
   const { theme, setTheme } = useThemeStore();
   const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Smooth scroll-to-top on page change
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -58,7 +64,9 @@ export const AppShell: React.FC = () => {
       <div className="flex flex-1 min-w-0">
         <Sidebar />
         <main className="flex-1 px-4 py-6 sm:px-8 max-w-7xl w-full mx-auto min-w-0">
-          <Outlet />
+          <div key={location.pathname} className="animate-page-enter">
+            <Outlet />
+          </div>
         </main>
       </div>
 

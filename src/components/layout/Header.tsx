@@ -110,7 +110,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             type="button"
             role="radio"
             aria-checked={theme === 'light'}
-            onClick={() => setTheme('light')}
+            onClick={(e) => setTheme('light', { clientX: e.clientX, clientY: e.clientY })}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'light'
                 ? 'bg-surface text-amber-600 dark:text-amber-400 shadow-xs border border-border'
@@ -126,7 +126,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             type="button"
             role="radio"
             aria-checked={theme === 'dark'}
-            onClick={() => setTheme('dark')}
+            onClick={(e) => setTheme('dark', { clientX: e.clientX, clientY: e.clientY })}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'dark'
                 ? 'bg-primary/20 text-blue-600 dark:text-blue-400 shadow-xs border border-primary/30'
@@ -142,7 +142,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             type="button"
             role="radio"
             aria-checked={theme === 'system'}
-            onClick={() => setTheme('system')}
+            onClick={(e) => setTheme('system', { clientX: e.clientX, clientY: e.clientY })}
             className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'system'
                 ? 'bg-primary/20 text-blue-600 dark:text-blue-400 shadow-xs border border-primary/30'
