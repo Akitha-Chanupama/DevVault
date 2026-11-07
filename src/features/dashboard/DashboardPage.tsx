@@ -131,7 +131,7 @@ export const DashboardPage: React.FC = () => {
 
         {/* Hero Left Content */}
         <div className="relative z-10 max-w-xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40 shadow-xs backdrop-blur-xs">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/90 text-blue-700 border border-blue-200 dark:bg-[#131d36] dark:text-blue-300 dark:border-blue-800/40 shadow-xs backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-blue-500 shrink-0" />
             <span>Developer Productivity Hub</span>
           </div>

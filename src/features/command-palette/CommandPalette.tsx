@@ -70,7 +70,7 @@ export const CommandPalette: React.FC = () => {
   return (
     <div
       onClick={() => setCommandPaletteOpen(false)}
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-xs animate-in fade-in duration-100"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-sm animate-in fade-in duration-100"
     >
       <div
         className="relative w-full max-w-xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/15 dark:shadow-black/90 ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden"

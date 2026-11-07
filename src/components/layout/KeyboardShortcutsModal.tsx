@@ -46,7 +46,7 @@ export const KeyboardShortcutsModal: React.FC<KeyboardShortcutsModalProps> = ({
       aria-modal="true"
       aria-labelledby="shortcuts-dialog-title"
       onClick={onClose}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-xs animate-in fade-in transition-all"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-sm animate-in fade-in transition-all"
     >
       <div
         className="relative w-full max-w-lg bg-white dark:bg-[#0c1324] border border-slate-200 dark:border-blue-500/30 rounded-2xl shadow-2xl shadow-blue-950/10 dark:shadow-black/90 ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden p-6 space-y-5"
