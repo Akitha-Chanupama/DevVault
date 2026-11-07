@@ -6,6 +6,7 @@ import {
   Moon,
   Laptop,
   Keyboard,
+  Github,
   PanelLeftClose,
   PanelLeft,
 } from 'lucide-react';
@@ -40,7 +41,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             <img
               src="/images/logo_transparent.png"
               alt="DevVault Logo"
-              className="h-[38px] w-[38px] object-contain shrink-0 group-hover:scale-105 transition-transform"
+              className="h-9 w-9 object-contain shrink-0 group-hover:scale-105 transition-transform"
             />
             <img
               src="/images/title.png"
@@ -95,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             title="Keyboard shortcuts (?)"
             aria-label="Keyboard shortcuts"
           >
-            <Keyboard className="w-4 h-4" />
+            <Keyboard className="w-5 h-5" />
           </Button>
         )}
 
@@ -110,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             role="radio"
             aria-checked={theme === 'light'}
             onClick={() => setTheme('light')}
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'light'
                 ? 'bg-surface text-amber-600 dark:text-amber-400 shadow-xs border border-border'
                 : 'text-slate-500 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-foreground'
@@ -118,7 +119,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             title="Light mode"
             aria-label="Light mode"
           >
-            <Sun className="w-3.5 h-3.5" />
+            <Sun className="w-4 h-4" />
           </button>
 
           <button
@@ -126,7 +127,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             role="radio"
             aria-checked={theme === 'dark'}
             onClick={() => setTheme('dark')}
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'dark'
                 ? 'bg-primary/20 text-blue-600 dark:text-blue-400 shadow-xs border border-primary/30'
                 : 'text-slate-500 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-foreground'
@@ -134,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             title="Dark mode"
             aria-label="Dark mode"
           >
-            <Moon className="w-3.5 h-3.5" />
+            <Moon className="w-4 h-4" />
           </button>
 
           <button
@@ -142,7 +143,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             role="radio"
             aria-checked={theme === 'system'}
             onClick={() => setTheme('system')}
-            className={`w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
               theme === 'system'
                 ? 'bg-primary/20 text-blue-600 dark:text-blue-400 shadow-xs border border-primary/30'
                 : 'text-slate-500 dark:text-muted-foreground hover:text-slate-900 dark:hover:text-foreground'
@@ -150,17 +151,21 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             title="System theme"
             aria-label="System theme"
           >
-            <Laptop className="w-3.5 h-3.5" />
+            <Laptop className="w-4 h-4" />
           </button>
         </div>
 
-        {/* User avatar badge */}
-        <div
-          className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-elevated border border-border text-foreground font-bold text-xs select-none shadow-2xs"
-          title="Developer Profile"
+        {/* GitHub Account Link */}
+        <a
+          href="https://github.com/Akitha-Chanupama"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex h-9 w-9 items-center justify-center rounded-xl text-slate-500 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors"
+          title="GitHub Profile (Akitha-Chanupama)"
+          aria-label="GitHub Profile"
         >
-          JD
-        </div>
+          <Github className="w-5 h-5" />
+        </a>
       </div>
     </header>
   );
