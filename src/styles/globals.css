@@ -107,22 +107,6 @@
   }
 }
 
-/* Velvety, smooth, uncorrupted color cross-fade across theme changes */
-html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-  transition: background-color 750ms cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 750ms cubic-bezier(0.4, 0, 0.2, 1),
-              color 650ms cubic-bezier(0.4, 0, 0.2, 1),
-              fill 650ms cubic-bezier(0.4, 0, 0.2, 1),
-              stroke 650ms cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 750ms cubic-bezier(0.4, 0, 0.2, 1),
-              filter 750ms cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 750ms cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-delay: 0s !important;
-}
-
 /* Silky page-to-page enter transition */
 @keyframes page-enter {
   0% {
@@ -148,9 +132,5 @@ html.theme-transitioning *::after {
   .animate-page-enter {
     animation: none !important;
     transform: none !important;
-  }
-  html.theme-transitioning,
-  html.theme-transitioning * {
-    transition: none !important;
   }
 }
