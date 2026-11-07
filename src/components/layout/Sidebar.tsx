@@ -61,17 +61,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
-        {/* Navigation Body - Compact & Non-scrollable on standard viewports */}
-        <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-2.5 py-3 space-y-3">
+        {/* Navigation Body - Spaced & Non-scrollable on standard viewports */}
+        <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-3 py-3.5 space-y-4">
           {/* Main Top Nav */}
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <NavLink
               to="/"
               end
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                  sidebarOpen ? 'gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -88,7 +88,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'justify-between px-3.5 py-2' : 'w-10 h-10 mx-auto justify-center p-0',
+                  sidebarOpen ? 'justify-between px-3.5 py-2.5' : 'w-10 h-10 mx-auto justify-center p-0',
                   isActive
                     ? 'bg-blue-600 text-white font-semibold shadow-sm shadow-blue-600/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -120,9 +120,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           </div>
 
           {/* Categories Section */}
-          <div className="space-y-0.5">
+          <div className="space-y-1.5">
             {sidebarOpen && (
-              <div className="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
+              <div className="px-3 pt-1 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Categories
               </div>
             )}
@@ -137,7 +137,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
                   to={`/tools?category=${encodeURIComponent(cat.name)}`}
                   className={cn(
                     'group flex items-center rounded-xl text-sm font-medium transition-all',
-                    sidebarOpen ? 'gap-3 px-3.5 py-1.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                    sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                     isCurrent
                       ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                       : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -161,9 +161,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
           </div>
 
           {/* Workspace Section */}
-          <div className="space-y-0.5">
+          <div className="space-y-1.5">
             {sidebarOpen && (
-              <div className="px-3 pb-1 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
+              <div className="px-3 pt-1 pb-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-muted-foreground/80">
                 Workspace
               </div>
             )}
@@ -172,7 +172,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'gap-3 px-3.5 py-1.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                  sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                   isActive
                     ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -199,7 +199,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               to="/tools?filter=favorites"
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
-                sidebarOpen ? 'gap-3 px-3.5 py-1.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                 location.pathname === '/tools' && location.search.includes('filter=favorites')
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -222,7 +222,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
-                  sidebarOpen ? 'gap-3 px-3.5 py-1.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                  sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                   isActive
                     ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                     : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
               to="/snippets?tab=collections"
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
-                sidebarOpen ? 'gap-3 px-3.5 py-1.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                 location.pathname === '/snippets' && location.search.includes('tab=collections')
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -270,13 +270,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
         </div>
 
         {/* Bottom Section: Settings & Help */}
-        <div className="p-2 border-t border-border shrink-0 space-y-1">
+        <div className="p-2.5 border-t border-border shrink-0 space-y-1.5">
           <NavLink
             to="/settings"
             className={({ isActive }) =>
               cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
-                sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
+                sidebarOpen ? 'gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
                 isActive
                   ? 'bg-blue-100/80 text-blue-800 dark:bg-primary/15 dark:text-blue-400 font-semibold border border-blue-200/90 dark:border-blue-500/20'
                   : 'text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
@@ -304,7 +304,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ onOpenHelp }) => {
             onClick={onOpenHelp}
             className={cn(
               'group flex items-center rounded-xl text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-all text-left',
-              sidebarOpen ? 'w-full gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0'
+              sidebarOpen ? 'w-full gap-3 px-3.5 py-2.5 justify-start' : 'w-10 h-10 mx-auto justify-center p-0'
             )}
             title="Help & Docs"
           >
