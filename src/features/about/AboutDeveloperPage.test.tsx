@@ -21,6 +21,10 @@ describe('AboutDeveloperPage', () => {
     const profileImg = screen.getByAltText('Akitha Chanupama') as HTMLImageElement;
     expect(profileImg).toBeInTheDocument();
     expect(profileImg.getAttribute('src')).toBe('/images/akitha_grad1.jpg');
+
+    // Metrics
+    expect(screen.getByText('100+')).toBeInTheDocument();
+    expect(screen.getByText('Projects')).toBeInTheDocument();
   });
 
   it('renders featured portfolio projects and tech stack categories', () => {

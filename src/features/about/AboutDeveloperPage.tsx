@@ -136,93 +136,91 @@ export const AboutDeveloperPage: React.FC = () => {
   return (
     <div className="space-y-10 pb-16 animate-fade-in max-w-6xl mx-auto">
       {/* Hero Profile Banner */}
-      <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white via-slate-50/70 to-blue-50/40 dark:from-slate-900/90 dark:via-slate-900/60 dark:to-blue-950/20 p-6 sm:p-10 shadow-lg shadow-blue-500/5 backdrop-blur-md">
+      <div className="relative overflow-hidden rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-gradient-to-br from-white via-slate-50/70 to-blue-50/40 dark:from-slate-900/90 dark:via-slate-900/60 dark:to-blue-950/20 shadow-lg shadow-blue-500/5 backdrop-blur-md flex flex-col md:flex-row items-stretch">
         {/* Ambient Decorative Lighting */}
         <div className="absolute top-0 right-0 -mt-16 -mr-16 w-96 h-96 rounded-full bg-blue-500/10 dark:bg-blue-600/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-1/3 -mb-16 w-80 h-80 rounded-full bg-cyan-500/10 dark:bg-cyan-600/10 blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-          {/* Avatar / Portrait with Glowing Accent Ring */}
-          <div className="relative shrink-0 group">
-            <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-2xl overflow-hidden ring-4 ring-blue-500/20 dark:ring-cyan-500/30 shadow-2xl shadow-blue-500/10 group-hover:scale-[1.02] transition-transform duration-300">
-              <img
-                src="/images/akitha_grad1.jpg"
-                alt="Akitha Chanupama"
-                className="w-full h-full object-cover object-center"
-              />
+        {/* Left Side: Full-size Portrait Image */}
+        <div className="relative w-full md:w-80 lg:w-[360px] shrink-0 self-stretch min-h-[340px] md:min-h-full">
+          <img
+            src="/images/akitha_grad1.jpg"
+            alt="Akitha Chanupama"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Subtle gradient overlay at bottom on mobile */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent md:hidden" />
+          {/* Status Badge floating at bottom */}
+          <div className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/20 text-white text-xs font-medium shadow-lg">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Available</span>
+          </div>
+        </div>
+
+        {/* Right Side: Profile Identity & Details */}
+        <div className="relative z-10 flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center space-y-4">
+          <div className="space-y-1.5 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300 border border-blue-200/60 dark:border-blue-500/30">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Software Engineer & Creator</span>
             </div>
-            {/* Online / Active Badge */}
-            <div className="absolute -bottom-2 -right-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface border border-slate-200 dark:border-slate-700 shadow-md text-[11px] font-medium text-slate-700 dark:text-slate-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              Akitha Chanupama
+            </h1>
+            <p className="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400">
+              Mobile App Developer & Associate Software Engineer
+            </p>
+          </div>
+
+          {/* Affiliation & Location Meta */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <div className="flex items-center gap-1.5">
+              <Briefcase className="w-4 h-4 text-slate-500 shrink-0" />
+              <span>Fentons Information Technology</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
+              <span>Colombo, Sri Lanka</span>
             </div>
           </div>
 
-          {/* Profile Identity & Headline */}
-          <div className="flex-1 text-center md:text-left space-y-4">
-            <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300 border border-blue-200/60 dark:border-blue-500/30">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Software Engineer & Creator</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                Akitha Chanupama
-              </h1>
-              <p className="text-lg sm:text-xl font-medium text-blue-600 dark:text-blue-400">
-                Mobile App Developer & Associate Software Engineer
-              </p>
-            </div>
+          {/* Bio summary */}
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed text-center md:text-left">
+            Passionate software engineer focused on architecting robust cross-platform mobile apps, privacy-first developer platforms, and elegant digital experiences. Building utilities that respect user autonomy and operate entirely client-side.
+          </p>
 
-            {/* Affiliation & Location Meta */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-sm text-slate-600 dark:text-slate-400">
-              <div className="flex items-center gap-1.5">
-                <Briefcase className="w-4 h-4 text-slate-500 shrink-0" />
-                <span>Fentons Information Technology</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-slate-500 shrink-0" />
-                <span>Colombo, Sri Lanka</span>
-              </div>
-            </div>
+          {/* Quick Action CTA Buttons */}
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
+            <a
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/20 transition-all hover:translate-y-[-1px]"
+            >
+              <Globe className="w-4 h-4" />
+              <span>Portfolio Website</span>
+              <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
+            </a>
 
-            {/* Bio summary */}
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-              Passionate software engineer focused on architecting robust cross-platform mobile apps, privacy-first developer platforms, and elegant digital experiences. Building utilities that respect user autonomy and operate entirely client-side.
-            </p>
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700/50 shadow-xs transition-all hover:translate-y-[-1px]"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub Profile</span>
+            </a>
 
-            {/* Quick Action CTA Buttons */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 pt-2">
-              <a
-                href={website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/20 transition-all hover:translate-y-[-1px]"
-              >
-                <Globe className="w-4 h-4" />
-                <span>Portfolio Website</span>
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
-              </a>
-
-              <a
-                href={github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700/50 shadow-xs transition-all hover:translate-y-[-1px]"
-              >
-                <Github className="w-4 h-4" />
-                <span>GitHub Profile</span>
-              </a>
-
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleCopyEmail}
-                className="gap-2 rounded-xl border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs sm:text-sm h-9 px-3.5"
-              >
-                {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
-                <span>{copiedEmail ? 'Email Copied' : 'Copy Email'}</span>
-              </Button>
-            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCopyEmail}
+              className="gap-2 rounded-xl border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs sm:text-sm h-9 px-3.5"
+            >
+              {copiedEmail ? <Check className="w-4 h-4 text-emerald-500" /> : <Copy className="w-4 h-4" />}
+              <span>{copiedEmail ? 'Email Copied' : 'Copy Email'}</span>
+            </Button>
           </div>
         </div>
       </div>
@@ -230,9 +228,9 @@ export const AboutDeveloperPage: React.FC = () => {
       {/* Metrics Banner */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-surface p-5 text-center space-y-1 shadow-2xs">
-          <div className="text-3xl font-extrabold text-blue-600 dark:text-blue-400">28+</div>
+          <div className="text-3xl font-extrabold text-blue-600 dark:text-blue-400">100+</div>
           <div className="text-xs font-semibold text-slate-500 dark:text-muted-foreground uppercase tracking-wider">
-            Public Repositories
+            Projects
           </div>
         </div>
 
