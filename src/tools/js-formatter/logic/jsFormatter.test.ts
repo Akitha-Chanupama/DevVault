@@ -47,3 +47,4 @@ describe('jsFormatter logic', () => {
     expect(result.error).toBeDefined();
   });
 });
+

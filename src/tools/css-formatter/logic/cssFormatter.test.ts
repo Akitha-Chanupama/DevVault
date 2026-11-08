@@ -42,3 +42,4 @@ describe('cssFormatter logic', () => {
     expect(typeof result.output).toBe('string');
   });
 });
+

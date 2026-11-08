@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
   Home,
@@ -27,6 +28,28 @@ import { cn } from '@/lib/utils';
 export const Sidebar: React.FC = () => {
   const location = useLocation();
   const { sidebarOpen, toggleSidebar } = useWorkspaceStore();
+
+  const [tooltip, setTooltip] = useState<{
+    label: string;
+    badge?: string | number;
+    top: number;
+    left: number;
+  } | null>(null);
+
+  const showTooltip = (e: React.MouseEvent<HTMLElement>, label: string, badge?: string | number) => {
+    if (sidebarOpen) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    setTooltip({
+      label,
+      badge,
+      top: rect.top + rect.height / 2,
+      left: rect.right + 12,
+    });
+  };
+
+  const hideTooltip = () => {
+    setTooltip(null);
+  };
 
   const searchParams = new URLSearchParams(location.search);
   const currentCategory = searchParams.get('category');
@@ -76,6 +99,9 @@ export const Sidebar: React.FC = () => {
             <NavLink
               to="/"
               end
+              onMouseEnter={(e) => showTooltip(e, 'Dashboard')}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
@@ -93,6 +119,9 @@ export const Sidebar: React.FC = () => {
 
             <NavLink
               to="/tools"
+              onMouseEnter={(e) => showTooltip(e, 'All Tools', totalCount)}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'justify-between px-3.5 py-2.5' : 'w-10 h-10 mx-auto justify-center p-0',
@@ -135,6 +164,9 @@ export const Sidebar: React.FC = () => {
                 <NavLink
                   key={cat.name}
                   to={`/tools?category=${encodeURIComponent(cat.name)}`}
+                  onMouseEnter={(e) => showTooltip(e, cat.name)}
+                  onMouseLeave={hideTooltip}
+                  onClick={hideTooltip}
                   className={cn(
                     'group flex items-center rounded-xl text-sm font-medium transition-all',
                     sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
@@ -169,6 +201,9 @@ export const Sidebar: React.FC = () => {
             )}
             <NavLink
               to="/snippets"
+              onMouseEnter={(e) => showTooltip(e, 'Snippets')}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
@@ -191,6 +226,9 @@ export const Sidebar: React.FC = () => {
 
             <NavLink
               to="/tools?filter=favorites"
+              onMouseEnter={(e) => showTooltip(e, 'Favorites')}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
@@ -213,6 +251,9 @@ export const Sidebar: React.FC = () => {
 
             <NavLink
               to="/history"
+              onMouseEnter={(e) => showTooltip(e, 'History')}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={({ isActive }) =>
                 cn(
                   'group flex items-center rounded-xl text-sm font-medium transition-all',
@@ -241,6 +282,9 @@ export const Sidebar: React.FC = () => {
 
             <NavLink
               to="/snippets?tab=collections"
+              onMouseEnter={(e) => showTooltip(e, 'Collections')}
+              onMouseLeave={hideTooltip}
+              onClick={hideTooltip}
               className={cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
                 sidebarOpen ? 'gap-3 px-3.5 py-2 justify-start' : 'w-10 h-10 mx-auto justify-center p-0',
@@ -267,6 +311,9 @@ export const Sidebar: React.FC = () => {
         <div className="p-2.5 border-t border-border shrink-0 space-y-1.5">
           <NavLink
             to="/settings"
+            onMouseEnter={(e) => showTooltip(e, 'Settings')}
+            onMouseLeave={hideTooltip}
+            onClick={hideTooltip}
             className={({ isActive }) =>
               cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
@@ -295,6 +342,9 @@ export const Sidebar: React.FC = () => {
 
           <NavLink
             to="/about"
+            onMouseEnter={(e) => showTooltip(e, 'About Developer')}
+            onMouseLeave={hideTooltip}
+            onClick={hideTooltip}
             className={({ isActive }) =>
               cn(
                 'group flex items-center rounded-xl text-sm font-medium transition-all',
@@ -324,7 +374,12 @@ export const Sidebar: React.FC = () => {
           {/* Sidebar Collapse / Expand Toggle */}
           <button
             type="button"
-            onClick={toggleSidebar}
+            onClick={() => {
+              hideTooltip();
+              toggleSidebar();
+            }}
+            onMouseEnter={(e) => showTooltip(e, sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar')}
+            onMouseLeave={hideTooltip}
             className={cn(
               'group flex items-center rounded-xl text-sm font-medium transition-all w-full cursor-pointer',
               sidebarOpen
@@ -345,6 +400,22 @@ export const Sidebar: React.FC = () => {
           </button>
         </div>
       </aside>
+
+      {/* Floating Tooltip Portal for Collapsed Sidebar */}
+      {tooltip && typeof document !== 'undefined' && createPortal(
+        <div
+          style={{ top: `${tooltip.top}px`, left: `${tooltip.left}px`, transform: 'translateY(-50%)' }}
+          className="fixed z-50 pointer-events-none flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 text-white dark:bg-[#141B2A] dark:text-slate-100 text-xs font-semibold shadow-xl border border-slate-700/80 dark:border-blue-500/30 animate-in fade-in zoom-in-95 duration-100"
+        >
+          <span>{tooltip.label}</span>
+          {tooltip.badge !== undefined && (
+            <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-blue-500/20 text-blue-300 border border-blue-400/30">
+              {tooltip.badge}
+            </span>
+          )}
+        </div>,
+        document.body
+      )}
     </>
   );
 };

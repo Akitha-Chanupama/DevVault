@@ -101,6 +101,30 @@ export const JsFormatterPage: React.FC = () => {
     };
   }, [input, dialect, tabWidth, useTabs, semi, singleQuote]);
 
+  const handleFormat = () => {
+    if (!input.trim()) return;
+    const options: JsFormatOptions = {
+      dialect,
+      tabWidth,
+      useTabs,
+      semi,
+      singleQuote,
+      trailingComma: 'es5',
+    };
+    formatJs(input, options).then((result) => {
+      if (result.success) {
+        setOutput(result.output);
+        setIsValid(true);
+        setErrorMessage(null);
+        toast.success(`${dialect === 'typescript' ? 'TypeScript' : 'JavaScript'} formatted`);
+      } else {
+        setIsValid(false);
+        setErrorMessage(result.error ?? 'Syntax error');
+        toast.error('Cannot format code with syntax errors');
+      }
+    });
+  };
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -221,10 +245,11 @@ export const JsFormatterPage: React.FC = () => {
           <label
             className={cn(
               buttonVariants({ variant: 'outline', size: 'sm' }),
-              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap'
+              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap inline-flex items-center'
             )}
+            title="Upload JavaScript / TypeScript file"
           >
-            <Upload className="w-3.5 h-3.5" />
+            <Upload className="w-3.5 h-3.5 shrink-0" />
             <span>Upload Code</span>
             <input
               type="file"
@@ -257,8 +282,9 @@ export const JsFormatterPage: React.FC = () => {
             value={input}
             onChange={(val) => setInput(val || '')}
             language={dialect}
-            placeholder={`Paste raw, unformatted ${dialect === 'typescript' ? 'TypeScript' : 'JavaScript'} here...`}
+            placeholder={`Paste raw, unformatted ${dialect === 'typescript' ? 'TypeScript' : 'JavaScript'} here... (Press Ctrl+Enter to format)`}
             height="460px"
+            onExecute={handleFormat}
           />
 
           {isValid === false && errorMessage && (

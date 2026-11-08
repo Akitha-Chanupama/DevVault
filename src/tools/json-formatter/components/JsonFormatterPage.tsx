@@ -71,6 +71,21 @@ export const JsonFormatterPage: React.FC = () => {
     });
   }, [input, indent, sortKeys]);
 
+  const handleFormat = () => {
+    if (!input.trim()) return;
+    const result = formatJson(input, { indent, sortKeys });
+    if (result.success) {
+      setOutput(result.output);
+      setIsValid(true);
+      setErrorDetail(null);
+      toast.success('JSON formatted');
+    } else {
+      setIsValid(false);
+      setErrorDetail(result.error ?? null);
+      toast.error('Cannot format invalid JSON');
+    }
+  };
+
   const handleMinify = () => {
     if (!input.trim()) return;
     const result = minifyJson(input);
@@ -251,8 +266,9 @@ export const JsonFormatterPage: React.FC = () => {
             value={input}
             onChange={(val) => setInput(val)}
             language="json"
-            placeholder="Paste or type raw JSON here..."
+            placeholder="Paste or type raw JSON here... (Press Ctrl+Enter to format)"
             height="460px"
+            onExecute={handleFormat}
           />
         </div>
 

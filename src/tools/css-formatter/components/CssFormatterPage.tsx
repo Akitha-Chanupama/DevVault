@@ -210,10 +210,11 @@ export const CssFormatterPage: React.FC = () => {
           <label
             className={cn(
               buttonVariants({ variant: 'outline', size: 'sm' }),
-              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap'
+              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap inline-flex items-center'
             )}
+            title="Upload CSS file"
           >
-            <Upload className="w-3.5 h-3.5" />
+            <Upload className="w-3.5 h-3.5 shrink-0" />
             <span>Upload .css</span>
             <input
               type="file"
@@ -249,8 +250,9 @@ export const CssFormatterPage: React.FC = () => {
               setIsMinified(false);
             }}
             language="css"
-            placeholder="Paste raw, unformatted, or minified CSS/SCSS here..."
+            placeholder="Paste raw, unformatted, or minified CSS/SCSS here... (Press Ctrl+Enter to format)"
             height="460px"
+            onExecute={() => runFormat(input)}
           />
 
           {isValid === false && errorMessage && (
