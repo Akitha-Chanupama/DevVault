@@ -65,10 +65,10 @@ export const SqlFormatterPage: React.FC = () => {
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value as SupportedSqlDialect)}
-              className="h-8 px-2.5 text-xs bg-muted/50 border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+              className="h-8 px-2.5 text-xs bg-surface text-foreground border border-border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
               {DIALECTS.map((d) => (
-                <option key={d.id} value={d.id}>
+                <option key={d.id} value={d.id} className="bg-surface text-foreground">
                   {d.label}
                 </option>
               ))}
@@ -82,11 +82,11 @@ export const SqlFormatterPage: React.FC = () => {
             <select
               value={keywordCase}
               onChange={(e) => setKeywordCase(e.target.value as KeywordCase)}
-              className="h-8 px-2.5 text-xs bg-muted/50 border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+              className="h-8 px-2.5 text-xs bg-surface text-foreground border border-border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
-              <option value="upper">UPPERCASE (SELECT, FROM)</option>
-              <option value="lower">lowercase (select, from)</option>
-              <option value="preserve">Preserve Original</option>
+              <option value="upper" className="bg-surface text-foreground">UPPERCASE (SELECT, FROM)</option>
+              <option value="lower" className="bg-surface text-foreground">lowercase (select, from)</option>
+              <option value="preserve" className="bg-surface text-foreground">Preserve Original</option>
             </select>
           </div>
 
@@ -97,10 +97,10 @@ export const SqlFormatterPage: React.FC = () => {
             <select
               value={tabWidth}
               onChange={(e) => setTabWidth(Number(e.target.value))}
-              className="h-8 px-2.5 text-xs bg-muted/50 border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+              className="h-8 px-2.5 text-xs bg-surface text-foreground border border-border rounded-md font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
-              <option value={2}>2 spaces</option>
-              <option value={4}>4 spaces</option>
+              <option value={2} className="bg-surface text-foreground">2 spaces</option>
+              <option value={4} className="bg-surface text-foreground">4 spaces</option>
             </select>
           </div>
         </div>

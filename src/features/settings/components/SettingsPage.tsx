@@ -183,7 +183,7 @@ export const SettingsPage: React.FC = () => {
                 onChange={(e) =>
                   handleUpdate({ defaultIndentation: parseInt(e.target.value, 10) as 2 | 4 })
                 }
-                className="w-full h-9 rounded-md border border-border bg-surface-elevated px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full h-9 rounded-md border border-border bg-surface-elevated px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
               >
                 <option value={2}>2 Spaces</option>
                 <option value={4}>4 Spaces</option>

@@ -56,11 +56,11 @@ export const HmacGeneratorPage: React.FC = () => {
             <select
               value={algorithm}
               onChange={(e) => setAlgorithm(e.target.value as HmacAlgorithm)}
-              className="w-full h-10 px-3 bg-muted/50 border rounded-md font-mono text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full h-10 px-3 bg-surface text-foreground border border-border rounded-md font-mono text-sm focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
-              <option value="SHA-256">HMAC-SHA-256 (Standard)</option>
-              <option value="SHA-384">HMAC-SHA-384</option>
-              <option value="SHA-512">HMAC-SHA-512 (High Security)</option>
+              <option value="SHA-256" className="bg-surface text-foreground">HMAC-SHA-256 (Standard)</option>
+              <option value="SHA-384" className="bg-surface text-foreground">HMAC-SHA-384</option>
+              <option value="SHA-512" className="bg-surface text-foreground">HMAC-SHA-512 (High Security)</option>
             </select>
           </div>
 
@@ -73,7 +73,7 @@ export const HmacGeneratorPage: React.FC = () => {
               value={secretKey}
               onChange={(e) => setSecretKey(e.target.value)}
               placeholder="Enter secret key..."
-              className="w-full h-10 px-3 bg-background border rounded-md font-mono text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full h-10 px-3 bg-surface text-foreground border border-border rounded-md font-mono text-sm focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
         </div>

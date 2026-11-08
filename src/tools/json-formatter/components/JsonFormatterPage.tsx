@@ -143,7 +143,7 @@ export const JsonFormatterPage: React.FC = () => {
             <select
               value={indent}
               onChange={(e) => setIndent(e.target.value as IndentOption)}
-              className="h-8 rounded-md border border-border bg-surface-elevated px-2.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              className="h-8 rounded-md border border-border bg-surface-elevated px-2.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
               <option value="2">2 Spaces</option>
               <option value="4">4 Spaces</option>

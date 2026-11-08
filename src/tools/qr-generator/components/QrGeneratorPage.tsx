@@ -86,12 +86,12 @@ export const QrGeneratorPage: React.FC = () => {
               <select
                 value={level}
                 onChange={(e) => setLevel(e.target.value as QrErrorCorrectionLevel)}
-                className="w-full h-9 px-3 bg-muted/40 border rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full h-9 px-3 bg-surface text-foreground border border-border rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
               >
-                <option value="L">L - Low (~7% recovery)</option>
-                <option value="M">M - Medium (~15% recovery)</option>
-                <option value="Q">Q - Quartile (~25% recovery)</option>
-                <option value="H">H - High (~30% recovery)</option>
+                <option value="L" className="bg-surface text-foreground">L - Low (~7% recovery)</option>
+                <option value="M" className="bg-surface text-foreground">M - Medium (~15% recovery)</option>
+                <option value="Q" className="bg-surface text-foreground">Q - Quartile (~25% recovery)</option>
+                <option value="H" className="bg-surface text-foreground">H - High (~30% recovery)</option>
               </select>
             </div>
 
@@ -102,11 +102,11 @@ export const QrGeneratorPage: React.FC = () => {
               <select
                 value={margin}
                 onChange={(e) => setMargin(Number(e.target.value))}
-                className="w-full h-9 px-3 bg-muted/40 border rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full h-9 px-3 bg-surface text-foreground border border-border rounded-md text-xs font-medium focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
               >
-                <option value={1}>1 module (compact)</option>
-                <option value={2}>2 modules (standard)</option>
-                <option value={4}>4 modules (strict compliance)</option>
+                <option value={1} className="bg-surface text-foreground">1 module (compact)</option>
+                <option value={2} className="bg-surface text-foreground">2 modules (standard)</option>
+                <option value={4} className="bg-surface text-foreground">4 modules (strict compliance)</option>
               </select>
             </div>
 
