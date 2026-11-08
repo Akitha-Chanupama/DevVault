@@ -4,7 +4,6 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { CommandPalette } from '@/features/command-palette/CommandPalette';
 import { KeyboardShortcutsModal } from './KeyboardShortcutsModal';
-import { ThemeTransitionOverlay } from './ThemeTransitionOverlay';
 import { Toaster } from 'sonner';
 import { useThemeStore } from '@/stores/themeStore';
 
@@ -73,7 +72,6 @@ export const AppShell: React.FC = () => {
 
       <CommandPalette />
       <KeyboardShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
-      <ThemeTransitionOverlay />
       <Toaster
         theme={resolvedTheme}
         position="bottom-right"
