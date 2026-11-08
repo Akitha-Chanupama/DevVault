@@ -137,6 +137,8 @@ export const SqlFormatterPage: React.FC = () => {
               onChange={(val) => setInputSql(val || '')}
               language="sql"
               height="460px"
+              placeholder="Paste raw SQL query here... (Press Ctrl+Enter to beautify)"
+              onExecute={handleBeautifyInPlace}
             />
           </div>
           <div className="mt-3 flex justify-between items-center text-xs text-muted-foreground">

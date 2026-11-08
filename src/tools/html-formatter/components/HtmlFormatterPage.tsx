@@ -70,6 +70,22 @@ export const HtmlFormatterPage: React.FC = () => {
     };
   }, [input, tabWidth, useTabs, printWidth]);
 
+  const handleFormat = () => {
+    if (!input.trim()) return;
+    formatHtml(input, { tabWidth, useTabs, printWidth }).then((result) => {
+      if (result.success) {
+        setOutput(result.formattedHtml);
+        setIsValid(true);
+        setErrorMessage(null);
+        toast.success('HTML formatted');
+      } else {
+        setIsValid(false);
+        setErrorMessage(result.error ?? 'HTML parsing error');
+        toast.error('Cannot format invalid HTML');
+      }
+    });
+  };
+
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -159,10 +175,11 @@ export const HtmlFormatterPage: React.FC = () => {
           <label
             className={cn(
               buttonVariants({ variant: 'outline', size: 'sm' }),
-              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap'
+              'cursor-pointer text-xs h-8 gap-1.5 whitespace-nowrap inline-flex items-center'
             )}
+            title="Upload HTML file"
           >
-            <Upload className="w-3.5 h-3.5" />
+            <Upload className="w-3.5 h-3.5 shrink-0" />
             <span>Upload .html</span>
             <input
               type="file"
@@ -195,8 +212,9 @@ export const HtmlFormatterPage: React.FC = () => {
             value={input}
             onChange={(val) => setInput(val || '')}
             language="html"
-            placeholder="Paste raw, unformatted, or minified HTML here..."
+            placeholder="Paste raw, unformatted, or minified HTML here... (Press Ctrl+Enter to format)"
             height="460px"
+            onExecute={handleFormat}
           />
 
           {isValid === false && errorMessage && (

@@ -9,6 +9,7 @@ interface ShortcutRow {
 
 const SHORTCUTS: ShortcutRow[] = [
   { keys: ['Ctrl', 'K'], description: 'Open global command palette and search' },
+  { keys: ['Ctrl', 'Enter'], description: 'Execute primary action in code editor (Format / Run)' },
   { keys: ['?'], description: 'Open this keyboard shortcuts reference' },
   { keys: ['Ctrl', 'Shift', 'T'], description: 'Cycle color theme (Light / Dark / System)' },
   { keys: ['Ctrl', 'Shift', 'S'], description: 'Navigate to Snippets Manager' },

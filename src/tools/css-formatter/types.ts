@@ -19,3 +19,4 @@ export interface CssMinifyResult {
   minifiedSize: number;
   savingsPercent: number;
 }
+
