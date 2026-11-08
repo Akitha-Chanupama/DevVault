@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useThemeStore } from '@/stores/themeStore';
+import { useFontSizeStore } from '@/stores/fontStore';
 import { ErrorBoundary } from './error-boundary';
 
 const queryClient = new QueryClient({
@@ -18,10 +19,12 @@ interface ProvidersProps {
 
 export const Providers: React.FC<ProvidersProps> = ({ children }) => {
   const initTheme = useThemeStore((state) => state.initTheme);
+  const initFontSize = useFontSizeStore((state) => state.initFontSize);
 
   useEffect(() => {
     initTheme();
-  }, [initTheme]);
+    initFontSize();
+  }, [initTheme, initFontSize]);
 
   return (
     <ErrorBoundary>

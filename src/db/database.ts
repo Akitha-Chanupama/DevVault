@@ -32,6 +32,7 @@ export interface DbHistoryItem {
 export interface DbSettings {
   id: string; // 'current'
   theme: 'dark' | 'light' | 'system';
+  fontSize?: 'small' | 'normal' | 'large' | 'xlarge';
   historyEnabled: boolean;
   historyRetentionDays: number;
   defaultIndentation: 2 | 4;

@@ -5,7 +5,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.5_Strict-blue?style=flat-square)
 ![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square)
 ![Vite](https://img.shields.io/badge/Vite-6.4-purple?style=flat-square)
-![Tests](https://img.shields.io/badge/Vitest-113%20passed-brightgreen?style=flat-square)
+![Tests](https://img.shields.io/badge/Vitest-116%20passed-brightgreen?style=flat-square)
 ![Privacy](https://img.shields.io/badge/Privacy-100%25_Browser_Local-success?style=flat-square)
 
 DevVault is a high-performance, privacy-first developer utility suite built with modern React, TypeScript, Tailwind CSS, Monaco Editor, and Dexie IndexedDB. It runs entirely inside your browser session — no tokens, passwords, payloads, or proprietary queries are ever transmitted to external servers.

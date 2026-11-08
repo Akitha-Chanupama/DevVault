@@ -3,6 +3,7 @@ import { db, DbSettings } from '../database';
 const DEFAULT_SETTINGS: DbSettings = {
   id: 'current',
   theme: 'system',
+  fontSize: 'normal',
   historyEnabled: true,
   historyRetentionDays: 30,
   defaultIndentation: 2,

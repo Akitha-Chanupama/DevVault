@@ -5,6 +5,7 @@ import {
   Sun,
   Moon,
   Laptop,
+  Type,
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
@@ -14,18 +15,58 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/com
 import { Input } from '@/components/ui/input';
 import { useThemeStore } from '@/stores/themeStore';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
+import { useFontSizeStore, AppFontSize } from '@/stores/fontStore';
 import { settingsRepository } from '@/db/repositories/settingsRepository';
 import { backupRepository, BackupValidationResult } from '@/db/repositories/backupRepository';
 import { DbSettings } from '@/db/database';
 import { toast } from 'sonner';
 
+const FONT_SIZE_OPTIONS: {
+  value: AppFontSize;
+  label: string;
+  preview: string;
+  sampleClass: string;
+  desc: string;
+}[] = [
+  {
+    value: 'small',
+    label: 'Small',
+    preview: 'Aa',
+    sampleClass: 'text-xs font-bold leading-none',
+    desc: '14px (Compact)',
+  },
+  {
+    value: 'normal',
+    label: 'Normal',
+    preview: 'Aa',
+    sampleClass: 'text-sm font-bold leading-none',
+    desc: '16px (Default)',
+  },
+  {
+    value: 'large',
+    label: 'Large',
+    preview: 'Aa',
+    sampleClass: 'text-base font-bold leading-none',
+    desc: '18px (Comfortable)',
+  },
+  {
+    value: 'xlarge',
+    label: 'Extra Large',
+    preview: 'Aa',
+    sampleClass: 'text-lg font-bold leading-none',
+    desc: '20px (Spacious)',
+  },
+];
+
 export const SettingsPage: React.FC = () => {
   const { theme, setTheme } = useThemeStore();
   const { favorites } = useWorkspaceStore();
+  const { fontSize, setFontSize } = useFontSizeStore();
 
   const [settings, setSettings] = useState<DbSettings>({
     id: 'current',
     theme: 'system',
+    fontSize: 'normal',
     historyEnabled: true,
     historyRetentionDays: 30,
     defaultIndentation: 2,
@@ -49,6 +90,11 @@ export const SettingsPage: React.FC = () => {
       setTheme(updates.theme, origin);
     }
     toast.success('Settings saved');
+  };
+
+  const handleFontSizeChange = async (size: AppFontSize) => {
+    setFontSize(size);
+    await handleUpdate({ fontSize: size });
   };
 
   const handleExportBackup = async () => {
@@ -160,6 +206,44 @@ export const SettingsPage: React.FC = () => {
               <Laptop className="w-4 h-4" />
               <span>System</span>
             </button>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Web Application Font Size */}
+      <Card className="bg-surface">
+        <CardHeader className="pb-3">
+          <div className="flex items-center gap-2">
+            <Type className="w-4 h-4 text-primary" />
+            <CardTitle className="text-sm font-semibold">Web Application Font Size</CardTitle>
+          </div>
+          <CardDescription className="text-xs">
+            Adjust the typography and display scale across the web application. Changes take effect immediately.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="pt-0">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-xl">
+            {FONT_SIZE_OPTIONS.map((opt) => {
+              const active = (settings.fontSize || fontSize) === opt.value;
+              return (
+                <button
+                  key={opt.value}
+                  type="button"
+                  onClick={() => handleFontSizeChange(opt.value)}
+                  className={`flex flex-col items-center justify-center p-3.5 rounded-xl border text-xs font-semibold gap-2 transition-all cursor-pointer ${
+                    active
+                      ? 'border-primary bg-primary/10 text-primary shadow-xs ring-1 ring-primary/30'
+                      : 'border-border bg-surface-elevated/40 text-muted-foreground hover:text-foreground hover:bg-surface-elevated'
+                  }`}
+                >
+                  <span className={opt.sampleClass}>{opt.preview}</span>
+                  <span className="font-semibold">{opt.label}</span>
+                  <span className="text-[10px] text-muted-foreground font-mono font-normal">
+                    {opt.desc}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </CardContent>
       </Card>
