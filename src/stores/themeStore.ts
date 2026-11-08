@@ -8,20 +8,11 @@ export interface ThemeEventOrigin {
   clientY?: number;
 }
 
-export interface ThemeTransitionState {
-  targetTheme: Theme;
-  targetResolved: 'light' | 'dark';
-  origin?: ThemeEventOrigin;
-  phase: 'entering' | 'holding' | 'leaving';
-}
-
 interface ThemeState {
   theme: Theme;
   resolvedTheme: 'light' | 'dark';
-  transition: ThemeTransitionState | null;
   setTheme: (theme: Theme, origin?: ThemeEventOrigin) => void;
   initTheme: () => void;
-  dismissTransition: () => void;
 }
 
 const getSystemTheme = (): 'light' | 'dark' => {
@@ -39,91 +30,88 @@ const applyThemeToDOM = (resolved: 'light' | 'dark') => {
   }
 };
 
-let phaseTimer1: number | undefined;
-let phaseTimer2: number | undefined;
-let phaseTimer3: number | undefined;
-
-const clearTransitionTimers = () => {
-  if (typeof window === 'undefined') return;
-  if (phaseTimer1) window.clearTimeout(phaseTimer1);
-  if (phaseTimer2) window.clearTimeout(phaseTimer2);
-  if (phaseTimer3) window.clearTimeout(phaseTimer3);
-};
-
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
       theme: 'system',
       resolvedTheme: 'dark',
-      transition: null,
-
-      dismissTransition: () => {
-        clearTransitionTimers();
-        set({ transition: null });
-      },
 
       setTheme: (theme: Theme, origin?: ThemeEventOrigin) => {
         const resolved = theme === 'system' ? getSystemTheme() : theme;
         const current = get();
 
-        // Check for test environment or reduced-motion preference
-        const isTest = typeof process !== 'undefined' && process.env?.NODE_ENV === 'test';
-        const prefersReducedMotion =
-          typeof window !== 'undefined' &&
-          window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        // If theme is already identical, no-op
+        if (current.theme === theme && current.resolvedTheme === resolved) {
+          return;
+        }
 
-        if (isTest || prefersReducedMotion || typeof window === 'undefined') {
-          clearTransitionTimers();
+        // Check if View Transition API is supported and reduced-motion is not requested
+        const isViewTransitionSupported =
+          typeof document !== 'undefined' &&
+          'startViewTransition' in document &&
+          typeof (document as any).startViewTransition === 'function' &&
+          !(
+            typeof window !== 'undefined' &&
+            window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+          );
+
+        if (!isViewTransitionSupported) {
           applyThemeToDOM(resolved);
-          set({ theme, resolvedTheme: resolved, transition: null });
+          set({ theme, resolvedTheme: resolved });
           return;
         }
 
-        // If theme is already identical and not in an active transition, no-op
-        if (current.theme === theme && current.resolvedTheme === resolved && !current.transition) {
-          return;
+        // Coordinates of the click origin or top-right theme switch position
+        const x = origin?.clientX ?? (typeof window !== 'undefined' ? window.innerWidth - 80 : 0);
+        const y = origin?.clientY ?? (typeof window !== 'undefined' ? 32 : 0);
+
+        if (typeof document !== 'undefined') {
+          document.documentElement.style.setProperty('--x', `${x}px`);
+          document.documentElement.style.setProperty('--y', `${y}px`);
         }
 
-        clearTransitionTimers();
+        // Calculate maximum radius to fully cover screen from origin point
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
 
-        // Phase 1: Mount atmospheric veil and animate HUD into view (0ms - 320ms)
-        set({
-          transition: {
-            targetTheme: theme,
-            targetResolved: resolved,
-            origin,
-            phase: 'entering',
-          },
+        // Run the View Transition
+        const transition = (document as any).startViewTransition(() => {
+          applyThemeToDOM(resolved);
+          set({ theme, resolvedTheme: resolved });
         });
 
-        // Phase 2: At peak veil coverage (320ms), cleanly swap the DOM theme behind the veil
-        phaseTimer1 = window.setTimeout(() => {
-          applyThemeToDOM(resolved);
-          set((s) => ({
-            theme,
-            resolvedTheme: resolved,
-            transition: s.transition ? { ...s.transition, phase: 'holding' } : null,
-          }));
-
-          // Phase 3: Veil begins smooth dissolve (440ms - 920ms)
-          phaseTimer2 = window.setTimeout(() => {
-            set((s) => ({
-              transition: s.transition ? { ...s.transition, phase: 'leaving' } : null,
-            }));
-
-            // Phase 4: Unmount transition overlay (at 920ms)
-            phaseTimer3 = window.setTimeout(() => {
-              set({ transition: null });
-            }, 480);
-          }, 120);
-        }, 320);
+        transition.ready
+          .then(() => {
+            try {
+              document.documentElement.animate(
+                {
+                  clipPath: [
+                    `circle(0px at ${x}px ${y}px)`,
+                    `circle(${endRadius}px at ${x}px ${y}px)`,
+                  ],
+                },
+                {
+                  duration: 480,
+                  easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                  pseudoElement: '::view-transition-new(root)',
+                }
+              );
+            } catch {
+              // Fallback if pseudoElement animation is unsupported
+            }
+          })
+          .catch(() => {
+            // Transition aborted or interrupted - safe no-op
+          });
       },
 
       initTheme: () => {
         const currentTheme = get().theme;
         const resolved = currentTheme === 'system' ? getSystemTheme() : currentTheme;
         applyThemeToDOM(resolved);
-        set({ resolvedTheme: resolved, transition: null });
+        set({ resolvedTheme: resolved });
 
         if (typeof window !== 'undefined') {
           const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');

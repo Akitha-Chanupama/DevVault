@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { useThemeStore } from './themeStore';
 
 describe('useThemeStore', () => {
@@ -26,5 +26,32 @@ describe('useThemeStore', () => {
     expect(useThemeStore.getState().theme).toBe('dark');
     expect(useThemeStore.getState().resolvedTheme).toBe('dark');
     expect(document.documentElement.classList.contains('dark')).toBe(true);
+  });
+
+  it('invokes document.startViewTransition when available', () => {
+    const mockReady = Promise.resolve();
+    const mockStartViewTransition = vi.fn((cb: () => void) => {
+      cb();
+      return {
+        ready: mockReady,
+      };
+    });
+
+    const originalSVT = (document as unknown as { startViewTransition?: unknown }).startViewTransition;
+    (document as unknown as { startViewTransition: unknown }).startViewTransition = mockStartViewTransition;
+
+    useThemeStore.setState({ theme: 'light', resolvedTheme: 'light' });
+    useThemeStore.getState().setTheme('dark', { clientX: 100, clientY: 200 });
+
+    expect(mockStartViewTransition).toHaveBeenCalled();
+    expect(document.documentElement.classList.contains('dark')).toBe(true);
+    expect(document.documentElement.style.getPropertyValue('--x')).toBe('100px');
+    expect(document.documentElement.style.getPropertyValue('--y')).toBe('200px');
+
+    if (originalSVT) {
+      (document as unknown as { startViewTransition: unknown }).startViewTransition = originalSVT;
+    } else {
+      delete (document as unknown as { startViewTransition?: unknown }).startViewTransition;
+    }
   });
 });
