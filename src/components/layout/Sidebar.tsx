@@ -17,6 +17,8 @@ import {
   Layers,
   Settings,
   User,
+  PanelLeftClose,
+  PanelLeft,
 } from 'lucide-react';
 import { TOOL_REGISTRY } from '@/tools/registry';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
@@ -318,6 +320,29 @@ export const Sidebar: React.FC = () => {
               </>
             )}
           </NavLink>
+
+          {/* Sidebar Collapse / Expand Toggle */}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            className={cn(
+              'group flex items-center rounded-xl text-sm font-medium transition-all w-full cursor-pointer',
+              sidebarOpen
+                ? 'gap-3 px-3.5 py-2.5 justify-start text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
+                : 'w-10 h-10 mx-auto justify-center p-0 text-slate-700 dark:text-slate-300 hover:text-blue-800 dark:hover:text-white hover:bg-blue-100/60 dark:hover:bg-slate-800/60'
+            )}
+            title={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+            aria-label={sidebarOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+          >
+            {sidebarOpen ? (
+              <>
+                <PanelLeftClose className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
+                <span>Collapse</span>
+              </>
+            ) : (
+              <PanelLeft className="w-4 h-4 shrink-0 text-slate-500 group-hover:text-blue-600 dark:text-muted-foreground dark:group-hover:text-blue-400 transition-colors" />
+            )}
+          </button>
         </div>
       </aside>
     </>
