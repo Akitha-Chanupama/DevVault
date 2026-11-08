@@ -64,3 +64,4 @@ export const AssistantAvatar: React.FC<AssistantAvatarProps> = ({
     </div>
   );
 };
+
