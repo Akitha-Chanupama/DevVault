@@ -33,3 +33,4 @@ describe('useFontSizeStore', () => {
     expect(document.documentElement.style.fontSize).toBe(FONT_SIZE_PX.xlarge);
   });
 });
+
