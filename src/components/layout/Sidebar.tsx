@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router-dom';
 import {
@@ -35,6 +35,46 @@ export const Sidebar: React.FC = () => {
     top: number;
     left: number;
   } | null>(null);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollDown, setCanScrollDown] = useState(false);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    // Check if scrollable content extends below the current scroll viewport
+    const hasMoreBelow =
+      el.scrollHeight > el.clientHeight && el.scrollTop + el.clientHeight < el.scrollHeight - 8;
+    setCanScrollDown(hasMoreBelow);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    checkScroll();
+    const rafId = requestAnimationFrame(checkScroll);
+
+    el.addEventListener('scroll', checkScroll, { passive: true });
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => {
+        checkScroll();
+      });
+      resizeObserver.observe(el);
+    }
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      el.removeEventListener('scroll', checkScroll);
+      resizeObserver?.disconnect();
+    };
+  }, [checkScroll]);
+
+  useEffect(() => {
+    checkScroll();
+  }, [sidebarOpen, location.pathname, location.search, checkScroll]);
 
   const showTooltip = (e: React.MouseEvent<HTMLElement>, label: string, badge?: string | number) => {
     if (sidebarOpen) return;
@@ -92,8 +132,20 @@ export const Sidebar: React.FC = () => {
           sidebarOpen ? 'w-64' : 'w-0 lg:w-16 overflow-hidden'
         )}
       >
-        {/* Navigation Body - Spaced & Non-scrollable on standard viewports */}
-        <div className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-3 py-3.5 space-y-4">
+        {/* Navigation Body with smooth scroll fade */}
+        <div className="relative flex-1 min-h-0 flex flex-col">
+          <div
+            ref={scrollContainerRef}
+            className="flex-1 overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden px-3 pt-3.5 pb-4 space-y-4"
+            style={{
+              WebkitMaskImage: canScrollDown
+                ? 'linear-gradient(to bottom, black calc(100% - 3.5rem), transparent 100%)'
+                : undefined,
+              maskImage: canScrollDown
+                ? 'linear-gradient(to bottom, black calc(100% - 3.5rem), transparent 100%)'
+                : undefined,
+            }}
+          >
           {/* Main Top Nav */}
           <div className="space-y-1.5">
             <NavLink
@@ -307,8 +359,18 @@ export const Sidebar: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Section: Settings & Help */}
-        <div className="p-2.5 border-t border-border shrink-0 space-y-1.5">
+        {/* Bottom Scroll Fade Gradient Overlay (matching reference design) */}
+        <div
+          className={cn(
+            'pointer-events-none absolute bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-sidebar via-sidebar/80 to-transparent z-10 transition-opacity duration-200',
+            canScrollDown ? 'opacity-100' : 'opacity-0'
+          )}
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Bottom Section: Settings & Help */}
+      <div className="p-2.5 shrink-0 space-y-1.5">
           <NavLink
             to="/settings"
             onMouseEnter={(e) => showTooltip(e, 'Settings')}
