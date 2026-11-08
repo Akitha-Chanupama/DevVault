@@ -80,6 +80,15 @@ const TimezoneConverterPage = React.lazy(
 const CronHelperPage = React.lazy(
   () => import('./cron-helper/components/CronHelperPage')
 );
+const HtmlFormatterPage = React.lazy(
+  () => import('./html-formatter/components/HtmlFormatterPage')
+);
+const CssFormatterPage = React.lazy(
+  () => import('./css-formatter/components/CssFormatterPage')
+);
+const JsFormatterPage = React.lazy(
+  () => import('./js-formatter/components/JsFormatterPage')
+);
 
 export const TOOL_REGISTRY: ToolDefinition[] = [
   // JSON & Data
@@ -388,38 +397,41 @@ export const TOOL_REGISTRY: ToolDefinition[] = [
   {
     id: 'html-formatter',
     name: 'HTML Formatter',
-    description: 'Clean, indent, and format HTML markup safely in the browser.',
+    description: 'Clean, indent, and format HTML markup safely in the browser using the Prettier AST engine.',
     category: 'Web Development',
-    keywords: ['html', 'format', 'beautify', 'markup'],
+    keywords: ['html', 'format', 'beautify', 'markup', 'indent'],
     route: '/tools/html-formatter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Code2',
     priority: 'P1',
+    component: HtmlFormatterPage,
   },
   {
     id: 'css-formatter',
     name: 'CSS Formatter & Minifier',
-    description: 'Format, beautify, or minify CSS stylesheets.',
+    description: 'Format, beautify, and minify modern CSS and SCSS stylesheets with instant compression metrics.',
     category: 'Web Development',
-    keywords: ['css', 'style', 'format', 'minify'],
+    keywords: ['css', 'style', 'format', 'minify', 'compress', 'scss'],
     route: '/tools/css-formatter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'Palette',
     priority: 'P1',
+    component: CssFormatterPage,
   },
   {
     id: 'js-formatter',
-    name: 'JavaScript Formatter',
-    description: 'Format and beautify JavaScript/TypeScript code snippets.',
+    name: 'JavaScript & TypeScript Formatter',
+    description: 'Format, standardize, and beautify JavaScript and TypeScript code safely in the browser with customizable styles.',
     category: 'Web Development',
-    keywords: ['javascript', 'js', 'ts', 'format', 'prettier'],
+    keywords: ['javascript', 'typescript', 'js', 'ts', 'format', 'prettier', 'beautify'],
     route: '/tools/js-formatter',
-    status: 'planned',
+    status: 'available',
     privacyMode: 'browser-only',
     icon: 'FileCode',
     priority: 'P1',
+    component: JsFormatterPage,
   },
 
   // Database

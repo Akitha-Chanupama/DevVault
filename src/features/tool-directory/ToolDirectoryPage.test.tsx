@@ -41,6 +41,12 @@ describe('ToolDirectoryPage', () => {
     fireEvent.click(readyButton);
 
     expect(screen.getByText('JSON Formatter')).toBeInTheDocument();
+    expect(screen.getByText('HTML Formatter')).toBeInTheDocument();
+
+    const plannedButton = screen.getByRole('button', { name: /Planned \(\d+\)/i });
+    fireEvent.click(plannedButton);
+
+    expect(screen.queryByText('JSON Formatter')).not.toBeInTheDocument();
     expect(screen.queryByText('HTML Formatter')).not.toBeInTheDocument();
   });
 });

@@ -5,7 +5,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.5_Strict-blue?style=flat-square)
 ![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square)
 ![Vite](https://img.shields.io/badge/Vite-6.4-purple?style=flat-square)
-![Tests](https://img.shields.io/badge/Vitest-98%20passed-brightgreen?style=flat-square)
+![Tests](https://img.shields.io/badge/Vitest-113%20passed-brightgreen?style=flat-square)
 ![Privacy](https://img.shields.io/badge/Privacy-100%25_Browser_Local-success?style=flat-square)
 
 DevVault is a high-performance, privacy-first developer utility suite built with modern React, TypeScript, Tailwind CSS, Monaco Editor, and Dexie IndexedDB. It runs entirely inside your browser session — no tokens, passwords, payloads, or proprietary queries are ever transmitted to external servers.
@@ -43,6 +43,9 @@ DevVault is a high-performance, privacy-first developer utility suite built with
 - **Password Generator**: CSPRNG unbiased random generation with customizable character pools (uppercase, lowercase, digits, symbols), bulk mode, and Shannon entropy scoring.
 
 ### Text & Code Utilities
+- **HTML Formatter & Beautifier**: Beautify HTML, XML, and SVG markup with configurable indentation, line wrap width, and standalone Prettier engine.
+- **CSS Formatter & Minifier**: Format and minify CSS stylesheets with PostCSS parser, comment stripping, delimiter whitespace collapse, and instant byte savings calculation.
+- **JavaScript & TypeScript Formatter**: Format modern ECMAScript and TypeScript code with customizable semicolons, quotes, and indentation rules.
 - **Text Diff Checker**: LCS-based line-level diff tool with additions, deletions, side-by-side split view, unified view, and quick swap controls.
 - **Text Case Converter**: Real-time transformation across 9 programming casing formats: `camelCase`, `PascalCase`, `snake_case`, `kebab-case`, `CONSTANT_CASE`, `Title Case`, `Sentence case`, `UPPERCASE`, and `lowercase`.
 - **Regular Expression Tester**: Real-time regex matching with flags (`g`, `i`, `m`, `s`, `u`), named capture group inspector, string replacement preview, and catastrophic backtracking guards.
