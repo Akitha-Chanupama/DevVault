@@ -13,6 +13,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { useThemeStore } from '@/stores/themeStore';
 import { useWorkspaceStore } from '@/stores/workspaceStore';
+import { cn } from '@/lib/utils';
 
 interface HeaderProps {
   onOpenShortcuts?: () => void;
@@ -28,8 +29,13 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border bg-sidebar/95 dark:bg-background/95 px-4 backdrop-blur-md transition-colors shrink-0">
       <div className="flex items-center min-w-0">
-        {/* Brand Container */}
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0 mr-3 sm:mr-6">
+        {/* Brand Container: Matches sidebar width exactly (16px header padding + 240px = 256px) */}
+        <div
+          className={cn(
+            'flex items-center shrink-0 transition-all duration-200',
+            sidebarOpen ? 'w-60' : 'w-auto mr-4'
+          )}
+        >
           {/* Brand Logo & Project Title - Permanently visible at top */}
           <NavLink to="/" className="flex items-center gap-2.5 shrink-0 group">
             <img
@@ -49,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="lg:hidden h-8 w-8 rounded-lg text-slate-500 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors shrink-0"
+            className="lg:hidden ml-auto h-8 w-8 rounded-lg text-slate-500 hover:text-blue-800 dark:text-muted-foreground dark:hover:text-foreground hover:bg-blue-100/60 dark:hover:bg-slate-800/60 transition-colors shrink-0"
             title={sidebarOpen ? 'Close menu' : 'Open menu'}
             aria-label="Toggle navigation menu"
           >
@@ -61,8 +67,8 @@ export const Header: React.FC<HeaderProps> = ({ onOpenShortcuts }) => {
           </Button>
         </div>
 
-        {/* Global tool search input */}
-        <div className="flex items-center min-w-0">
+        {/* Global tool search input - Positioned right next to where the sidebar line ends */}
+        <div className="flex items-center pl-4 sm:pl-6 min-w-0">
           <button
             onClick={() => setCommandPaletteOpen(true)}
             className="flex h-10 w-44 sm:w-64 md:w-80 lg:w-96 items-center justify-between rounded-xl border border-border bg-surface hover:bg-white dark:bg-surface dark:hover:bg-slate-800/60 px-3.5 text-sm text-slate-600 dark:text-muted-foreground hover:border-blue-400 dark:hover:border-blue-500/40 hover:shadow-xs transition-all shadow-2xs group"
