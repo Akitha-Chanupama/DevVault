@@ -195,18 +195,20 @@ export const QrGeneratorPage: React.FC = () => {
               size="sm"
               onClick={downloadPng}
               disabled={!qrResult.dataUrl}
-              className="flex-1 gap-1.5"
+              className="flex-1 gap-1.5 whitespace-nowrap"
             >
-              <Download className="w-3.5 h-3.5" /> Download PNG
+              <Download className="w-3.5 h-3.5 shrink-0" />
+              <span>Download PNG</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={downloadSvg}
               disabled={!qrResult.svg}
-              className="flex-1 gap-1.5"
+              className="flex-1 gap-1.5 whitespace-nowrap"
             >
-              <Download className="w-3.5 h-3.5" /> Download SVG
+              <Download className="w-3.5 h-3.5 shrink-0" />
+              <span>Download SVG</span>
             </Button>
             <div className="w-full">
               <CopyButton content={qrResult.dataUrl} label="Copy Data URL" className="w-full justify-center" />

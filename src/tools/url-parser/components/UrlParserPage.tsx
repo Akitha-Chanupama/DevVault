@@ -115,7 +115,7 @@ export const UrlParserPage: React.FC = () => {
               onClick={() => handleUrlInputChange(SAMPLE_URL)}
               className="text-xs h-7 px-2"
             >
-              <RefreshCw className="w-3 h-3 mr-1" />
+              <RefreshCw className="w-3.5 h-3.5 shrink-0" />
               <span>Sample</span>
             </Button>
             <ClearButton onClear={() => handleUrlInputChange('')} disabled={!urlInput} />

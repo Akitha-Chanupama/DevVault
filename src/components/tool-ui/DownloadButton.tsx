@@ -1,6 +1,7 @@
 import React from 'react';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 
 interface DownloadButtonProps {
@@ -44,12 +45,11 @@ export const DownloadButton: React.FC<DownloadButtonProps> = ({
       variant="secondary"
       size="sm"
       onClick={handleDownload}
-      className={className}
+      className={cn('gap-1.5 whitespace-nowrap', className)}
       title="Download file"
     >
-      <Download className="w-3.5 h-3.5 mr-1.5 text-muted-foreground" />
+      <Download className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
       <span>{label}</span>
     </Button>
   );
 };
-

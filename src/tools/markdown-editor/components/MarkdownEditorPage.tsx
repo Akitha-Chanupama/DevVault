@@ -69,35 +69,35 @@ export const MarkdownEditorPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setViewMode('split')}
-            className={`px-3 py-1.5 rounded flex items-center gap-1.5 transition-colors ${
+            className={`px-3 py-1.5 rounded flex items-center gap-1.5 whitespace-nowrap transition-colors ${
               viewMode === 'split'
                 ? 'bg-primary text-primary-foreground font-semibold shadow-xs'
                 : 'text-muted-foreground hover:bg-muted'
             }`}
           >
-            <Columns className="w-3.5 h-3.5" /> Split View
+            <Columns className="w-3.5 h-3.5 shrink-0" /> Split View
           </button>
           <button
             type="button"
             onClick={() => setViewMode('editor')}
-            className={`px-3 py-1.5 rounded flex items-center gap-1.5 transition-colors ${
+            className={`px-3 py-1.5 rounded flex items-center gap-1.5 whitespace-nowrap transition-colors ${
               viewMode === 'editor'
                 ? 'bg-primary text-primary-foreground font-semibold shadow-xs'
                 : 'text-muted-foreground hover:bg-muted'
             }`}
           >
-            <Edit3 className="w-3.5 h-3.5" /> Editor Only
+            <Edit3 className="w-3.5 h-3.5 shrink-0" /> Editor Only
           </button>
           <button
             type="button"
             onClick={() => setViewMode('preview')}
-            className={`px-3 py-1.5 rounded flex items-center gap-1.5 transition-colors ${
+            className={`px-3 py-1.5 rounded flex items-center gap-1.5 whitespace-nowrap transition-colors ${
               viewMode === 'preview'
                 ? 'bg-primary text-primary-foreground font-semibold shadow-xs'
                 : 'text-muted-foreground hover:bg-muted'
             }`}
           >
-            <Eye className="w-3.5 h-3.5" /> Preview Only
+            <Eye className="w-3.5 h-3.5 shrink-0" /> Preview Only
           </button>
         </div>
 

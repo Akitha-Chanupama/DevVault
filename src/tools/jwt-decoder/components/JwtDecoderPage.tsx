@@ -70,7 +70,7 @@ export const JwtDecoderPage: React.FC = () => {
                 onClick={() => setTokenInput(SAMPLE_JWT)}
                 className="text-xs h-7 px-2"
               >
-                <RefreshCw className="w-3 h-3 mr-1" />
+                <RefreshCw className="w-3 h-3 shrink-0" />
                 <span>Sample</span>
               </Button>
               <ClearButton onClear={() => setTokenInput('')} disabled={!tokenInput} />

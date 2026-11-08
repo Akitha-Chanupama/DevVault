@@ -1,6 +1,7 @@
 import React from 'react';
 import { Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface ClearButtonProps {
   onClear: () => void;
@@ -21,12 +22,11 @@ export const ClearButton: React.FC<ClearButtonProps> = ({
       size="sm"
       onClick={onClear}
       disabled={disabled}
-      className={className}
+      className={cn('gap-1.5 whitespace-nowrap', className)}
       title="Clear input"
     >
-      <Trash2 className="w-3.5 h-3.5 mr-1.5 text-muted-foreground" />
+      <Trash2 className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
       <span>{label}</span>
     </Button>
   );
 };
-

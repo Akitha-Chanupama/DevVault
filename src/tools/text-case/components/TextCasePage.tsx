@@ -38,7 +38,7 @@ export const TextCasePage: React.FC = () => {
                 onClick={() => setInput(SAMPLE_TEXT)}
                 className="text-xs h-7 px-2"
               >
-                <RefreshCw className="w-3 h-3 mr-1" />
+                <RefreshCw className="w-3.5 h-3.5 shrink-0" />
                 <span>Sample</span>
               </Button>
               <ClearButton onClear={() => setInput('')} disabled={!input} />
