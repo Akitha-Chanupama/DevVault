@@ -51,6 +51,6 @@
 
 ## Test Suite & Verification Summary
 - **Type Checking:** 100% strict TypeScript (`tsc -b`), 0 errors.
-- **Unit & Component Tests:** 34 test suites, 113 passing tests (`vitest run`).
+- **Unit & Component Tests:** 35 test suites, 116 passing tests (`vitest run`).
 - **Production Build:** Clean Vite build, code-split per tool, bundled banner image assets.
 - **Data Privacy & Storage:** Purely local in-browser execution with Dexie IndexedDB. Zero telemetry, zero analytics tracking, zero remote transmission of user secrets.

@@ -37,6 +37,7 @@ export const backupRepository = {
       favorites,
       settings: {
         theme: settings.theme,
+        fontSize: settings.fontSize || 'normal',
         historyEnabled: settings.historyEnabled,
         historyRetentionDays: settings.historyRetentionDays,
         defaultIndentation: settings.defaultIndentation,

@@ -10,7 +10,7 @@
     <meta name="description" content="Local-first, privacy-first developer productivity suite executing entirely in your browser with zero remote transmission." />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DevVault — Developer Productivity Platform</title>
-    <!-- Prevent theme flash -->
+    <!-- Prevent theme and font size flash -->
     <script>
       (function() {
         try {
@@ -27,6 +27,16 @@
             document.documentElement.classList.add('dark');
           }
         }
+
+        try {
+          const storedFont = localStorage.getItem('devvault-font-size');
+          const fontSize = storedFont ? JSON.parse(storedFont).state?.fontSize || 'normal' : 'normal';
+          const fontMap = { small: '14px', normal: '16px', large: '18px', xlarge: '20px' };
+          if (fontMap[fontSize]) {
+            document.documentElement.style.fontSize = fontMap[fontSize];
+            document.documentElement.setAttribute('data-font-size', fontSize);
+          }
+        } catch (e) {}
       })();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
