@@ -14,7 +14,8 @@ import { ClearButton } from '@/components/tool-ui/ClearButton';
 import { ValidationMessage, ErrorPanel } from '@/components/tool-ui/ValidationMessage';
 import { ToolHelpPanel } from '@/components/tool-ui/EmptyState';
 import { CodeEditor } from '@/components/editor/CodeEditor';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { formatJson, minifyJson, validateJson } from '../logic/jsonFormatter';
 import { IndentOption, ParseErrorDetail } from '../types';
 import { toast } from 'sonner';
@@ -155,10 +156,10 @@ export const JsonFormatterPage: React.FC = () => {
             variant={sortKeys ? 'default' : 'secondary'}
             size="sm"
             onClick={() => setSortKeys(!sortKeys)}
-            className="text-xs h-8 gap-1.5"
+            className="text-xs h-8 gap-1.5 whitespace-nowrap"
             title="Sort object keys alphabetically"
           >
-            <ArrowUpDown className="w-3.5 h-3.5" />
+            <ArrowUpDown className="w-3.5 h-3.5 shrink-0" />
             <span>Sort Keys</span>
           </Button>
 
@@ -167,10 +168,10 @@ export const JsonFormatterPage: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleMinify}
-            className="text-xs h-8 gap-1.5"
+            className="text-xs h-8 gap-1.5 whitespace-nowrap"
             title="Remove whitespace and compact"
           >
-            <Minimize2 className="w-3.5 h-3.5" />
+            <Minimize2 className="w-3.5 h-3.5 shrink-0" />
             <span>Minify</span>
           </Button>
 
@@ -179,44 +180,41 @@ export const JsonFormatterPage: React.FC = () => {
             variant="secondary"
             size="sm"
             onClick={handleValidateOnly}
-            className="text-xs h-8 gap-1.5"
+            className="text-xs h-8 gap-1.5 whitespace-nowrap"
             title="Check JSON syntax validity"
           >
-            <CheckCircle2 className="w-3.5 h-3.5" />
+            <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
             <span>Validate</span>
           </Button>
         </div>
 
         <div className="flex items-center gap-2">
           {/* File Upload Button */}
-          <label className="cursor-pointer">
+          <label
+            className={cn(
+              buttonVariants({ variant: 'outline', size: 'sm' }),
+              'text-xs h-8 gap-1.5 cursor-pointer whitespace-nowrap inline-flex items-center'
+            )}
+            title="Upload JSON file"
+          >
             <input
               type="file"
               accept=".json,application/json,text/plain"
               onChange={handleFileUpload}
               className="hidden"
             />
-            <Button
-              variant="outline"
-              size="sm"
-              asChild
-              className="text-xs h-8 gap-1.5 cursor-pointer pointer-events-none"
-            >
-              <span>
-                <Upload className="w-3.5 h-3.5" />
-                <span>Upload .json</span>
-              </span>
-            </Button>
+            <Upload className="w-3.5 h-3.5 shrink-0" />
+            <span>Upload .json</span>
           </label>
 
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setInput(SAMPLE_JSON)}
-            className="text-xs h-8 text-muted-foreground hover:text-foreground"
+            className="text-xs h-8 gap-1.5 text-muted-foreground hover:text-foreground whitespace-nowrap"
             title="Load sample JSON"
           >
-            <RefreshCw className="w-3.5 h-3.5 mr-1" />
+            <RefreshCw className="w-3.5 h-3.5 shrink-0" />
             <span>Sample</span>
           </Button>
         </div>

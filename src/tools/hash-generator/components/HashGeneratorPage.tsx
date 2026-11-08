@@ -70,7 +70,7 @@ export const HashGeneratorPage: React.FC = () => {
                 onClick={() => setInput('DevVault')}
                 className="text-xs h-7 px-2"
               >
-                <RefreshCw className="w-3 h-3 mr-1" />
+                <RefreshCw className="w-3 h-3 shrink-0" />
                 <span>Reset</span>
               </Button>
               <ClearButton onClear={() => setInput('')} disabled={!input} />

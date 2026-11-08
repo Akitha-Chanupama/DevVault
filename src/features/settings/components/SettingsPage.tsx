@@ -8,7 +8,8 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { useThemeStore } from '@/stores/themeStore';
@@ -268,24 +269,26 @@ export const SettingsPage: React.FC = () => {
         </CardHeader>
         <CardContent className="pt-0 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <Button onClick={handleExportBackup} size="sm" className="gap-1.5 text-xs">
-              <Download className="w-3.5 h-3.5" />
+            <Button onClick={handleExportBackup} size="sm" className="gap-1.5 text-xs whitespace-nowrap">
+              <Download className="w-3.5 h-3.5 shrink-0" />
               <span>Export Workspace Backup</span>
             </Button>
 
-            <label className="cursor-pointer">
+            <label
+              className={cn(
+                buttonVariants({ variant: 'outline', size: 'sm' }),
+                'gap-1.5 text-xs cursor-pointer whitespace-nowrap inline-flex items-center'
+              )}
+              title="Upload backup file to restore"
+            >
               <input
                 type="file"
                 accept=".json,application/json"
                 onChange={handleFileUpload}
                 className="hidden"
               />
-              <Button variant="outline" size="sm" asChild className="gap-1.5 text-xs cursor-pointer">
-                <span>
-                  <Upload className="w-3.5 h-3.5" />
-                  <span>Choose Backup to Restore</span>
-                </span>
-              </Button>
+              <Upload className="w-3.5 h-3.5 shrink-0" />
+              <span>Choose Backup to Restore</span>
             </label>
           </div>
 

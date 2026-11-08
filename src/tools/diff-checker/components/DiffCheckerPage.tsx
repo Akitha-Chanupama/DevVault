@@ -73,24 +73,24 @@ export const DiffCheckerPage: React.FC = () => {
           <div className="inline-flex rounded-lg border border-border bg-surface-elevated p-0.5">
             <button
               onClick={() => setViewMode('split')}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap transition-colors ${
                 viewMode === 'split'
                   ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <Columns className="w-3.5 h-3.5" />
+              <Columns className="w-3.5 h-3.5 shrink-0" />
               <span>Split View</span>
             </button>
             <button
               onClick={() => setViewMode('unified')}
-              className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+              className={`px-3 py-1.5 rounded-md text-xs font-semibold flex items-center gap-1.5 whitespace-nowrap transition-colors ${
                 viewMode === 'unified'
                   ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              <AlignJustify className="w-3.5 h-3.5" />
+              <AlignJustify className="w-3.5 h-3.5 shrink-0" />
               <span>Unified View</span>
             </button>
           </div>
