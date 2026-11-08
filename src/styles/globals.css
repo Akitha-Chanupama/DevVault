@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    color-scheme: light;
     /* Light Mode - Harmonious blue-tinted developer aesthetic matching banner */
     --background: #EEF4FB;
     --foreground: #0C1E36;
@@ -32,6 +33,7 @@
   }
 
   .dark {
+    color-scheme: dark;
     /* Dark Mode - Exact reference match */
     --background: #090D16;
     --foreground: #F1F5F9;
@@ -61,6 +63,18 @@
 
   * {
     @apply border-border;
+  }
+
+  select {
+    color-scheme: inherit;
+    background-color: var(--surface);
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+
+  option {
+    background-color: var(--surface);
+    color: var(--foreground);
   }
 
   html {

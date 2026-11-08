@@ -75,7 +75,7 @@ export const UuidGeneratorPage: React.FC = () => {
             <select
               value={options.count}
               onChange={(e) => setOptions({ ...options, count: parseInt(e.target.value, 10) })}
-              className="h-8 rounded-md border border-border bg-surface-elevated px-2.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+              className="h-8 rounded-md border border-border bg-surface-elevated px-2.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
               <option value="1">1 UUID</option>
               <option value="5">5 UUIDs</option>

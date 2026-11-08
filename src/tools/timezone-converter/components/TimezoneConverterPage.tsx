@@ -119,10 +119,10 @@ export const TimezoneConverterPage: React.FC = () => {
           <select
             value={baseTimezone}
             onChange={(e) => setBaseTimezone(e.target.value)}
-            className="h-9 px-3 bg-muted/40 border rounded-md font-medium text-xs focus:outline-none focus:ring-1 focus:ring-primary w-full md:w-64"
+            className="h-9 px-3 bg-surface text-foreground border border-border rounded-md font-medium text-xs focus:outline-none focus:ring-1 focus:ring-primary w-full md:w-64 cursor-pointer"
           >
             {zones.map((z) => (
-              <option key={z.id} value={z.timeZone}>
+              <option key={z.id} value={z.timeZone} className="bg-surface text-foreground">
                 {z.city} ({z.timeZone})
               </option>
             ))}

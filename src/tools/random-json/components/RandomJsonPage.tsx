@@ -92,15 +92,15 @@ export const RandomJsonPage: React.FC = () => {
                   value={field.name}
                   onChange={(e) => updateField(field.id, { name: e.target.value })}
                   placeholder="Key name"
-                  className="w-1/2 h-8 px-2.5 font-mono text-xs bg-background border rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-1/2 h-8 px-2.5 font-mono text-xs bg-surface text-foreground border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
                 />
                 <select
                   value={field.type}
                   onChange={(e) => updateField(field.id, { type: e.target.value as FieldDataType })}
-                  className="w-1/2 h-8 px-2 text-xs bg-muted/40 border rounded-md focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-1/2 h-8 px-2 text-xs bg-surface text-foreground border border-border rounded-md focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
                 >
                   {FIELD_TYPES.map((t) => (
-                    <option key={t.type} value={t.type}>
+                    <option key={t.type} value={t.type} className="bg-surface text-foreground">
                       {t.label}
                     </option>
                   ))}
@@ -128,7 +128,7 @@ export const RandomJsonPage: React.FC = () => {
                 max={100}
                 value={count}
                 onChange={(e) => setCount(Math.max(1, Math.min(100, Number(e.target.value) || 1)))}
-                className="w-20 h-8 px-2 text-center font-mono text-xs bg-background border rounded-md"
+                className="w-20 h-8 px-2 text-center font-mono text-xs bg-surface text-foreground border border-border rounded-md"
               />
             </div>
 

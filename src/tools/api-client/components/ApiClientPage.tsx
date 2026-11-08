@@ -119,10 +119,10 @@ export const ApiClientPage: React.FC = () => {
           <select
             value={method}
             onChange={(e) => setMethod(e.target.value as HttpMethod)}
-            className="h-10 px-3 py-2 bg-muted/60 border rounded-md font-semibold text-sm focus:outline-none focus:ring-1 focus:ring-primary w-full md:w-32"
+            className="h-10 px-3 py-2 bg-surface text-foreground border border-border rounded-md font-semibold text-sm focus:outline-none focus:ring-1 focus:ring-primary w-full md:w-32 cursor-pointer"
           >
             {HTTP_METHODS.map((m) => (
-              <option key={m} value={m}>
+              <option key={m} value={m} className="bg-surface text-foreground">
                 {m}
               </option>
             ))}
@@ -132,7 +132,7 @@ export const ApiClientPage: React.FC = () => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="https://api.example.com/v1/resource"
-            className="flex-1 h-10 px-4 bg-background border rounded-md text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
+            className="flex-1 h-10 px-4 bg-surface text-foreground border border-border rounded-md text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary"
             onKeyDown={(e) => {
               if (e.key === 'Enter') handleSend();
             }}

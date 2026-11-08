@@ -148,7 +148,7 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
-                className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
                   <option key={lang} value={lang}>
@@ -179,7 +179,7 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
               <select
                 value={collectionId}
                 onChange={(e) => setCollectionId(e.target.value)}
-                className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full h-9 rounded-md border border-border bg-surface px-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
               >
                 <option value="">No Collection</option>
                 {collections.map((col) => (
