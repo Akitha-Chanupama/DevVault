@@ -92,9 +92,9 @@ export const AssistantModal: React.FC = () => {
     <div
       className={cn(
         'fixed z-50 transition-all duration-300 ease-out select-none flex flex-col',
-        'bottom-22 right-4 sm:right-6',
-        'w-[calc(100vw-2rem)] sm:w-[420px]',
-        isMinimized ? 'h-16' : 'h-[580px] max-h-[82vh]',
+        'bottom-24 sm:bottom-28 right-4 sm:right-6',
+        'w-[calc(100vw-2rem)] sm:w-[410px]',
+        isMinimized ? 'h-16' : 'h-[490px] max-h-[calc(100vh-9.5rem)]',
         'bg-surface/95 dark:bg-[#141B2A]/95 backdrop-blur-2xl',
         'border border-border/80 dark:border-border/60',
         'rounded-3xl shadow-2xl shadow-blue-900/10 dark:shadow-black/60',

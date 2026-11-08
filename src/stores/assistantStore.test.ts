@@ -74,3 +74,4 @@ describe('useAssistantStore', () => {
     expect(state.messages[0].text).toContain("Hello! I'm DevBot");
   });
 });
+

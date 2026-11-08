@@ -220,3 +220,4 @@ export const FAQ_KNOWLEDGE_BASE: FaqItem[] = [
     relatedIds: ['code-formatters', 'theme-and-font-size'],
   },
 ];
+
