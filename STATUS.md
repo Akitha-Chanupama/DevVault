@@ -43,14 +43,14 @@
 | `sql-formatter` | SQL Formatter & Beautifier | P1 | Available | Passing | Verified | browser-only | SQL beautifier supporting PostgreSQL, MySQL, SQLite, BigQuery, T-SQL |
 | `timezone-converter` | World Time & Timezone | P1 | Available | Passing | Verified | browser-only | IANA timezone database via Intl API, live clocks, daylight indicators, UTC offsets |
 | `cron-helper` | Cron Expression Helper | P1 | Available | Passing | Verified | browser-only | Translates 5-part cron syntax to plain English, predicts next 6 trigger executions |
-| `html-formatter` | HTML Formatter | P1 | Planned | — | — | browser-only | Static formatting without evaluation |
-| `css-formatter` | CSS Formatter & Minifier | P1 | Planned | — | — | browser-only | CSS stylesheet formatting |
-| `js-formatter` | JavaScript Formatter | P1 | Planned | — | — | browser-only | Static formatting without evaluation |
+| `html-formatter` | HTML Formatter & Beautifier | P1 | Available | Passing | Verified | browser-only | Static formatting without evaluation, Prettier HTML parser, custom wrap & indent |
+| `css-formatter` | CSS Formatter & Minifier | P1 | Available | Passing | Verified | browser-only | PostCSS formatting and CSS minification with byte savings metrics |
+| `js-formatter` | JavaScript & TypeScript Formatter | P1 | Available | Passing | Verified | browser-only | Babel and TypeScript AST formatting with semicolon & quote controls |
 
 ---
 
 ## Test Suite & Verification Summary
 - **Type Checking:** 100% strict TypeScript (`tsc -b`), 0 errors.
-- **Unit & Component Tests:** 31 test suites, 101 passing tests (`vitest run`).
+- **Unit & Component Tests:** 34 test suites, 113 passing tests (`vitest run`).
 - **Production Build:** Clean Vite build, code-split per tool, bundled banner image assets.
 - **Data Privacy & Storage:** Purely local in-browser execution with Dexie IndexedDB. Zero telemetry, zero analytics tracking, zero remote transmission of user secrets.
