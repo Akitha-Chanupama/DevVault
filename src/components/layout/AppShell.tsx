@@ -4,6 +4,8 @@ import { Sidebar } from './Sidebar';
 import { Header } from './Header';
 import { CommandPalette } from '@/features/command-palette/CommandPalette';
 import { KeyboardShortcutsModal } from './KeyboardShortcutsModal';
+import { AssistantFAB } from '@/features/assistant/components/AssistantFAB';
+import { AssistantModal } from '@/features/assistant/components/AssistantModal';
 import { Toaster } from 'sonner';
 import { useThemeStore } from '@/stores/themeStore';
 
@@ -72,9 +74,12 @@ export const AppShell: React.FC = () => {
 
       <CommandPalette />
       <KeyboardShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
+      <AssistantModal />
+      <AssistantFAB />
       <Toaster
         theme={resolvedTheme}
         position="bottom-right"
+        offset="80px"
         toastOptions={{
           style: {
             background: 'var(--surface-elevated)',
