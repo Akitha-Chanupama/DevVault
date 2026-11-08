@@ -16,10 +16,10 @@ export const AssistantAvatar: React.FC<AssistantAvatarProps> = ({
   const [imageError, setImageError] = useState(false);
 
   const sizeClasses = {
-    sm: 'w-7 h-7',
-    md: 'w-9 h-9',
-    lg: 'w-11 h-11',
-    xl: 'w-14 h-14',
+    sm: 'w-8 h-8',
+    md: 'w-11 h-11',
+    lg: 'w-14 h-14',
+    xl: 'w-16 h-16',
   };
 
   const dotClasses = {
