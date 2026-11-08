@@ -8,11 +8,11 @@ describe('useFontSizeStore', () => {
     document.documentElement.removeAttribute('data-font-size');
   });
 
-  it('initializes with default normal font size (16px)', () => {
+  it('initializes with default normal font size (14px)', () => {
     useFontSizeStore.getState().initFontSize();
     const state = useFontSizeStore.getState();
     expect(state.fontSize).toBe('normal');
-    expect(document.documentElement.style.fontSize).toBe('16px');
+    expect(document.documentElement.style.fontSize).toBe('14px');
     expect(document.documentElement.getAttribute('data-font-size')).toBe('normal');
   });
 

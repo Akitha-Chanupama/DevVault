@@ -4,10 +4,10 @@ import { persist } from 'zustand/middleware';
 export type AppFontSize = 'small' | 'normal' | 'large' | 'xlarge';
 
 export const FONT_SIZE_PX: Record<AppFontSize, string> = {
-  small: '14px',
-  normal: '16px',
-  large: '18px',
-  xlarge: '20px',
+  small: '12px',
+  normal: '14px',
+  large: '16px',
+  xlarge: '18px',
 };
 
 interface FontSizeState {
@@ -18,7 +18,7 @@ interface FontSizeState {
 
 export const applyFontSizeToDOM = (size: AppFontSize) => {
   if (typeof document === 'undefined') return;
-  const px = FONT_SIZE_PX[size] || '16px';
+  const px = FONT_SIZE_PX[size] || '14px';
   document.documentElement.style.fontSize = px;
   document.documentElement.setAttribute('data-font-size', size);
 };

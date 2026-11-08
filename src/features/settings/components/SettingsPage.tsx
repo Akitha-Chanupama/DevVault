@@ -33,28 +33,28 @@ const FONT_SIZE_OPTIONS: {
     label: 'Small',
     preview: 'Aa',
     sampleClass: 'text-xs font-bold leading-none',
-    desc: '14px (Compact)',
+    desc: '12px (Compact)',
   },
   {
     value: 'normal',
     label: 'Normal',
     preview: 'Aa',
     sampleClass: 'text-sm font-bold leading-none',
-    desc: '16px (Default)',
+    desc: '14px (Default)',
   },
   {
     value: 'large',
     label: 'Large',
     preview: 'Aa',
     sampleClass: 'text-base font-bold leading-none',
-    desc: '18px (Comfortable)',
+    desc: '16px (Comfortable)',
   },
   {
     value: 'xlarge',
     label: 'Extra Large',
     preview: 'Aa',
     sampleClass: 'text-lg font-bold leading-none',
-    desc: '20px (Spacious)',
+    desc: '18px (Spacious)',
   },
 ];
 
