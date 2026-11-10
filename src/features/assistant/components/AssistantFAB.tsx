@@ -18,8 +18,8 @@ export const AssistantFAB: React.FC = () => {
           isOpen ? 'scale-95 opacity-80 hover:opacity-100' : 'opacity-100'
         )}
       >
-        {/* 3D Robot Image - At least twice the size (180px height) */}
-        <div className="w-[110px] h-[146px] sm:w-[136px] sm:h-[180px] flex items-center justify-center">
+        {/* 3D Robot Image */}
+        <div className="w-[94px] h-[125px] sm:w-[116px] sm:h-[154px] flex items-center justify-center">
           <img
             src="/images/robo.png"
             alt="DevBot Assistant"
@@ -35,7 +35,7 @@ export const AssistantFAB: React.FC = () => {
 
         {/* Floating Tooltip Callout on Desktop when closed */}
         {!isOpen && (
-          <span className="hidden lg:group-hover:flex absolute right-32 sm:right-36 top-1/2 -translate-y-1/2 px-3.5 py-2 rounded-xl bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-semibold shadow-2xl border border-white/10 whitespace-nowrap items-center gap-2 backdrop-blur-md animate-in fade-in slide-in-from-right-3 duration-150 pointer-events-none">
+          <span className="hidden lg:group-hover:flex absolute right-28 sm:right-32 top-1/2 -translate-y-1/2 px-3.5 py-2 rounded-xl bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-semibold shadow-2xl border border-white/10 whitespace-nowrap items-center gap-2 backdrop-blur-md animate-in fade-in slide-in-from-right-3 duration-150 pointer-events-none">
             <span>Ask DevBot</span>
             <span className="text-[10px] text-blue-300 bg-blue-500/20 px-1.5 py-0.5 rounded-md font-mono">FAQ</span>
           </span>
