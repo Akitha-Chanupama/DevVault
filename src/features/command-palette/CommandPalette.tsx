@@ -10,6 +10,7 @@ export const CommandPalette: React.FC = () => {
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const navigate = useNavigate();
 
   // Listen for Cmd+K / Ctrl+K
@@ -36,6 +37,13 @@ export const CommandPalette: React.FC = () => {
     }
   }, [commandPaletteOpen]);
 
+  // Keep selected item scrolled into view if needed
+  useEffect(() => {
+    itemRefs.current[selectedIndex]?.scrollIntoView({
+      block: 'nearest',
+    });
+  }, [selectedIndex]);
+
   if (!commandPaletteOpen) return null;
 
   const filteredTools = TOOL_REGISTRY.filter((tool) => {
@@ -47,7 +55,7 @@ export const CommandPalette: React.FC = () => {
       tool.category.toLowerCase().includes(q) ||
       tool.keywords.some((k) => k.toLowerCase().includes(q))
     );
-  }).slice(0, 10);
+  }).slice(0, 16);
 
   const handleSelect = (route: string) => {
     setCommandPaletteOpen(false);
@@ -70,15 +78,15 @@ export const CommandPalette: React.FC = () => {
   return (
     <div
       onClick={() => setCommandPaletteOpen(false)}
-      className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-slate-900/40 dark:bg-black/65 backdrop-blur-sm animate-in fade-in duration-100"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-20 px-4 bg-slate-900/50 dark:bg-black/75 backdrop-blur-md animate-in fade-in duration-150"
     >
       <div
-        className="relative w-full max-w-xl rounded-2xl border border-slate-200 dark:border-blue-500/30 bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/15 dark:shadow-black/90 ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden"
+        className="relative w-full max-w-2xl rounded-2xl border border-slate-200 dark:border-[#263247] bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/20 dark:shadow-black/95 ring-1 ring-slate-900/5 dark:ring-white/10 overflow-hidden animate-in fade-in zoom-in-95 duration-150"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4 border-b border-slate-200 dark:border-border/80">
-          <Search className="w-4 h-4 text-slate-400 dark:text-muted-foreground shrink-0" />
+        <div className="flex items-center px-4.5 py-4 border-b border-slate-200/80 dark:border-[#263247] bg-slate-50/50 dark:bg-[#0c1324]">
+          <Search className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
           <input
             ref={inputRef}
             type="text"
@@ -89,22 +97,50 @@ export const CommandPalette: React.FC = () => {
               setSelectedIndex(0);
             }}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent px-3 py-3.5 text-sm text-slate-800 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none"
+            className="flex-1 bg-transparent px-3 text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
           />
-          <button
-            onClick={() => setCommandPaletteOpen(false)}
-            className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            title="Close"
-          >
-            <X className="w-4 h-4" />
-          </button>
+
+          <div className="flex items-center gap-1.5 shrink-0">
+            {query ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setQuery('');
+                  setSelectedIndex(0);
+                  inputRef.current?.focus();
+                }}
+                className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                title="Clear search"
+                aria-label="Clear search"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            ) : (
+              <kbd className="hidden sm:inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-slate-100 dark:bg-[#192338] border border-slate-200 dark:border-[#263247] text-slate-500 dark:text-slate-400">
+                ESC
+              </kbd>
+            )}
+
+            <button
+              type="button"
+              onClick={() => setCommandPaletteOpen(false)}
+              className="text-slate-400 hover:text-slate-700 dark:text-slate-400 dark:hover:text-white p-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              title="Close palette"
+              aria-label="Close command palette"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
         </div>
 
         {/* Results List */}
-        <div className="max-h-80 overflow-y-auto p-2 space-y-1">
+        <div className="max-h-[min(65vh,520px)] overflow-y-auto p-2 space-y-1.5 [scrollbar-width:thin] scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-800">
           {filteredTools.length === 0 ? (
-            <div className="p-8 text-center text-xs text-slate-500 dark:text-slate-400">
-              No matching tools found for "{query}".
+            <div className="py-12 px-6 text-center text-xs text-slate-500 dark:text-slate-400">
+              <p className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-1">
+                No matching tools found
+              </p>
+              <p>No offline utilities matched "{query}". Try checking another keyword or category.</p>
             </div>
           ) : (
             filteredTools.map((tool, idx) => {
@@ -114,40 +150,61 @@ export const CommandPalette: React.FC = () => {
               return (
                 <div
                   key={tool.id}
+                  ref={(el) => {
+                    itemRefs.current[idx] = el;
+                  }}
                   onClick={() => handleSelect(tool.route)}
                   onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm cursor-pointer transition-colors ${
+                  className={`group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-blue-600 text-white font-medium shadow-xs'
-                      : 'text-slate-800 dark:text-slate-200 hover:bg-blue-50/80 dark:hover:bg-slate-800/70'
+                      ? 'bg-blue-600 text-white font-medium shadow-sm shadow-blue-600/30'
+                      : 'text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#162138]'
                   }`}
                 >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    {isFav && (
+                  <div className="flex items-center gap-3 min-w-0">
+                    {isFav ? (
                       <Star
                         className={`w-4 h-4 shrink-0 ${
                           isSelected ? 'fill-white text-white' : 'fill-amber-400 text-amber-500'
                         }`}
                       />
+                    ) : (
+                      <span
+                        className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                          isSelected ? 'bg-white' : 'bg-slate-300 dark:bg-slate-600'
+                        }`}
+                      />
                     )}
-                    <span className="font-semibold truncate">{tool.name}</span>
-                    <span
-                      className={`truncate text-xs ${
-                        isSelected ? 'text-blue-100' : 'text-slate-500 dark:text-slate-400'
-                      }`}
-                    >
-                      — {tool.category}
-                    </span>
+
+                    <div className="flex items-baseline gap-2.5 min-w-0">
+                      <span className="font-semibold truncate text-[13px] sm:text-sm">{tool.name}</span>
+                      <span
+                        className={`text-[10px] font-mono px-2 py-0.5 rounded-md shrink-0 transition-colors ${
+                          isSelected
+                            ? 'bg-blue-500/40 text-blue-100 border border-blue-400/30 font-semibold'
+                            : 'bg-slate-100 dark:bg-[#192338] text-slate-500 dark:text-slate-400 border border-slate-200/80 dark:border-[#263247]'
+                        }`}
+                      >
+                        {tool.category}
+                      </span>
+                      <span
+                        className={`hidden sm:inline-block text-xs truncate max-w-[260px] ${
+                          isSelected ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'
+                        }`}
+                      >
+                        {tool.description}
+                      </span>
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-2 shrink-0 ml-3">
+                  <div className="flex items-center gap-2.5 shrink-0 ml-3">
                     {tool.status === 'available' ? (
                       <Badge
                         variant="success"
                         className={
                           isSelected
-                            ? 'bg-white/20 text-white border-transparent'
-                            : 'bg-emerald-50 text-emerald-700 border-emerald-200 font-semibold dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-500/30'
+                            ? 'bg-white/20 text-white border-transparent text-[11px]'
+                            : 'bg-emerald-50 text-emerald-700 border-emerald-200/80 font-semibold dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-500/30 text-[11px]'
                         }
                       >
                         Ready
@@ -157,14 +214,20 @@ export const CommandPalette: React.FC = () => {
                         variant="secondary"
                         className={
                           isSelected
-                            ? 'bg-white/10 text-white border-transparent'
-                            : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700'
+                            ? 'bg-white/10 text-white border-transparent text-[11px]'
+                            : 'bg-slate-100 text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 text-[11px]'
                         }
                       >
                         Planned
                       </Badge>
                     )}
-                    <ArrowRight className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-400 dark:text-slate-400'}`} />
+                    <ArrowRight
+                      className={`w-3.5 h-3.5 transition-transform ${
+                        isSelected
+                          ? 'text-white translate-x-0.5'
+                          : 'text-slate-400 dark:text-slate-500 group-hover:translate-x-0.5'
+                      }`}
+                    />
                   </div>
                 </div>
               );
@@ -173,15 +236,31 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Footer shortcuts info */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#080d19] text-xs text-slate-500 dark:text-slate-400 font-mono">
-          <div className="flex items-center gap-3">
-            <span>↑↓ to navigate</span>
-            <span>↵ to select</span>
-            <span>esc to close</span>
+        <div className="flex items-center justify-between px-4.5 py-3 border-t border-slate-200/80 dark:border-[#263247] bg-slate-50 dark:bg-[#080d19] text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center gap-3.5">
+            <span className="flex items-center gap-1.5">
+              <kbd className="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-[#192338] text-[10px] font-mono border border-slate-300/70 dark:border-[#263247] text-slate-600 dark:text-slate-300">
+                ↑↓
+              </kbd>
+              <span className="text-[11px]">navigate</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <kbd className="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-[#192338] text-[10px] font-mono border border-slate-300/70 dark:border-[#263247] text-slate-600 dark:text-slate-300">
+                ↵
+              </kbd>
+              <span className="text-[11px]">select</span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <kbd className="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-[#192338] text-[10px] font-mono border border-slate-300/70 dark:border-[#263247] text-slate-600 dark:text-slate-300">
+                esc
+              </kbd>
+              <span className="text-[11px]">close</span>
+            </span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-success" />
-            <span>Local Execution</span>
+
+          <div className="flex items-center gap-1.5 text-[11px]">
+            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            <span className="font-medium text-slate-600 dark:text-slate-300">100% Offline • Local Execution</span>
           </div>
         </div>
       </div>
