@@ -85,7 +85,7 @@ export const CommandPalette: React.FC = () => {
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}
-        <div className="flex items-center px-4.5 py-4 border-b border-slate-200/80 dark:border-[#263247] bg-slate-50/50 dark:bg-[#0c1324]">
+        <div className="flex items-center px-5 sm:px-6 py-4 border-b border-slate-200/80 dark:border-[#263247] bg-slate-50/50 dark:bg-[#0c1324]">
           <Search className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0" />
           <input
             ref={inputRef}
@@ -97,10 +97,10 @@ export const CommandPalette: React.FC = () => {
               setSelectedIndex(0);
             }}
             onKeyDown={handleKeyDown}
-            className="flex-1 bg-transparent px-3 text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
+            className="flex-1 bg-transparent px-3.5 text-sm sm:text-base text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none"
           />
 
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
             {query ? (
               <button
                 type="button"
@@ -134,7 +134,7 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Results List */}
-        <div className="max-h-[min(65vh,520px)] overflow-y-auto p-2 space-y-1.5 [scrollbar-width:thin] scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-800">
+        <div className="max-h-[min(65vh,520px)] overflow-y-auto p-3 space-y-1.5 [scrollbar-width:thin] scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-800">
           {filteredTools.length === 0 ? (
             <div className="py-12 px-6 text-center text-xs text-slate-500 dark:text-slate-400">
               <p className="font-semibold text-slate-700 dark:text-slate-300 text-sm mb-1">
@@ -176,8 +176,8 @@ export const CommandPalette: React.FC = () => {
                       />
                     )}
 
-                    <div className="flex items-baseline gap-2.5 min-w-0">
-                      <span className="font-semibold truncate text-[13px] sm:text-sm">{tool.name}</span>
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <span className="font-semibold text-sm shrink-0">{tool.name}</span>
                       <span
                         className={`text-[10px] font-mono px-2 py-0.5 rounded-md shrink-0 transition-colors ${
                           isSelected
@@ -188,7 +188,7 @@ export const CommandPalette: React.FC = () => {
                         {tool.category}
                       </span>
                       <span
-                        className={`hidden sm:inline-block text-xs truncate max-w-[260px] ${
+                        className={`hidden sm:inline-block text-xs truncate flex-1 min-w-0 ${
                           isSelected ? 'text-blue-100' : 'text-slate-400 dark:text-slate-500'
                         }`}
                       >
@@ -236,7 +236,7 @@ export const CommandPalette: React.FC = () => {
         </div>
 
         {/* Footer shortcuts info */}
-        <div className="flex items-center justify-between px-4.5 py-3 border-t border-slate-200/80 dark:border-[#263247] bg-slate-50 dark:bg-[#080d19] text-xs text-slate-500 dark:text-slate-400">
+        <div className="flex items-center justify-between px-5 sm:px-6 py-3.5 border-t border-slate-200/80 dark:border-[#263247] bg-slate-50 dark:bg-[#080d19] text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-3.5">
             <span className="flex items-center gap-1.5">
               <kbd className="px-1.5 py-0.5 rounded bg-slate-200/70 dark:bg-[#192338] text-[10px] font-mono border border-slate-300/70 dark:border-[#263247] text-slate-600 dark:text-slate-300">
