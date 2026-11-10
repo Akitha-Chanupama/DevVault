@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { X, Save, Code2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -67,6 +68,25 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
     }
   }, [initialSnippet, isOpen]);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -103,10 +123,13 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
     }
   };
 
-  return (
+  const modalContent = (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="snippet-modal-title"
       onClick={onClose}
-      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 dark:bg-black/75 backdrop-blur-sm p-3 sm:p-4 md:p-6 flex justify-center items-start sm:items-center animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm p-3 sm:p-4 md:p-6 flex justify-center items-start sm:items-center animate-in fade-in duration-150"
     >
       <div
         className="relative w-full max-w-3xl my-auto rounded-2xl border border-slate-200 dark:border-[#263247] bg-white dark:bg-[#0c1324] shadow-2xl shadow-blue-950/20 dark:shadow-black/95 ring-1 ring-slate-900/5 dark:ring-white/10 flex flex-col max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-3.5rem)] overflow-hidden animate-in fade-in zoom-in-95 duration-150"
@@ -119,7 +142,7 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
               <Code2 className="w-4 h-4" />
             </div>
             <div>
-              <span className="font-bold text-sm text-slate-900 dark:text-foreground block">
+              <span id="snippet-modal-title" className="font-bold text-sm text-slate-900 dark:text-foreground block">
                 {initialSnippet ? 'Edit Code Snippet' : 'New Code Snippet'}
               </span>
               <span className="text-[11px] text-slate-500 dark:text-muted-foreground block">
@@ -250,5 +273,7 @@ export const SnippetEditorModal: React.FC<SnippetEditorModalProps> = ({
       </div>
     </div>
   );
+
+  return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : modalContent;
 };
 
